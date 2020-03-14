@@ -117,3 +117,5 @@ dmypy.json
 .idea
 .idea/
 .idea/*
+
+settings_dev.py
