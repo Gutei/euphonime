@@ -33,3 +33,4 @@ elasticsearch-dsl
 django-colorfield
 mysqlclient
 social-auth-app-django
+django-extensions
