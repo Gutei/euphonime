@@ -32,3 +32,4 @@ django-cors-headers
 elasticsearch-dsl
 django-colorfield
 mysqlclient
+social-auth-app-django
