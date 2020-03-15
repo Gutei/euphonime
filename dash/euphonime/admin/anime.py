@@ -45,3 +45,8 @@ class ProducerAdmin(admin.ModelAdmin):
 class MalAnimeAdmin(admin.ModelAdmin):
     list_display = ('id',)
     search_fields = ('id',)
+
+@admin.register(Character, site=admin.site)
+class CharacterAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    search_fields = ('name',)

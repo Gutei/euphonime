@@ -76,47 +76,53 @@ class MalAnime(models.Model):
         if req.status_code == 200:
             json = req.json()
 
-            anime = Anime()
-            anime.title = json['title']
-            anime.native_title = json['title_japanese']
-            anime.english_title = json['title_english']
+            a = Anime.objects.filter(mal_id=id).first()
+            if not a:
+                anime = Anime()
+                anime.title = json['title']
+                anime.native_title = json['title_japanese']
+                anime.english_title = json['title_english']
 
-            if json['type'] == Anime.TYPE[0][1]:
-                anime.type = 1
-            elif json['type'] == Anime.TYPE[1][1]:
-                anime.type = 2
-            elif json['type'] == Anime.TYPE[2][1]:
-                anime.type = 3
-            elif json['type'] == Anime.TYPE[3][1]:
-                anime.type = 4
-            elif json['type'] == Anime.TYPE[4][1]:
-                anime.type = 5
+                if json['type'] == Anime.TYPE[0][1]:
+                    anime.type = 1
+                elif json['type'] == Anime.TYPE[1][1]:
+                    anime.type = 2
+                elif json['type'] == Anime.TYPE[2][1]:
+                    anime.type = 3
+                elif json['type'] == Anime.TYPE[3][1]:
+                    anime.type = 4
+                elif json['type'] == Anime.TYPE[4][1]:
+                    anime.type = 5
 
-            anime.total_episode = json['episodes']
-            anime.airing_date = json['aired']['from']
-            duration = re.findall(r'\d+', json['duration'])
-            anime.duration = duration[0]
-            anime.rating = json['rating']
-            anime.is_publish = True
-            anime.image_url = json['image_url']
+                anime.total_episode = json['episodes']
+                anime.airing_date = json['aired']['from']
+                duration = re.findall(r'\d+', json['duration'])
+                anime.duration = duration[0]
+                anime.rating = json['rating']
+                anime.is_publish = True
+                anime.image_url = json['image_url']
 
-            anime.save()
+                anime.save()
 
-            chara_url = "{}/characters_staff".format(url)
-            req_chara = requests.get(chara_url)
-            if req_chara.status_code == 200:
-                chara_json = req_chara.json()
-                characters = chara_json['characters']
-                for c in characters:
-                    chara_name = ''
-                    act = None
-                    for v in c['voice_actors']:
-                        if v['language'] == 'Japanese':
-                            seiyuu, created = VoiceAct.objects.get_or_create(mal_id=v['mal_id'], name=v['name'], image_url=v['image_url'])
-                            chara_name = c['name']
-                            act = seiyuu
-                    if chara_name and chara_name != '':
-                        chara, chara_created = Character.objects.get_or_create(mal_id=c['mal_id'], name=c['name'], image_url=c['image_url'], anime=anime, voice_act=act)
+                chara_url = "{}/characters_staff".format(url)
+                req_chara = requests.get(chara_url)
+                if req_chara.status_code == 200:
+                    chara_json = req_chara.json()
+                    characters = chara_json['characters']
+                    for c in characters:
+                        chara_name = ''
+                        act = None
+                        for v in c['voice_actors']:
+                            if v['language'] == 'Japanese':
+                                seiyuu, created = VoiceAct.objects.get_or_create(mal_id=v['mal_id'], name=v['name'], image_url=v['image_url'])
+                                chara_name = c['name']
+                                act = seiyuu
+                        if chara_name and chara_name != '':
+                            if c['role'] == 'Main':
+                                role = 1
+                            else:
+                                role = 2
+                            chara, chara_created = Character.objects.get_or_create(mal_id=c['mal_id'], name=c['name'], image_url=c['image_url'], anime=anime, voice_act=act, role=role)
 
             super(MalAnime, self).save()
 
