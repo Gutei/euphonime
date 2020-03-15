@@ -38,12 +38,12 @@ body {
 	font-family: "Roboto", sans-serif;
 	-webkit-font-smoothing: antialiased;
 	font-smoothing: antialiased;
-    background-color: #e9ecef;
 }
 
+/*
 .container {
 		background-color: #fff;
-}
+}*/
 
 h1,
 h2,
@@ -113,6 +113,14 @@ ol {
 	padding: 0;
 	margin: 0;
 }
+
+/*---------------------
+  ovveride corrosal
+-----------------------*/
+
+/*
+.owl-item { width : 150px !important; }
+*/
 
 /*---------------------
   Helper CSS
@@ -387,11 +395,11 @@ ol {
 }
 
 .header__nav {
-	background: #e9ecef;
-}
+  background-color: #fff; /* For browsers that do not support gradients */
+  }
 
 .header__nav .logo {
-	padding: 10px 0;
+	padding: 25px 0;
 }
 
 .header__nav .logo a {
@@ -699,7 +707,7 @@ ol {
 }
 
 .soccer-item {
-	height: 405px;
+	height: 200px;
 	position: relative;
 	margin-bottom: 10px;
 }
@@ -723,9 +731,9 @@ ol {
     background-size: 100% 100%;
 	position: absolute;
 	left: 0;
-	bottom: 25px;
+	bottom: 0;
 	width: 100%;
-	padding: 0 30px;
+	padding: 0 5px;
 }
 
 .soccer-item .si-text h5 {
@@ -859,7 +867,8 @@ ol {
 
 .news-item .ni-pic img {
 	height: 100px;
-	width: 100px;
+	/*
+	width: 100px; */
 }
 
 .news-item .ni-text {
@@ -1103,6 +1112,7 @@ ol {
 	bottom: 16px;
 	width: 100%;
 	padding: 0 20px;
+	background:rgba(0,0,0,0.5);
 }
 
 .news-item.popular-item .ni-text h5 a {

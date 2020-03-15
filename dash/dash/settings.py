@@ -38,10 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     # 'social_django',
     'euphonime',
     'django_extensions',
-    'tinymce',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -141,3 +142,5 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 JET_SIDE_MENU_COMPACT = True
+
+CKEDITOR_UPLOAD_PATH = '/upload/'

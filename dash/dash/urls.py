@@ -23,10 +23,12 @@ from euphonime import views
 
 urlpatterns = [
                   url(r'^jet', include('jet.urls', 'jet')),
+                  url(r'^ckeditor/', include('ckeditor_uploader.urls')),
                   # url(r'^login/$', auth_views.LoginView.as_view(), name='login'),
                   # url(r'^logout/$', auth_views.LogoutView.as_view(), name='logout'),
                   # url(r'^oauth/', include('social_django.urls', namespace='social')),
                   url(r'^admin/', admin.site.urls),
+                  url(r'^tinymce/', include('tinymce.urls')),
                   url(r'^$', views.home, name='home'),
                   url(r'^anime/(?P<pk>[^/]+)/$', views.get_anime, name='anime'),
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL,

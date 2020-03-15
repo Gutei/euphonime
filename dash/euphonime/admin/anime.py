@@ -5,6 +5,8 @@ from euphonime.models import Anime, Character, Studio, Producer, AnimeStudio, An
 
 class CharacterInline(admin.TabularInline):
     model = Character
+    exclude = ('native_name', 'mal_id', 'image_url')
+    raw_id_fields = ('voice_act',)
     extra = 1
 
 class AnimeStudioInline(admin.TabularInline):
@@ -21,9 +23,9 @@ class AnimeGenreInline(admin.TabularInline):
 
 @admin.register(Anime, site=admin.site)
 class AnimeAdmin(admin.ModelAdmin):
-    list_display = ('title', 'is_publish', 'created','updated')
+    list_display = ('title', 'get_image', 'is_publish', 'created','updated')
     search_fields = ('title',)
-    list_filter = ('created', 'updated')
+    list_filter = ('is_publish', 'created', 'updated')
     inlines = [
         AnimeGenreInline,
         CharacterInline,
@@ -31,6 +33,19 @@ class AnimeAdmin(admin.ModelAdmin):
         AnimeProducerInline,
     ]
     list_per_page = 10
+
+    def get_image(self, obj):
+        if obj.image:
+            image = obj.image.url
+            return mark_safe("<img src='{}' width='30'>".format(image))
+        elif obj.image_url:
+            image = obj.image_url
+            return mark_safe("<img src='{}' width='30'>".format(image))
+
+        return '-'
+
+    get_image.admin_order_field = 'image'
+    get_image.short_description = 'Image'
 
 @admin.register(Studio, site=admin.site)
 class StudioAdmin(admin.ModelAdmin):
@@ -54,6 +69,7 @@ class MalAnimeAdmin(admin.ModelAdmin):
 class CharacterAdmin(admin.ModelAdmin):
     list_display = ('get_image', 'role', 'anime', 'get_actor')
     search_fields = ('name', 'voice_act__name')
+    raw_id_fields = ('voice_act', 'anime')
     list_per_page = 10
 
     def get_image(self, obj):

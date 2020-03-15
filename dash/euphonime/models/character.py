@@ -18,7 +18,7 @@ class Character(models.Model):
     name = models.CharField(max_length=128, default="-")
     native_name = models.CharField(max_length=128, default="-")
     role = models.PositiveIntegerField(choices=ROLE, null=True, blank=True)
-    anime = models.ForeignKey('Anime', null=True, blank=True, on_delete=models.PROTECT)
+    anime = models.ForeignKey('Anime', null=True, blank=True, on_delete=models.CASCADE)
     voice_act = models.ForeignKey('VoiceAct', null=True, blank=True, on_delete=models.PROTECT)
     mal_id = models.CharField(max_length=128, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
