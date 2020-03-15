@@ -1,3 +1,4 @@
+from django.utils.html import mark_safe
 from django.contrib import admin
 from euphonime.models import Anime, Character, Studio, Producer, AnimeStudio, AnimeProducer, AnimeGenre, MalAnime
 
@@ -29,6 +30,7 @@ class AnimeAdmin(admin.ModelAdmin):
         AnimeStudioInline,
         AnimeProducerInline,
     ]
+    list_per_page = 10
 
 @admin.register(Studio, site=admin.site)
 class StudioAdmin(admin.ModelAdmin):
@@ -43,10 +45,39 @@ class ProducerAdmin(admin.ModelAdmin):
 
 @admin.register(MalAnime, site=admin.site)
 class MalAnimeAdmin(admin.ModelAdmin):
-    list_display = ('id',)
-    search_fields = ('id',)
+    list_display = ('id', 'log', 'created')
+    search_fields = ('id', 'mal_id')
+    list_filter = ('created',)
+    exclude = ('log',)
 
 @admin.register(Character, site=admin.site)
 class CharacterAdmin(admin.ModelAdmin):
-    list_display = ('name',)
+    list_display = ('get_image', 'role', 'anime', 'get_actor')
     search_fields = ('name',)
+    list_per_page = 10
+
+    def get_image(self, obj):
+        if obj.image:
+            image = obj.image.url
+            return mark_safe("<img src='{}' width='30'> {}".format(image, obj.name))
+        elif obj.image_url:
+            image = obj.image_url
+            return mark_safe("<img src='{}' width='30'> {}".format(image, obj.name))
+
+        return '-'
+
+    get_image.admin_order_field = 'image'
+    get_image.short_description = 'Image'
+
+    def get_actor(self, obj):
+        if obj.voice_act.image:
+            image = obj.voice_act.image.url
+            return mark_safe("<img src='{}' width='30'> {}".format(image, obj.voice_act.name))
+        elif obj.voice_act.image_url:
+            image = obj.voice_act.image_url
+            return mark_safe("<img src='{}' width='30'> {}".format(image, obj.voice_act.name))
+
+        return '-'
+
+    get_actor.admin_order_field = 'actor'
+    get_actor.short_description = 'Voice actress/actor'

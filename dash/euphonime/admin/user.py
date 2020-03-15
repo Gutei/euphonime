@@ -17,6 +17,7 @@ class ProfileUserAdmin(admin.ModelAdmin):
         WatchingInline,
         ScoreInline,
     ]
+    list_per_page = 10
 
     def get_email(self, obj):
         return obj.user.email
