@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Specer Template">
+    <meta name="keywords" content="Specer, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Euphonime</title>
+
+    {% block css %}
+            {% include 'euphonime/__includes/__css/__css.html' %}
+    {% endblock css %}
+
+</head>
+
+<body>
+    {% block navbar %}
+            {% include 'euphonime/__includes/__navbar/__navbar.html' %}
+    {% endblock navbar %}
+
+    {% block content %}
+    {% endblock content %}
+
+    {% block footer %}
+            {% include 'euphonime/__includes/__footer/__footer.html' %}
+    {% endblock footer %}
+
+    {% block search %}
+            {% include 'euphonime/__includes/__search/__search.html' %}
+    {% endblock search %}
+
+    {% block js %}
+            {% include 'euphonime/__includes/__js/__js.html' %}
+    {% endblock js %}
+
+</body>
+
+</html>

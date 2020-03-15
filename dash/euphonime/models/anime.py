@@ -66,7 +66,7 @@ class MalAnime(models.Model):
 
     class Meta:
         db_table = 'mal_anime'
-        verbose_name = 'Upload from MAL'
+        verbose_name = 'Sync from MAL'
 
     def save(self):
         id = self.mal_id

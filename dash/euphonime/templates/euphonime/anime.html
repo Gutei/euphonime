@@ -1,0 +1,126 @@
+    {% extends "euphonime/index.html" %}
+    {% load static %}
+    {% block content %}
+    <!-- Club Section Begin -->
+    <section class="club-section spad">
+        <div class="container">
+            <div class="club-content">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <div class="cc-pic">
+                            <img src="{{anime.image_url}}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="cc-text">
+                            <div class="ct-title">
+                                <h3>{{ anime.title }}</h3>
+                                <p>{{ anime.description }}</p>
+                            </div>
+                            <div class="ct-widget">
+                                <ul>
+                                    <li>
+                                        <h5>Rating</h5>
+                                        <p>{{anime.rating}}</p>
+                                    </li>
+                                    <li>
+                                        <h5>Type</h5>
+                                        <p>John Martin</p>
+                                    </li>
+                                    <li>
+                                        <h5>Tayang Mulai</h5>
+                                        <p>Jack Hadison</p>
+                                    </li>
+                                    <li>
+                                        <h5>Total Matches</h5>
+                                        <p>78</p>
+                                    </li>
+                                    <li>
+                                        <h5>Location</h5>
+                                        <p>Brasilia, Brazil</p>
+                                    </li>
+                                    <li>
+                                        <h5>Berbagi</h5>
+                                        <div class="cw-social">
+                                            <a href="#"><i class="fa fa-facebook"></i></a>
+                                            <a href="#"><i class="fa fa-twitter"></i></a>
+                                            <a href="#"><i class="fa fa-youtube-play"></i></a>
+                                            <a href="#"><i class="fa fa-google"></i></a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="club-tab-list">
+                <div class="row">
+                    <div class="col-lg-8 m-auto">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Karakter dan Pengisi Suara</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Opening</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Ending</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-4" role="tab">Berita Terkait</a>
+                            </li>
+                        </ul><!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                                <div class="club-tab-content">
+                                    <div class="ct-item">
+                                        <div class="ci-text">
+                                            <img src="{{anime.}}" alt="">
+                                            <h5>12. Buddy Peck</h5>
+                                        </div>
+                                        <div class="ci-name">Forward</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tabs-2" role="tabpanel">
+                                <div class="club-tab-content">
+                                    <div class="ct-item">
+                                        <div class="ci-text">
+                                            <img src="img/club/p-5.jpg" alt="">
+                                            <h5>09. John Thompson</h5>
+                                        </div>
+                                        <div class="ci-name">Central midfielder</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tabs-3" role="tabpanel">
+                                <div class="club-tab-content">
+                                    <div class="ct-item">
+                                        <div class="ci-text">
+                                            <img src="img/club/p-1.jpg" alt="">
+                                            <h5>12. Buddy Peck</h5>
+                                        </div>
+                                        <div class="ci-name">Forward</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tabs-4" role="tabpanel">
+                                <div class="club-tab-content">
+                                    <div class="ct-item">
+                                        <div class="ci-text">
+                                            <img src="img/club/p-3.jpg" alt="">
+                                            <h5>18. Hanry Edison</h5>
+                                        </div>
+                                        <div class="ci-name">Goalkeeper </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Club Section End -->
+    {% endblock content %}
