@@ -82,6 +82,7 @@
         items: 4,
         dots: false,
         autoplay: false,
+        autoWidth: true,
         margin: 0,
         loop: true,
         smartSpeed: 1200,
