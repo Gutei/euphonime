@@ -28,6 +28,6 @@ urlpatterns = [
                   # url(r'^oauth/', include('social_django.urls', namespace='social')),
                   url(r'^admin/', admin.site.urls),
                   url(r'^$', views.home, name='home'),
-                  url(r'^anime/(?P<pk>[^/]+)/$', views.get_anime, name='anime'),
+                  url(r'^anime/(?P<pk>[^/]+)/(?P<name>[^/]+)/$', views.get_anime, name='anime'),
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL,
                 document_root=settings.MEDIA_ROOT)
