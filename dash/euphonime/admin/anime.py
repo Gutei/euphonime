@@ -53,7 +53,7 @@ class MalAnimeAdmin(admin.ModelAdmin):
 @admin.register(Character, site=admin.site)
 class CharacterAdmin(admin.ModelAdmin):
     list_display = ('get_image', 'role', 'anime', 'get_actor')
-    search_fields = ('name',)
+    search_fields = ('name', 'voice_act__name')
     list_per_page = 10
 
     def get_image(self, obj):

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # 'social_django',
     'euphonime',
     'django_extensions',
+    'tinymce',
 ]
 
 MIDDLEWARE = [
