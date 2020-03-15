@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',
-    # 'social_django',
+    # 'django.contrib.sites',
+    'social_django',
     'euphonime',
     'django_extensions',
     'ckeditor',
@@ -77,13 +77,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'dash.wsgi.application'
 
-# AUTHENTICATION_BACKENDS = (
-#     'social_core.backends.google.GoogleOAuth2',
-#     'social_core.backends.twitter.TwitterOAuth',
-#     'social_core.backends.facebook.FacebookOAuth2',
-#
-#     'django.contrib.auth.backends.ModelBackend',
-# )
+AUTHENTICATION_BACKENDS = (
+    # 'social_core.backends.google.GoogleOAuth2',
+    # 'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.facebook.FacebookOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 
 # Database
@@ -144,3 +144,21 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 JET_SIDE_MENU_COMPACT = True
 
 CKEDITOR_UPLOAD_PATH = '/upload/'
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'profile'
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'login'
+
+SOCIAL_AUTH_FACEBOOK_KEY = "659187134855235"        # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = "3c00e5d0bfb9aa562e7194032b97ca6c"  # App Secret
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'user_link'] # add this
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {       # add this
+  'fields': 'id, name, email, picture.type(large), link'
+}
+SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [                 # add this
+    ('name', 'name'),
+    ('email', 'email'),
+    ('picture', 'picture'),
+    ('link', 'profile_url'),
+]
