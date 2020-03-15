@@ -6,57 +6,100 @@
         <div class="container">
             <div class="club-content">
                 <div class="row">
-                    <div class="col-lg-5">
+                    <div class="col-lg-4">
                         <div class="cc-pic">
                             <img src="{{anime.image_url}}" alt="">
                         </div>
+                        <div class="container" style="margin-top:1em;">
+                                    <div class="schedule-text">
+                                        <h4 class="st-title">Info Anime</h4>
+                                        <div class="st-table">
+                                            <table>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="left-team">
+                                                            <h5>Rating</h5>
+                                                        </td>
+                                                        <td class="left-team">
+                                                            <p>{% if anime.rating == "None" %} - {% else %}{{ anime.rating }}{% endif %}</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="left-team">
+                                                            <h5>Type</h5>
+                                                        </td>
+                                                        <td class="left-team">
+                                                            <p>{{anime.get_type_display}}</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="left-team">
+                                                            <h5>Genre</h5>
+                                                        </td>
+                                                        <td class="left-team">
+                                                            <p>{% if genre %}{% for gr in genre %}{{gr.genre.title}}, {% endfor %}{% else %} - {% endif %}</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="left-team">
+                                                            <h5>Total Episode</h5>
+                                                        </td>
+                                                        <td class="left-team">
+                                                            <p>{{anime.total_episode}}</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="left-team">
+                                                            <h5>Durasi</h5>
+                                                        </td>
+                                                        <td class="left-team">
+                                                            <p>{% if not anime.duration %} -{% else %}{{anime.duration}} min per eps {% endif %}</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="left-team">
+                                                            <h5>Tayang Mulai</h5>
+                                                        </td>
+                                                        <td class="left-team">
+                                                            <p>{{anime.airing_date|date:'d F Y'}}</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="left-team">
+                                                            <h5>Studio</h5>
+                                                        </td>
+                                                        <td class="left-team">
+                                                            <p>{% if anime.studio %}{{anime.studio}}{% else %}-{%endif%}</p>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                        </div>
                     </div>
-                    <div class="col-lg-6">
+
+                    <div class="col-lg-8">
                         <div class="cc-text">
                             <div class="ct-title">
                                 <h3>{{ anime.title }}</h3>
                                 <p>{{ anime.description }}</p>
                             </div>
-                            <div class="ct-widget">
-                                <ul>
-                                    <li>
-                                        <h5>Rating</h5>
-                                        <p>{{anime.rating}}</p>
-                                    </li>
-                                    <li>
-                                        <h5>Type</h5>
-                                        <p>John Martin</p>
-                                    </li>
-                                    <li>
-                                        <h5>Tayang Mulai</h5>
-                                        <p>Jack Hadison</p>
-                                    </li>
-                                    <li>
-                                        <h5>Total Matches</h5>
-                                        <p>78</p>
-                                    </li>
-                                    <li>
-                                        <h5>Location</h5>
-                                        <p>Brasilia, Brazil</p>
-                                    </li>
-                                    <li>
-                                        <h5>Berbagi</h5>
-                                        <div class="cw-social">
+                            <div class="ct-title">
+                                <h5>Berbagi</h5>
+                                <div class="cw-social">
                                             <a href="#"><i class="fa fa-facebook"></i></a>
                                             <a href="#"><i class="fa fa-twitter"></i></a>
                                             <a href="#"><i class="fa fa-youtube-play"></i></a>
                                             <a href="#"><i class="fa fa-google"></i></a>
-                                        </div>
-                                    </li>
-                                </ul>
+                                </div>
                             </div>
+
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="club-tab-list">
+                        <div class="club-tab-list">
                 <div class="row">
-                    <div class="col-lg-8 m-auto">
+                    <div class="col-lg-12 m-auto">
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Karakter dan Pengisi Suara</a>
@@ -68,19 +111,30 @@
                                 <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Ending</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tabs-4" role="tab">Berita Terkait</a>
+                                <a class="nav-link" data-toggle="tab" href="#tabs-4" role="tab">Quote</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-5" role="tab">Berita Terkait</a>
                             </li>
                         </ul><!-- Tab panes -->
                         <div class="tab-content">
                             <div class="tab-pane active" id="tabs-1" role="tabpanel">
                                 <div class="club-tab-content">
+                                    {% for ch in character %}
                                     <div class="ct-item">
                                         <div class="ci-text">
-                                            <img src="{{anime.}}" alt="">
-                                            <h5>12. Buddy Peck</h5>
+                                            <img style="width:50px;" src="{% if ch.image %}{{ch.image.url}}{% else %}{{ ch.image_url }}{% endif %}" alt="">
+                                            <div class="row">
+                                                <h5>{{ch.name}}</h5>
+                                                <p style="font-size:0.7rem;">({{ch.get_role_display}})</p>
+                                            </div>
                                         </div>
-                                        <div class="ci-name">Forward</div>
+                                        <div class="ci-text" style="width:200px;float:right;">
+                                            <img style="width:50px;" src="{% if ch.voice_act.image %}{{ch.voice_act.image.url}}{% else %}{{ ch.voice_act.image_url }}{% endif %}" alt="">
+                                            <h5>{{ch.voice_act.name}}</h5>
+                                        </div>
                                     </div>
+                                    {% endfor %}
                                 </div>
                             </div>
                             <div class="tab-pane" id="tabs-2" role="tabpanel">
@@ -109,6 +163,17 @@
                                 <div class="club-tab-content">
                                     <div class="ct-item">
                                         <div class="ci-text">
+                                            <img src="img/club/p-1.jpg" alt="">
+                                            <h5>12. Buddy Peck</h5>
+                                        </div>
+                                        <div class="ci-name">Forward</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tabs-5" role="tabpanel">
+                                <div class="club-tab-content">
+                                    <div class="ct-item">
+                                        <div class="ci-text">
                                             <img src="img/club/p-3.jpg" alt="">
                                             <h5>18. Hanry Edison</h5>
                                         </div>
@@ -120,7 +185,17 @@
                     </div>
                 </div>
             </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
         </div>
     </section>
     <!-- Club Section End -->
+
     {% endblock content %}

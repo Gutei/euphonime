@@ -1,13 +1,17 @@
 from django.shortcuts import render
-from euphonime.models import Anime
+from euphonime.models import Anime, Character, AnimeGenre
 
 
-def anime(request, pk):
-    model = Anime
+def get_anime(request, pk):
+    anime = Anime.objects.filter(id=pk).first()
+    character = Character.objects.filter(anime=anime)
+    genre = AnimeGenre.objects.filter(anime=anime)
+
     template_name = 'euphonime/anime.html'
 
     context = {
-        'anime': model.objects.filter(id=pk).first()
-
+        'anime': anime,
+        'character': character,
+        'genre': genre
     }
     return render(request, template_name, context)

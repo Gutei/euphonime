@@ -3,11 +3,11 @@ from euphonime.models import Anime
 
 
 def home(request):
-    model = Anime
+    anime = Anime.objects.filter(is_publish=True)
     template_name = 'euphonime/home.html'
+    print(anime)
 
     context = {
-        'season_nime': model.objects.filter(is_publish=True)
-
+        'season_nime': anime
     }
     return render(request, template_name, context)

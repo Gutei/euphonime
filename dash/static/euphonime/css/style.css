@@ -38,12 +38,12 @@ body {
 	font-family: "Roboto", sans-serif;
 	-webkit-font-smoothing: antialiased;
 	font-smoothing: antialiased;
+    background-color: #e9ecef;
 }
 
-/*
 .container {
 		background-color: #fff;
-}*/
+}
 
 h1,
 h2,
