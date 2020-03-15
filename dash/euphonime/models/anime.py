@@ -101,6 +101,7 @@ class MalAnime(models.Model):
                 anime.rating = json['rating']
                 anime.is_publish = True
                 anime.image_url = json['image_url']
+                anime.description = json['synopsis']
 
                 anime.save()
 
