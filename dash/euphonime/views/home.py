@@ -1,13 +1,16 @@
 from django.shortcuts import render
-from euphonime.models import Anime
+from euphonime.models import Anime, Article
 
 
 def home(request):
-    anime = Anime.objects.filter(is_publish=True)
+    ses_anime = Anime.objects.filter(is_publish=True)
+    new_anime = Anime.objects.filter(is_publish=True).order_by('-updated')[:4]
+    article = Article.objects.filter(is_publish=True).order_by('-updated')[:4]
     template_name = 'euphonime/home.html'
-    print(anime)
 
     context = {
-        'season_nime': anime
+        'season_nime': ses_anime,
+        'new_anime': new_anime,
+        'article': article
     }
     return render(request, template_name, context)

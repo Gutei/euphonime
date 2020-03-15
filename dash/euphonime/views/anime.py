@@ -15,3 +15,4 @@ def get_anime(request, pk):
         'genre': genre
     }
     return render(request, template_name, context)
+
