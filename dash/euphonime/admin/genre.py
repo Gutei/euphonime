@@ -6,3 +6,4 @@ from euphonime.models import Genre
 class GenreAdmin(admin.ModelAdmin):
     list_display = ('title',)
     search_fields = ('title',)
+    list_per_page = 10

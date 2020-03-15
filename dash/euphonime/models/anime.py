@@ -61,6 +61,7 @@ class AnimeGenre(models.Model):
 class MalAnime(models.Model):
     id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False)
     mal_id = models.CharField(max_length=128, null=True, blank=True)
+    log = models.CharField(max_length=128, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -94,10 +95,10 @@ class MalAnime(models.Model):
                 elif json['type'] == Anime.TYPE[4][1]:
                     anime.type = 5
 
-                anime.total_episode = json['episodes']
+                anime.total_episode = 0 if not json['episodes'] else json['episodes']
                 anime.airing_date = json['aired']['from']
                 duration = re.findall(r'\d+', json['duration'])
-                anime.duration = duration[0]
+                anime.duration = 0 if not duration else duration[0]
                 anime.rating = json['rating']
                 anime.is_publish = True
                 anime.image_url = json['image_url']
@@ -125,6 +126,7 @@ class MalAnime(models.Model):
                                 role = 2
                             chara, chara_created = Character.objects.get_or_create(mal_id=c['mal_id'], name=c['name'], image_url=c['image_url'], anime=anime, voice_act=act, role=role)
 
+            self.log = "Sync from MyAnimeList for {}, with title: {}.".format(id, anime.title)
             super(MalAnime, self).save()
 
 
