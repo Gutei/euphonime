@@ -1,0 +1,473 @@
+{% extends "euphonime/index.html" %}
+{% load static %}
+    {% block content %}
+    <!-- Trending News Section Begin -->
+    <div class="trending-news-section">
+        <div class="container">
+            <div class="tn-title"><i class="fa fa-caret-right"></i> Trending Anime</div>
+            <div class="news-slider owl-carousel">
+                <div class="nt-item">Vinyl Banners With Its Different Types Kinds And Applications</div>
+                <div class="nt-item">Banners With Its Different Types Kinds And Applications</div>
+            </div>
+        </div>
+    </div>
+    <!-- Trending News Section End -->
+
+    <!-- Anime Session Begin -->
+    <section class="soccer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 p-0">
+                    <div class="section-title">
+                        <h3>Anime <span>Musim ini</span></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="video-slider owl-carousel">
+                    {% for sn in season_nime %}
+                    <div class="col-lg-3 col-sm-6 p-0">
+                        <div class="soccer-item set-bg" data-setbg="{{ sn.image_url }}">
+                            <div class="si-tag">{{sn.get_type_display}}</div>
+                            <div class="si-text">
+                                <h5><a href="{% url 'anime' sn.id.hex %}">{{ sn.title }}</a></h5>
+                                <ul>
+                                    <li><i class="fa fa-calendar"></i> {{ sn.airing_date|date:'d F Y' }}</li>
+                                    <li><i class="fa fa-edit"></i> 3 Comment</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Anime Session End -->
+
+    <!-- Latest Section Begin -->
+    <section class="latest-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="section-title latest-title">
+                        <h3>Anime <span>Terbaru</span></h3>
+                        <ul>
+                            <li>All</li>
+                            <li>World Cup</li>
+                            <li>Champions</li>
+                            <li>MLS</li>
+                        </ul>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="news-item left-news">
+                                <div class="ni-pic set-bg" data-setbg="{% static 'euphonime/img/news/latest-b.jpg' %}">
+                                    <div class="ni-tag">Soccer</div>
+                                </div>
+                                <div class="ni-text">
+                                    <h4><a href="#">Once You Learn These Hard Truths About Life, You'll Become</a></h4>
+                                    <ul>
+                                        <li><i class="fa fa-calendar"></i> May 19, 2019</li>
+                                        <li><i class="fa fa-edit"></i> 3 Comment</li>
+                                    </ul>
+                                    <p>It’s that time again when people start thinking about their New Years
+                                        Resolutions. Usually they involve, losing weight, quitting smoking, and joining
+                                        a gym, just to mention a few.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="news-item">
+                                <div class="ni-pic">
+                                    <img src="{% static 'euphonime/img/news/ln-1.jpg' %}" alt="">
+                                </div>
+                                <div class="ni-text">
+                                    <h5><a href="#">How To Quit Smoking Using Zyban</a></h5>
+                                    <ul>
+                                        <li><i class="fa fa-calendar"></i> May 19, 2019</li>
+                                        <li><i class="fa fa-edit"></i> 3 Comment</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="news-item">
+                                <div class="ni-pic">
+                                    <img src="{% static 'euphonime/img/news/ln-2.jpg' %}" alt="">
+                                </div>
+                                <div class="ni-text">
+                                    <h5><a href="#">Decorate For Less With Art Posters</a></h5>
+                                    <ul>
+                                        <li><i class="fa fa-calendar"></i> May 19, 2019</li>
+                                        <li><i class="fa fa-edit"></i> 3 Comment</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="news-item">
+                                <div class="ni-pic">
+                                    <img src="{% static 'euphonime/img/news/ln-3.jpg' %}" alt="">
+                                </div>
+                                <div class="ni-text">
+                                    <h5><a href="#">Home Business Advertising Ideas</a></h5>
+                                    <ul>
+                                        <li><i class="fa fa-calendar"></i> May 19, 2019</li>
+                                        <li><i class="fa fa-edit"></i> 3 Comment</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="news-item">
+                                <div class="ni-pic">
+                                    <img src="{% static 'euphonime/img/news/ln-4.jpg' %}" alt="">
+                                </div>
+                                <div class="ni-text">
+                                    <h5><a href="#">Lasik Doesn T Stop Your Eyes From Aging</a></h5>
+                                    <ul>
+                                        <li><i class="fa fa-calendar"></i> May 19, 2019</li>
+                                        <li><i class="fa fa-edit"></i> 3 Comment</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="section-title">
+                        <h3>Anime <span>Ranking</span></h3>
+                    </div>
+                    <div class="points-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="th-o">Pos</th>
+                                    <th>Anime</th>
+                                    <th class="th-o">P</th>
+                                    <th class="th-o">Score</th>
+                                    <th class="th-o">L</th>
+                                    <th class="th-o">PTS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td class="team-name">
+                                        <img src="{% static 'euphonime/img/flag/flag-1.jpg' %}" alt="">
+                                        <span>Afghanis</span>
+                                    </td>
+                                    <td>22</td>
+                                    <td>2</td>
+                                    <td>5</td>
+                                    <td>72</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td class="team-name">
+                                        <img src="{% static 'euphonime/img/flag/flag-2.jpg' %}" alt="">
+                                        <span>Australia</span>
+                                    </td>
+                                    <td>20</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>71</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td class="team-name">
+                                        <img src="{% static 'euphonime/img/flag/flag-3.jpg' %}" alt="">
+                                        <span>Qatar</span>
+                                    </td>
+                                    <td>18</td>
+                                    <td>4</td>
+                                    <td>4</td>
+                                    <td>68</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td class="team-name">
+                                        <img src="{% static 'euphonime/img/flag/flag-4.jpg' %}" alt="">
+                                        <span>Cambodia</span>
+                                    </td>
+                                    <td>17</td>
+                                    <td>2</td>
+                                    <td>7</td>
+                                    <td>64</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td class="team-name">
+                                        <img src="{% static 'euphonime/img/flag/flag-5.jpg' %}" alt="">
+                                        <span>Uzbekistan</span>
+                                    </td>
+                                    <td>17</td>
+                                    <td>2</td>
+                                    <td>6</td>
+                                    <td>60</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td class="team-name">
+                                        <img src="{% static 'euphonime/img/flag/flag-6.jpg' %}" alt="">
+                                        <span>Turkme</span>
+                                    </td>
+                                    <td>161</td>
+                                    <td>1</td>
+                                    <td>8</td>
+                                    <td>57</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td class="team-name">
+                                        <img src="{% static 'euphonime/img/flag/flag-7.jpg' %}" alt="">
+                                        <span>Sri Lanka</span>
+                                    </td>
+                                    <td>15</td>
+                                    <td>4</td>
+                                    <td>8</td>
+                                    <td>52</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td class="team-name">
+                                        <img src="{% static 'euphonime/img/flag/flag-8.jpg' %}" alt="">
+                                        <span>Myanmar</span>
+                                    </td>
+                                    <td>14</td>
+                                    <td>3</td>
+                                    <td>7</td>
+                                    <td>48</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <a href="#" class="p-all">View All</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Latest Section End -->
+
+    <!-- Video Section Begin -->
+    <section class="video-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h3>Hot <span>Videos</span></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="video-slider owl-carousel">
+                    <div class="col-lg-3">
+                        <div class="video-item set-bg" data-setbg="{% static 'euphonime/img/videos/video-1.jpg' %}">
+                            <div class="vi-title">
+                                <h5>A World Of Infinite Opportunities</h5>
+                            </div>
+                            <a href="https://www.youtube.com/watch?v=dhYOPzcsbGM" class="play-btn video-popup"><img
+                                    src="{% static 'euphonime/img/videos/play.png" alt=""></a>
+                            <div class="vi-time">11:13</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="video-item set-bg" data-setbg="{% static 'euphonime/img/videos/video-2.jpg' %}">
+                            <div class="vi-title">
+                                <h5>Video Games Playing With Imagination</h5>
+                            </div>
+                            <a href="https://www.youtube.com/watch?v=dhYOPzcsbGM" class="play-btn video-popup"><img
+                                    src="{% static 'euphonime/img/videos/play.png" alt=""></a>
+                            <div class="vi-time">11:13</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="video-item set-bg" data-setbg="{% static 'euphonime/img/videos/video-3.jpg' %}">
+                            <div class="vi-title">
+                                <h5>Home Audio Recording For Everyone</h5>
+                            </div>
+                            <a href="https://www.youtube.com/watch?v=dhYOPzcsbGM" class="play-btn video-popup"><img
+                                    src="{% static 'euphonime/img/videos/play.png" alt=""></a>
+                            <div class="vi-time">11:13</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="video-item set-bg" data-setbg="{% static 'euphonime/img/videos/video-4.jpg' %}">
+                            <div class="vi-title">
+                                <h5>What If They Let You Run The Hubble</h5>
+                            </div>
+                            <a href="https://www.youtube.com/watch?v=dhYOPzcsbGM" class="play-btn video-popup"><img
+                                    src="{% static 'euphonime/img/videos/play.png" alt=""></a>
+                            <div class="vi-time">11:13</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="video-item set-bg" data-setbg="{% static 'euphonime/img/videos/video-4.jpg' %}">
+                            <div class="vi-title">
+                                <h5>What If They Let You Run The Hubble</h5>
+                            </div>
+                            <a href="https://www.youtube.com/watch?v=dhYOPzcsbGM" class="play-btn video-popup"><img
+                                    src="{% static 'euphonime/img/videos/play.png" alt=""></a>
+                            <div class="vi-time">11:13</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Video Section End -->
+
+    <!-- Popular News Section Begin -->
+    <section class="popular-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="section-title">
+                        <h3>Berita Terbaru <span>Post</span></h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="news-item popular-item set-bg" data-setbg="{% static 'euphonime/img/news/popular-b.jpg' %}">
+                                <div class="ni-tag tenis">Tenis</div>
+                                <div class="ni-text">
+                                    <h5><a href="#">England reach World Cup last 16 with hard-fought win over
+                                            Argentina</a></h5>
+                                    <ul>
+                                        <li><i class="fa fa-calendar"></i> May 19, 2019</li>
+                                        <li><i class="fa fa-edit"></i> 3 Comment</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="news-item">
+                                <div class="ni-pic">
+                                    <img src="{% static 'euphonime/img/news/ln-1.jpg' %}" alt="">
+                                </div>
+                                <div class="ni-text">
+                                    <h5><a href="#">There’s a great history of the winner Sandia</a></h5>
+                                    <ul>
+                                        <li><i class="fa fa-calendar"></i> May 19, 2019</li>
+                                        <li><i class="fa fa-edit"></i> 3 Comment</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="news-item">
+                                <div class="ni-pic">
+                                    <img src="{% static 'euphonime/img/news/ln-2.jpg' %}" alt="">
+                                </div>
+                                <div class="ni-text">
+                                    <h5><a href="#">It’ll be a tough game and a physical game</a></h5>
+                                    <ul>
+                                        <li><i class="fa fa-calendar"></i> May 19, 2019</li>
+                                        <li><i class="fa fa-edit"></i> 3 Comment</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="news-item">
+                                <div class="ni-pic">
+                                    <img src="{% static 'euphonime/img/news/ln-3.jpg' %}" alt="">
+                                </div>
+                                <div class="ni-text">
+                                    <h5><a href="#">If we don’t score we can’t get frustrated</a></h5>
+                                    <ul>
+                                        <li><i class="fa fa-calendar"></i> May 19, 2019</li>
+                                        <li><i class="fa fa-edit"></i> 3 Comment</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="news-item popular-item set-bg" data-setbg="{% static 'euphonime/img/news/popular-b.jpg' %}">
+                                <div class="ni-tag football">Football</div>
+                                <div class="ni-text">
+                                    <h5><a href="#">We are playing history and Argentina at the World Cup, says Phil
+                                            Neville</a></h5>
+                                    <ul>
+                                        <li><i class="fa fa-calendar"></i> May 19, 2019</li>
+                                        <li><i class="fa fa-edit"></i> 3 Comment</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="news-item">
+                                <div class="ni-pic">
+                                    <img src="{% static 'euphonime/img/news/ln-5.jpg' %}" alt="">
+                                </div>
+                                <div class="ni-text">
+                                    <h5><a href="#">Le Havre does have a growing fan club</a></h5>
+                                    <ul>
+                                        <li><i class="fa fa-calendar"></i> May 19, 2019</li>
+                                        <li><i class="fa fa-edit"></i> 3 Comment</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="news-item">
+                                <div class="ni-pic">
+                                    <img src="{% static 'euphonime/img/news/ln-6.jpg' %}" alt="">
+                                </div>
+                                <div class="ni-text">
+                                    <h5><a href="#">It will be hard to break them down</a></h5>
+                                    <ul>
+                                        <li><i class="fa fa-calendar"></i> May 19, 2019</li>
+                                        <li><i class="fa fa-edit"></i> 3 Comment</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="news-item">
+                                <div class="ni-pic">
+                                    <img src="{% static 'euphonime/img/news/ln-7.jpg' %}" alt="">
+                                </div>
+                                <div class="ni-text">
+                                    <h5><a href="#">We’ve never seen them as organised </a></h5>
+                                    <ul>
+                                        <li><i class="fa fa-calendar"></i> May 19, 2019</li>
+                                        <li><i class="fa fa-edit"></i> 3 Comment</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="section-title">
+                        <h3>Follow <span>Us</span></h3>
+                    </div>
+                    <div class="follow-links">
+                        <ul>
+                            <li class="facebook">
+                                <i class="fa fa-facebook"></i>
+                                <div class="fl-name">Facebook</div>
+                                <span class="fl-fan">2.530 Fans</span>
+                            </li>
+                            <li class="twitter">
+                                <i class="fa fa-twitter"></i>
+                                <div class="fl-name">Twitter</div>
+                                <span class="fl-fan">2.046 Fans</span>
+                            </li>
+                            <li class="google">
+                                <i class="fa fa-google"></i>
+                                <div class="fl-name">Google</div>
+                                <span class="fl-fan">1.170 Fans</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="vote-option set-bg" data-setbg="{% static 'euphonime/img/news/vote-bg.jpg' %}">
+                        <div class="vo-text">
+                            <h5>In your opinion, which country will win this year</h5>
+                            <div class="vt-item">
+                                <input type="radio" name="like-team" id="one">
+                                <label for="one">Germany</label>
+                            </div>
+                            <div class="vt-item">
+                                <input type="radio" name="like-team" id="two">
+                                <label for="two">Brazil</label>
+                            </div>
+                            <div class="vt-item">
+                                <input type="radio" name="like-team" id="three">
+                                <label for="three">Myanmar</label>
+                            </div>
+                            <div class="vt-item">
+                                <input type="radio" name="like-team" id="four">
+                                <label for="four">Argentina</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Popular News Section End -->
+    {% endblock content %}
