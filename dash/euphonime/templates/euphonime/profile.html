@@ -8,7 +8,11 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="cc-pic">
+                            {% if profile_pic %}
                             <img src="{{profile_pic}}" alt="">
+                            {% else %}
+                            <img src="{% static 'euphonime/img/anonymous.jpg' %}" alt="">
+                            {% endif %}
                         </div>
                         <div class="container" style="margin-top:1em;">
                                     <div class="schedule-text">
@@ -52,7 +56,9 @@
                         <div class="cc-text">
                             <div class="ct-title">
                                 <h3>{{ anime.title }}</h3>
-                                <p>{{ anime.description }}</p>
+                                <div>
+                                    OK
+                                </div>
                             </div>
 
                         </div>
@@ -143,6 +149,7 @@
     {% endblock content %}
 
     {% block extra_js %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
     <script>
         $(document).ready(() => {
             $('.header__top').hide();

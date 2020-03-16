@@ -31,6 +31,7 @@ urlpatterns = [
                   url(r'^$', views.home, name='home'),
                   url(r'^profile/', views.profile, name='profile'),
                   url(r'^finish-signup/', views.finish_signup, name='finish_signup'),
+                  url(r'^auth-login/', views.auth_login, name='auth_login'),
                   url(r'^anime/(?P<pk>[^/]+)/$', views.get_anime, name='anime'),
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL,
                 document_root=settings.MEDIA_ROOT)

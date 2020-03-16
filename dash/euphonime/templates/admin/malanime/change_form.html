@@ -1,0 +1,43 @@
+{% extends "admin/change_form.html" %}
+{% load static %}
+{% block field_sets %}
+
+{{ block.super }}
+<div style="padding:10px; background:#FFFFFF; padding:15px;">
+    <div class="form-row">
+        <div style="width:500px;">
+            <img src="{% static 'euphonime/servant/modred-chibi.png' %}" width="150" style="float:left;">
+            <div style="border:1px solid red; border-radius:5px; width:300px; float:right; padding:10px; color:red;">
+                Harap digunakan dengan bijak ya, mastaa...!<br>
+                Proses sinkronisasi bisa jadi membutuhkan<br>
+                waktu yang lama.<br><br>
+                Jangan lakukan apa pun saat sinkronisasi<br>
+                sedang berjalan.<br><br>
+                Proses ini nge-pull data anime, karakter,<br>
+                seiyuu, beserta resource multimedia ukuran HD.<br>
+                (Jika tersedia)
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<p class="waiting">Sabar...</p>
+<script>
+    jQuery(document).ready(() => {
+    console.log('ok')
+    jQuery('.waiting').hide();
+    jQuery('input[name="_save"]').val('Mulai');
+    jQuery('input[name="_addanother"]').hide();
+    jQuery('input[name="_continue"]').hide();
+
+    jQuery('input[name="_save"]').click(() => {
+        jQuery('input[name="_save"]').hide();
+        jQuery('.waiting').show();
+    })
+    })
+</script>
+{% endblock %}
+
+{% block after_field_sets %}
+
+{% endblock %}

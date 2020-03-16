@@ -22,28 +22,58 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'euphonime/login/css/main.css' %}">
 <!--===============================================================================================-->
 </head>
-<body>
+<!--<body style="background-image: url({% static 'euphonime/img/stars.jpg' %}); background-repeat:repeat;)">-->
+<body style="background-image: url({% static 'euphonime/login/images/background login.png' %});background-position: center;background-repeat: no-repeat; background-size: cover;">
 
 	<div class="limiter">
 		<div class="container-login100">
-			<div class="wrap-login100">
-
+			<div class="wrap-login100" style="width:100%; background:transparent;">
 				<div class="login100-pic js-tilt" data-tilt>
-					Mastaaa...!!!
-					<img src="{% static 'euphonime/servant/modred-chibi.png' %}" alt="IMG">
+<!--					Mastaaa...!!!-->
+<!--					<img src="{% static 'euphonime/servant/modred-chibi.png' %}" alt="IMG">-->
+					{% if failed %}
+					<div class="error-message" style="display:none; width:100%; background:rgba(255,255,255,0.8); padding:25px; color:red;">[Failed]<br>{{message}}</div>
+					{% else %}
+					{% if user.username %}
+						<div class="error-message" style="display:none; width:100%; background:rgba(255,255,255,0.8); padding:25px; color:purple;">
+						You are currently logged in as:<br>
+						[{{user.username}}]
+						</div>
+					{% else %}
+					<div class="error-message" style="display:none; width:100%; background:rgba(255,255,255,0.8); padding:25px; color:purple;">
+						Welcome,<br>
+						Tell me your username and password...
+					</div>
+					{% endif %}
+					{% endif %}
+					<br>
+					<a href="{% url 'home' %}" class="error-message" style="display:none; background:rgba(255,255,255,0.8); padding:10px; color:purple;">Back to Home</a>
+					{% if failed %}
+					<a href="{% url 'login' %}" class="error-message" style="display:none; background:rgba(255,255,255,0.8); padding:10px; color:purple;">Try Again</a>
+					{% endif %}
+					{% if user.username %}
+					<a href="{% url 'profile' %}" class="error-message" style="display:none; background:rgba(255,255,255,0.8); padding:10px; color:purple;">Go to Profile</a>
+					<a href="{% url 'logout' %}" class="error-message" style="display:none; background:rgba(255,255,255,0.8); padding:10px; color:purple;">Logout</a>
+					{% endif %}
+
 				</div>
 
-				<form class="login100-form validate-form">
+				<form class="login100-form validate-form" method="post" action="{% url 'auth_login' %}">
+					{% csrf_token %}
 					<center>
-						<img src="{% static 'euphonime/img/logo.png' %}" width="200">
+						<img src="{% static 'euphonime/img/text logo.png' %}" style="opacity:0.5" width="200">
+						{% if profile_pic %}
 					<img src="{{profile_pic}}" width="150" style="border-radius:100px;">
+						{% endif %}
 					</center>
 					<span class="login100-form-title">
+						{% if user.username %}
 						{{user.username}}
+						{% endif %}
 					</span>
-
+					{% if not user.username %}
 					<div class="wrap-input100 validate-input">
-						<input class="input100" type="text" autocomplete="off" name="username" placeholder="Username">
+						<input class="input100" style="background:rgba(255,255,255,0.5)" type="text" autocomplete="off" name="username" placeholder="Username">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-user" aria-hidden="true"></i>
@@ -51,7 +81,7 @@
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Password is required">
-						<input class="input100" type="password" name="pass" placeholder="Password">
+						<input style="background:rgba(255,255,255,0.5)" class="input100" type="password" name="password" placeholder="Password">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
@@ -59,11 +89,11 @@
 					</div>
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">Login</button>
+						<button class="login100-form-btn" style="opacity:0.5" >Login</button>
 					</div>
 
                     <div class="container-login100-form-btn">
-						<a href="{% url 'social:begin' 'facebook' %}" class="login100-form-btn" style="background-color:#2183ad;">
+						<a href="{% url 'social:begin' 'facebook' %}" class="login100-form-btn" style="background-color:#2183ad; opacity:0.5;">
 							Login with Facebook
 						</a>
 					</div>
@@ -81,6 +111,7 @@
 							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
 						</a>
 					</div>
+					{% endif %}
 				</form>
 			</div>
 		</div>
@@ -97,7 +128,7 @@
 <!--===============================================================================================-->
 	<script src="{% static 'euphonime/login/vendor/select2/select2.min.js' %}"></script>
 <!--===============================================================================================-->
-	<script src="{% static 'euphonime/login/vendor/tilt/tilt.jquery.min.js' %}"></script>
+
 	<script >
 		$('.js-tilt').tilt({
 			scale: 1.1
@@ -105,6 +136,12 @@
 	</script>
 <!--===============================================================================================-->
 	<script src="{% static 'euphonime/login/js/main.js' %}"></script>
+
+	<script>
+		$(document).ready(() => {
+			$('.error-message').show(500)
+		});
+	</script>
 
 </body>
 </html>
