@@ -34,3 +34,4 @@ django-colorfield
 mysqlclient
 social-auth-app-django
 django-extensions
+django-social-share
