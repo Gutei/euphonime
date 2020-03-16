@@ -63,7 +63,9 @@
 					<center>
 						<img src="{% static 'euphonime/img/text logo.png' %}" style="opacity:0.5" width="200">
 						{% if profile_pic %}
-					<img src="{{profile_pic}}" width="150" style="border-radius:100px;">
+							<img src="{{profile_pic}}" width="150" style="border-radius:100px;">
+						{% else %}
+							<img src="{% static 'euphonime/img/anonymous.jpg' %}" width="150" style="border-radius:100px;">
 						{% endif %}
 					</center>
 					<span class="login100-form-title">
