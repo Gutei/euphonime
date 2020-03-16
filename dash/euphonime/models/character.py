@@ -17,6 +17,7 @@ class Character(models.Model):
     image_url = models.CharField(null=True, blank=True, max_length=1500)
     name = models.CharField(max_length=128, default="-")
     native_name = models.CharField(max_length=128, default="-")
+    description = models.TextField(null=True, blank=True)
     role = models.PositiveIntegerField(choices=ROLE, null=True, blank=True)
     anime = models.ForeignKey('Anime', null=True, blank=True, on_delete=models.CASCADE)
     voice_act = models.ForeignKey('VoiceAct', null=True, blank=True, on_delete=models.PROTECT)

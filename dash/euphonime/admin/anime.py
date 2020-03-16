@@ -5,7 +5,7 @@ from euphonime.models import Anime, Character, Studio, Producer, AnimeStudio, An
 
 class CharacterInline(admin.TabularInline):
     model = Character
-    exclude = ('native_name', 'mal_id', 'image_url')
+    exclude = ('native_name', 'mal_id', 'image_url', 'description')
     raw_id_fields = ('voice_act',)
     extra = 1
 
@@ -64,6 +64,7 @@ class MalAnimeAdmin(admin.ModelAdmin):
     search_fields = ('id', 'mal_id')
     list_filter = ('created',)
     exclude = ('log',)
+    change_form_template = "admin/malanime/change_form.html"
 
 @admin.register(Character, site=admin.site)
 class CharacterAdmin(admin.ModelAdmin):

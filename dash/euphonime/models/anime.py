@@ -145,6 +145,8 @@ class MalAnime(models.Model):
 
                 par_anime = a
 
+            status = "[ONLY ANIME SYNCHRONIZED][{}][{}]".format(id, req.status_code)
+
             chara_url = "{}/characters_staff".format(url)
             req_chara = requests.get(chara_url)
             if req_chara.status_code == 200:
@@ -155,7 +157,21 @@ class MalAnime(models.Model):
                     act = None
                     for v in c['voice_actors']:
                         if v['language'] == 'Japanese':
-                            seiyuu, created = VoiceAct.objects.get_or_create(mal_id=v['mal_id'], name=v['name'], image_url=v['image_url'])
+                            seiyuu_url = "https://api.jikan.moe/v3/person/{}/".format(v['mal_id'])
+                            req_seiyuu = requests.get(seiyuu_url)
+                            if req_seiyuu.status_code == 200:
+                                seiyuu_json = req_seiyuu.json()
+                                seiyuu, created = VoiceAct.objects.get_or_create(mal_id=v['mal_id'], name=v['name'],
+                                                                                 given_name=seiyuu_json['given_name'],
+                                                                                 family_name=seiyuu_json['family_name'],
+                                                                                 image_url=seiyuu_json['image_url'],
+                                                                                 description=seiyuu_json['about'],
+                                                                                 birth_date=seiyuu_json['birthday'],)
+
+                            else:
+                                seiyuu, created = VoiceAct.objects.get_or_create(mal_id=v['mal_id'], name=v['name'],
+                                                                                 image_url=v['image_url'])
+
                             chara_name = c['name']
                             act = seiyuu
                     if chara_name and chara_name != '':
@@ -163,7 +179,23 @@ class MalAnime(models.Model):
                             role = 1
                         else:
                             role = 2
-                        chara, chara_created = Character.objects.get_or_create(mal_id=c['mal_id'], name=c['name'], image_url=c['image_url'], anime=par_anime, voice_act=act, role=role)
+                        chara_url = "https://api.jikan.moe/v3/character/{}/".format(c['mal_id'])
+                        req_detail_chara = requests.get(chara_url)
+                        detail_json = req_detail_chara.json()
+                        if req_detail_chara.status_code == 200:
+                            chara, chara_created = Character.objects.get_or_create(mal_id=c['mal_id'], name=c['name'],
+                                                                                   native_name=detail_json['name_kanji'],
+                                                                                   image_url=detail_json['image_url'],
+                                                                                   description=detail_json['about'],
+                                                                                   anime=par_anime, voice_act=act,
+                                                                                   role=role)
+
+
+                        else:
+                            chara, chara_created = Character.objects.get_or_create(mal_id=c['mal_id'], name=c['name'],
+                                                                                   image_url=c['image_url'],
+                                                                                   anime=par_anime, voice_act=act,
+                                                                                   role=role)
 
                 status = "[SUCCESS] Sync from MyAnimeList for {}, with title: {}.".format(id, anime.title)
 
