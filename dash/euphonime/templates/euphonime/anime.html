@@ -84,17 +84,12 @@
                         <div class="cc-text">
                             <div class="ct-title">
                                 <h3>{{ anime.title }}</h3>
-                                <p>{{ anime.description }}</p>
+                                <p class="text-justify">{{ anime.description }}</p>
                             </div>
-                            <div class="ct-title">
-                                <h5>Berbagi</h5>
-                                <div class="cw-social">
-                                            <a href="#"><i class="fa fa-facebook"></i></a>
-                                            <a href="#"><i class="fa fa-twitter"></i></a>
-                                            <a href="#"><i class="fa fa-youtube-play"></i></a>
-                                            <a href="#"><i class="fa fa-google"></i></a>
-                                </div>
-                            </div>
+
+                            {% block share %}
+                                {% include 'euphonime/__includes/__sosmed/__share.html' %}
+                            {% endblock share %}
 
                         </div>
                         <div class="club-tab-list">
