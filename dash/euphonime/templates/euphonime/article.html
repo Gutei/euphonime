@@ -1,11 +1,13 @@
     {% extends "euphonime/index.html" %}
     {% load static %}
+                                                        {% load social_share %}
+
     {% block content %}
 
-        <section class="blog-hero-section set-bg" data-setbg="{{ article.image.url }}">
-        <div class="container" style="background:rgba(0,0,0,0.5);position:absolute;">
+    <section class="blog-hero-section set-bg" data-setbg="{{ article.image.url }}">
+        <div class="container" style="position: relative;bottom:0;">
             <div class="row" >
-                <div class="col-lg-12" >
+                <div class="col-lg-12" style="background:rgba(0,0,0,0.5);position:absolute;left:0;">
                     <div class="bh-text">
                         <h2>{{article.title}}</h2>
                         <ul>
@@ -18,7 +20,7 @@
         </div>
     </section>
 
-    <section class="blog-details-section spad" style="margin-top:1em;">
+    <section class="blog-details-section spad">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 left-blog-pad">
@@ -28,35 +30,12 @@
                                 {{article.content}}
                             </div>
 
-                            <div class="container">
-                                <div class="club-content">
-                                    <div class="row">
-                                        <div class="col-lg-12" style="padding-left:0;">
-                                            <div class="cc-text">
-                                                <div class="ct-widget">
-                                                    <ul>
-                                                        <li>
-                                                            <h5>Berbagi</h5>
-                                                            <div class="cw-social">
-                                                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                                                <a href="#"><i class="fa fa-youtube-play"></i></a>
-                                                                <a href="#"><i class="fa fa-google"></i></a>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            {% block share %}
+                                {% include 'euphonime/__includes/__sosmed/__share.html' %}
+                            {% endblock share %}
 
-                            <div class="bd-tags">
-                                <a href="#">Multipopuse</a>
-                                <a href="#">Design</a>
-                                <a href="#">Ideas</a>
-                            </div>
+                            <hr>
+
                             <div class="comment-option">
                                 <h4>2 Comments</h4>
                                 <div class="single-comment-item first-comment">
@@ -122,7 +101,7 @@
                     <div class="col-lg-4">
                         <div class="blog-sidebar">
                             {% block follow %}
-                                {% include 'euphonime/__includes/__follow/__follow.html' %}
+                                {% include 'euphonime/__includes/__sosmed/__follow.html' %}
                             {% endblock follow %}
                             <div class="bs-recent">
                                 <div class="section-title sidebar-title">
@@ -141,19 +120,6 @@
                                     </div>
                                 </div>
                                 {% endfor %}
-                            </div>
-                            <div class="bs-popular-tag">
-                                <div class="section-title sidebar-title">
-                                    <h5>Popular Tag</h5>
-                                </div>
-                                <div class="tags">
-                                    <a href="#">Seagame</a>
-                                    <a href="#">Fifa</a>
-                                    <a href="#">World Cup 2019</a>
-                                    <a href="#">Championship</a>
-                                    <a href="#">2019</a>
-                                    <a href="#">Qatar</a>
-                                </div>
                             </div>
                         </div>
                     </div>

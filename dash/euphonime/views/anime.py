@@ -2,7 +2,7 @@ from django.shortcuts import render
 from euphonime.models import Anime, Character, AnimeGenre
 
 
-def get_anime(request, pk, name):
+def get_anime(request, pk):
     anime = Anime.objects.filter(id=pk).first()
     character = Character.objects.filter(anime=anime)
     genre = AnimeGenre.objects.filter(anime=anime)
