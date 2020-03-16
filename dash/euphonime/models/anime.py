@@ -77,6 +77,7 @@ class MalAnime(models.Model):
 
     def save(self):
         id = self.mal_id
+        logger.debug('===========STARTING SYNC FOR MAL ID {}============'.format(id))
         url = "https://api.jikan.moe/v3/anime/{}".format(id)
         req = requests.get(url)
         
