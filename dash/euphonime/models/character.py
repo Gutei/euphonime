@@ -16,7 +16,7 @@ class Character(models.Model):
     image = models.ImageField(upload_to='character/image', null=True, blank=True, max_length=1500)
     image_url = models.CharField(null=True, blank=True, max_length=1500)
     name = models.CharField(max_length=128, default="-")
-    native_name = models.CharField(max_length=128, default="-")
+    native_name = models.CharField(max_length=128, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     role = models.PositiveIntegerField(choices=ROLE, null=True, blank=True)
     anime = models.ForeignKey('Anime', null=True, blank=True, on_delete=models.CASCADE)

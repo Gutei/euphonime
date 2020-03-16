@@ -7,8 +7,12 @@ from django.core.files import File
 from .character import Character
 from .voice_act import VoiceAct
 
+import logging
+
 from ckeditor.fields import RichTextField
 
+
+logger = logging.getLogger(__name__)
 
 class Anime(models.Model):
 
@@ -79,8 +83,13 @@ class MalAnime(models.Model):
         status = "[FAILED][{}][{}]".format(id, req.status_code)
         self.log = status
 
+        logger.debug('GET from {}'.format(url))
+        logger.debug('{}, status={}'.format(url, status))
+
         if req.status_code == 200:
             json = req.json()
+
+            logger.debug('GET ANIME {} SUCCESS, status={}'.format(json['title'], status))
 
             a = Anime.objects.filter(mal_id=id).first()
             if not a:
@@ -141,7 +150,10 @@ class MalAnime(models.Model):
                 a.description = json['synopsis']
                 a.mal_id = id
 
-                a.save()
+                try:
+                    a.save()
+                except Exception as e:
+                    logger.debug('GET ANIME {} FAILED'.format(json['title']))
 
                 par_anime = a
 
@@ -155,11 +167,13 @@ class MalAnime(models.Model):
                 for c in characters:
                     chara_name = ''
                     act = None
+                    logger.debug('GET CHARACTER {} SUCCESS'.format(c['name']))
                     for v in c['voice_actors']:
                         if v['language'] == 'Japanese':
                             seiyuu_url = "https://api.jikan.moe/v3/person/{}/".format(v['mal_id'])
                             req_seiyuu = requests.get(seiyuu_url)
                             if req_seiyuu.status_code == 200:
+                                logger.debug('GET CHARACTER {} SUCCESS'.format(v['name']))
                                 seiyuu_json = req_seiyuu.json()
                                 seiyuu, created = VoiceAct.objects.get_or_create(mal_id=v['mal_id'], name=v['name'],
                                                                                  given_name=seiyuu_json['given_name'],
@@ -182,6 +196,7 @@ class MalAnime(models.Model):
                         chara_url = "https://api.jikan.moe/v3/character/{}/".format(c['mal_id'])
                         req_detail_chara = requests.get(chara_url)
                         detail_json = req_detail_chara.json()
+                        logger.debug('ADD CHARACTER {} SUCCESS'.format(c['name']))
                         if req_detail_chara.status_code == 200:
                             chara, chara_created = Character.objects.get_or_create(mal_id=c['mal_id'], name=c['name'],
                                                                                    native_name=detail_json['name_kanji'],
