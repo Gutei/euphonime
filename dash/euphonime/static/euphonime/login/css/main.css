@@ -41,6 +41,10 @@ body, html {
 	background-size: cover;
 }
 
+.error-nomnom {
+    display: none;
+}
+
 /*---------------------------------------------*/
 a {
 	font-family: Poppins-Regular;
@@ -416,6 +420,10 @@ iframe {
 }
 
 @media (max-width: 576px) {
+  .error-nomnom {
+    display: block;
+  }
+
   .wrap-login100 {
     padding: 100px 15px 33px 15px;
   }
