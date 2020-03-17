@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'ckeditor',
     'django_social_share',
-    'django_celery_results'
+    # 'django_celery_results'
 
 ]
 
