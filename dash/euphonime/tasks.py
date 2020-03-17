@@ -15,6 +15,12 @@ logger = logging.getLogger(__name__)
 def sync_anime(mal_id, task_id):
     from euphonime.models import Anime, Character, VoiceAct, MalAnime
     id = mal_id
+
+    exist_anime = Anime.objects.filter(mal_id=id).first()
+    if exist_anime:
+        logger.debug('[----ANIME EXSIST----]'.format(id))
+        return None
+
     logger.debug('===========STARTING SYNC FOR MAL ID {}============'.format(id))
     url = "https://api.jikan.moe/v3/anime/{}".format(id)
     req = requests.get(url)
