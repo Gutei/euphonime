@@ -78,7 +78,7 @@ def profile(request):
   user_anime_data = []
   user_anime = UserWatching.objects.filter(user=profile)
   for ua in user_anime:
-    user_anime_label.append(user_anime.anime.title)
+    user_anime_label.append(ua.anime.title)
 
   return render(request, 'euphonime/profile.html', context)
 
