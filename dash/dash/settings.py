@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'euphonime',
     'django_extensions',
     'ckeditor',
-    'django_social_share'
+    'django_social_share',
+    'django_celery_results'
 
 ]
 

@@ -90,7 +90,7 @@ class MalAnime(models.Model):
         if req.status_code == 200:
             json = req.json()
 
-            logger.debug('GET ANIME {} SUCCESS, status={}'.format(json['title'], status))
+            logger.debug('GET ANIME {} SUCCESS, status={}'.format(json['title'], req.status_code))
 
             a = Anime.objects.filter(mal_id=id).first()
             if not a:
