@@ -78,6 +78,7 @@ class MalAnime(models.Model):
     def save(self):
         sync_anime.apply_async((self.mal_id, self.id))
         super(MalAnime, self).save()
+        return None
 
 
 
