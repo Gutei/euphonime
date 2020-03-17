@@ -139,9 +139,10 @@ def sync_anime(mal_id, task_id):
                         role = 2
                     chara_url = "https://api.jikan.moe/v3/character/{}/".format(c['mal_id'])
                     req_detail_chara = requests.get(chara_url)
-                    detail_json = req_detail_chara.json()
                     logger.debug('ADD CHARACTER {} SUCCESS'.format(c['name']))
                     if req_detail_chara.status_code == 200:
+                        detail_json = req_detail_chara.json()
+
                         chara, chara_created = Character.objects.get_or_create(mal_id=c['mal_id'], name=c['name'],
                                                                                native_name=detail_json[
                                                                                    'name_kanji'],
@@ -159,4 +160,4 @@ def sync_anime(mal_id, task_id):
 
             status = "[SUCCESS] Sync from MyAnimeList for {}, with title: {}.".format(id, par_anime.title)
 
-            return None
+    return None
