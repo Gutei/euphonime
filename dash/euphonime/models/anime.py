@@ -174,7 +174,7 @@ class MalAnime(models.Model):
                             seiyuu_url = "https://api.jikan.moe/v3/person/{}/".format(v['mal_id'])
                             req_seiyuu = requests.get(seiyuu_url)
                             if req_seiyuu.status_code == 200:
-                                logger.debug('GET SEIYUU {} FOR CHARACTER {} SUCCESS'.format(v['name']), c['name'])
+                                logger.debug('GET SEIYUU {} FOR CHARACTER {} SUCCESS'.format(v['name'], c['name']))
                                 seiyuu_json = req_seiyuu.json()
                                 seiyuu, created = VoiceAct.objects.get_or_create(mal_id=v['mal_id'], name=v['name'],
                                                                                  given_name=seiyuu_json['given_name'],
