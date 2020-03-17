@@ -15,6 +15,10 @@ class AnimeSeasonInline(admin.TabularInline):
     extra = 1
     raw_id_fields = ('anime',)
 
+class QuoteInline(admin.TabularInline):
+    model = Quote
+    extra = 1
+
 class AnimeStudioInline(admin.TabularInline):
     model = AnimeStudio
     extra = 1
@@ -84,6 +88,10 @@ class CharacterAdmin(admin.ModelAdmin):
     search_fields = ('name', 'voice_act__name')
     raw_id_fields = ('voice_act', 'anime')
     list_per_page = 10
+
+    inlines = [
+        QuoteInline,
+    ]
 
     def get_image(self, obj):
         if obj:
