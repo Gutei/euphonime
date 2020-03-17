@@ -74,12 +74,13 @@ class CharacterAdmin(admin.ModelAdmin):
     list_per_page = 10
 
     def get_image(self, obj):
-        if obj.image:
-            image = obj.image.url
-            return mark_safe("<img src='{}' width='30'> {}".format(image, obj.name))
-        elif obj.image_url:
-            image = obj.image_url
-            return mark_safe("<img src='{}' width='30'> {}".format(image, obj.name))
+        if obj:
+            if obj.image:
+                image = obj.image.url
+                return mark_safe("<img src='{}' width='30'> {}".format(image, obj.name))
+            elif obj.image_url:
+                image = obj.image_url
+                return mark_safe("<img src='{}' width='30'> {}".format(image, obj.name))
 
         return '-'
 
@@ -87,14 +88,15 @@ class CharacterAdmin(admin.ModelAdmin):
     get_image.short_description = 'Image'
 
     def get_actor(self, obj):
-        if obj.voice_act.image:
-            image = obj.voice_act.image.url
-            return mark_safe("<img src='{}' width='30'> {}".format(image, obj.voice_act.name))
-        elif obj.voice_act.image_url:
-            image = obj.voice_act.image_url
-            return mark_safe("<img src='{}' width='30'> {}".format(image, obj.voice_act.name))
+        if obj:
+            if obj.voice_act.image:
+                image = obj.voice_act.image.url
+                return mark_safe("<img src='{}' width='30'> {}".format(image, obj.voice_act.name))
+            elif obj.voice_act.image_url:
+                image = obj.voice_act.image_url
+                return mark_safe("<img src='{}' width='30'> {}".format(image, obj.voice_act.name))
 
-        return '-'
+            return '-'
 
     get_actor.admin_order_field = 'actor'
     get_actor.short_description = 'Voice actress/actor'
