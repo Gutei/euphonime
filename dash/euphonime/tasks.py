@@ -153,8 +153,4 @@ def sync_anime(mal_id, task_id):
 
             status = "[SUCCESS] Sync from MyAnimeList for {}, with title: {}.".format(id, par_anime.title)
 
-            ma = MalAnime.objects.filter(id=task_id).first()
-            ma.status = status
-            ma.save()
-
             return None
