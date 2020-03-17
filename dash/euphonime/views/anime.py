@@ -21,7 +21,7 @@ def get_anime(request, pk):
 def list_anime(request):
     template_name = 'euphonime/anime/list-anime.html'
     genre = AnimeGenre.objects.all()
-    animes = Anime.objects.filter(is_publish=True).order_by('-updated')
+    animes = Anime.objects.filter(is_publish=True).order_by('title')
 
     paginator = Paginator(animes, 15)  # Show 25 contacts per page
     page = request.GET.get('page')
