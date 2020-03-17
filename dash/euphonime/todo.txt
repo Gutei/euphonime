@@ -1,0 +1,8 @@
+
+# FEATURES
+anime season
+genre
+quote
+
+# FIX
+seiyu view on get-anime

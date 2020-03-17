@@ -31,9 +31,16 @@ urlpatterns = [
                   url(r'^$', views.home, name='home'),
                   url(r'^profile/', views.profile, name='profile'),
                   url(r'^finish-signup/', views.finish_signup, name='finish_signup'),
+
+                  # Anime
                   url(r'^anime/(?P<pk>[^/]+)/$', views.get_anime, name='anime'),
+                  url(r'^animes/$', views.list_anime, name='list_anime'),
+
+                  # Article
                   url(r'^article/(?P<pk>[^/]+)/$', views.get_article, name='article'),
+                  url(r'^articles/$', views.list_article, name='list_article'),
+
                   url(r'^auth-login/', views.auth_login, name='auth_login'),
 
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL,
-                document_root=settings.MEDIA_ROOT)
+                                                                                           document_root=settings.MEDIA_ROOT)
