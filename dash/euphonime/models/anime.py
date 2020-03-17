@@ -77,3 +77,29 @@ class MalAnime(models.Model):
 
 
 
+class Season(models.Model):
+
+    id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=128, null=True, blank=True)
+    is_season = models.BooleanField(default=False, verbose_name='This season')
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'seasons'
+
+
+
+class AnimeSeason(models.Model):
+
+    id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False)
+    season = models.ForeignKey('Season', null=True, blank=True, on_delete=models.CASCADE)
+    anime = models.OneToOneField('Anime', null=True, blank=True, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'anime_seasons'
+
+
+

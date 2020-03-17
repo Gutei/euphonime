@@ -1,6 +1,7 @@
 from django.utils.html import mark_safe
 from django.contrib import admin
-from euphonime.models import Anime, Character, Studio, Producer, AnimeStudio, AnimeProducer, AnimeGenre, MalAnime, Quote
+from euphonime.models import (Anime, Character, Studio, Producer, AnimeStudio, AnimeProducer, AnimeGenre, MalAnime,
+                              Quote, Season, AnimeSeason)
 from euphonime.tasks import sync_anime
 
 class CharacterInline(admin.TabularInline):
@@ -8,6 +9,11 @@ class CharacterInline(admin.TabularInline):
     exclude = ('native_name', 'mal_id', 'image_url', 'description')
     raw_id_fields = ('voice_act',)
     extra = 1
+
+class AnimeSeasonInline(admin.TabularInline):
+    model = AnimeSeason
+    extra = 1
+    raw_id_fields = ('anime',)
 
 class AnimeStudioInline(admin.TabularInline):
     model = AnimeStudio
@@ -136,3 +142,26 @@ class QuoteAdmin(admin.ModelAdmin):
 
     get_image.admin_order_field = 'image'
     get_image.short_description = 'Image'
+
+
+@admin.register(Season, site=admin.site)
+class SeasonAdmin(admin.ModelAdmin):
+    list_display = ('name', 'is_season', 'created')
+    search_fields = ('name',)
+    list_filter = ('created', 'is_season',)
+    list_editable = ('is_season',)
+
+    inlines = [
+        AnimeSeasonInline,
+    ]
+
+    def save_model(self, request, obj, form, change):
+
+        if change:
+            season = Season.objects.filter(is_season=True).first()
+
+            if season:
+                season.is_season = False
+                season.save()
+
+        super().save_model(request, obj, form, change)
