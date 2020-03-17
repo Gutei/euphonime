@@ -11,7 +11,7 @@ if settings.DEBUG == False:
 else:
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'proj.settings_dev')
 
-app = Celery('euphonime')
+app = Celery('euphonime_celery')
 
 # Using a string here means the worker doesn't have to serialize
 # the configuration object to child processes.
@@ -21,6 +21,8 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 
 # Load task modules from all registered Django app configs.
 app.autodiscover_tasks()
+
+app.conf.broker_url = 'redis://localhost:6379/0'
 
 
 @app.task(bind=True)
