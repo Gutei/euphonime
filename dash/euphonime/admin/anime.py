@@ -89,12 +89,13 @@ class CharacterAdmin(admin.ModelAdmin):
 
     def get_actor(self, obj):
         if obj:
-            if obj.voice_act.image:
-                image = obj.voice_act.image.url
-                return mark_safe("<img src='{}' width='30'> {}".format(image, obj.voice_act.name))
-            elif obj.voice_act.image_url:
-                image = obj.voice_act.image_url
-                return mark_safe("<img src='{}' width='30'> {}".format(image, obj.voice_act.name))
+            if obj.voice_act:
+                if obj.voice_act.image:
+                    image = obj.voice_act.image.url
+                    return mark_safe("<img src='{}' width='30'> {}".format(image, obj.voice_act.name))
+                elif obj.voice_act.image_url:
+                    image = obj.voice_act.image_url
+                    return mark_safe("<img src='{}' width='30'> {}".format(image, obj.voice_act.name))
 
         return '-'
 
