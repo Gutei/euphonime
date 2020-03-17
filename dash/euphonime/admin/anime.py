@@ -114,6 +114,6 @@ class CharacterAdmin(admin.ModelAdmin):
 @admin.register(Quote, site=admin.site)
 class QuoteAdmin(admin.ModelAdmin):
     list_display = ('character', 'quote')
-    search_fields = ('character__name', 'character__anime__title', 'quote')
+    # search_fields = ('character__name', 'character__anime__title', 'quote')
     raw_id_fields = ('character',)
     list_per_page = 10
