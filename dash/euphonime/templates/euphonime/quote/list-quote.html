@@ -1,0 +1,89 @@
+    {% extends "euphonime/index.html" %}
+    {% load static %}
+
+    {% block extra_css %}
+
+    {% endblock extra_css %}
+
+
+    {% block content %}
+    <section class="schedule-section spad">
+        <div class="container">
+            <div class="col-lg-12 left-blog-pad">
+                    <div class="schedule-text">
+                            <div class="section-title sidebar-title">
+                                <h5>Quote</h5>
+                            </div>
+                        <div class="st-table table table-hover">
+                            <table style="padding: 4px 0;border-bottom: #EBEBEB 1px solid;">
+                                <thead>
+                                    <tr>
+                                        <th width="5%">#</th>
+                                        <th width="10%" style="padding-left: 8px;text-align: left;">Image</th>
+                                        <th width="15%" style="padding-left: 8px;text-align: left;">Name</th>
+                                        <th width="55%">Quote</th>
+                                        <th width="15%">Anime</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for q in quotes %}
+                                    <tr>
+
+                                        <td class="st-option">
+                                            <div class="so-text">
+                                                {{ forloop.counter0|add:quotes.start_index }}
+                                            </div>
+                                        </td>
+                                        <td class="left-team">
+                                            <img src="{% if q.image %}{{q.character.image.url}}{% else %}{{ q.character.image_url }}{% endif %}" alt="">
+                                        </td>
+                                        <td class="st-option" style="padding-left: 8px;text-align: left;">
+                                            <div class="so-text">{{q.character.name}}</div>
+                                        </td>
+                                        <td class="st-option">
+                                            <div class="so-text">
+                                                <p>
+                                                    <span class="fa fa-quote-left"></span>
+                                                    <span class="text-justify" style="padding:4px">{{q.quote}}</span>
+                                                    <span class="fa fa-quote-right"></span>
+                                                </p>
+                                            </div>
+                                        </td>
+                                        <td class="st-option">
+                                            <div class="so-text">{{q.character.anime.title}}</div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            <div class="more-blog">
+                <span>
+                    {% if quotes.has_previous %}
+                        <a href="?page={{ quotes.previous_page_number }}"><i class="fa fa-long-arrow-left"></i> Back</a>
+                    {% endif %}
+
+                    {% if quotes.has_next %}
+                        <a href="?page={{ quotes.next_page_number }}"> Next<i class="fa fa-long-arrow-right"></i></a>
+                    {% endif %}
+                </span>
+                <span >
+                        Page {{ quotes.number }} of {{ quotes.paginator.num_pages }}.
+                </span>
+            </div>
+        </div>
+    </section>
+    {% endblock content %}
+
+
+    {% block extra_js %}
+    <script>
+
+    $(document).ready(function(){
+        $('#4').addClass("active");
+    });
+    </script>
+    {% endblock extra_js %}
+
