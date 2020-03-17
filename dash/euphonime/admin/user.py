@@ -1,5 +1,5 @@
 from django.contrib import admin
-from euphonime.models import ProfileUser, UserWatching, UserAnimeScore
+from euphonime.models import ProfileUser, UserWatching, UserAnimeScore, UserPolls
 
 class ScoreInline(admin.TabularInline):
     model = UserAnimeScore
@@ -9,6 +9,10 @@ class WatchingInline(admin.TabularInline):
     model = UserWatching
     extra = 1
 
+class PollsInline(admin.TabularInline):
+    model = UserPolls
+    extra = 1
+
 @admin.register(ProfileUser, site=admin.site)
 class ProfileUserAdmin(admin.ModelAdmin):
     list_display = ('get_email', 'get_username', 'get_fullname','birth_date')
@@ -16,6 +20,7 @@ class ProfileUserAdmin(admin.ModelAdmin):
     inlines = [
         WatchingInline,
         ScoreInline,
+        PollsInline,
     ]
     list_per_page = 10
 
