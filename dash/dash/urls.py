@@ -40,6 +40,13 @@ urlpatterns = [
                   url(r'^article/(?P<pk>[^/]+)/$', views.get_article, name='article'),
                   url(r'^articles/$', views.list_article, name='list_article'),
 
+                  # Quote
+                  # url(r'^article/(?P<pk>[^/]+)/$', views.get_article, name='article'),
+                  url(r'^quotes/$', views.list_quote, name='list_quote'),
+
+                  # Character
+                  url(r'^characters/$', views.list_character, name='list_character'),
+
                   url(r'^auth-login/', views.auth_login, name='auth_login'),
 
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL,
