@@ -96,7 +96,7 @@ class CharacterAdmin(admin.ModelAdmin):
                 image = obj.voice_act.image_url
                 return mark_safe("<img src='{}' width='30'> {}".format(image, obj.voice_act.name))
 
-            return '-'
+        return '-'
 
     get_actor.admin_order_field = 'actor'
     get_actor.short_description = 'Voice actress/actor'
