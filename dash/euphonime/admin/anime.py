@@ -121,17 +121,17 @@ class QuoteAdmin(admin.ModelAdmin):
     def get_anime(self, obj):
         if obj:
             if obj.character.anime:
-                a = obj.character.title
+                a = obj.character.anime.title
                 return "{}".format(a)
         return '-'
 
     def get_image(self, obj):
         if obj:
-            if obj.image:
-                image = obj.image.url
+            if obj.character.image:
+                image = obj.character.image.url
                 return mark_safe("<img src='{}' width='30'> {}".format(image, obj.character.name))
-            elif obj.image_url:
-                image = obj.image_url
+            elif obj.character.image_url:
+                image = obj.character.image_url
                 return mark_safe("<img src='{}' width='30'> {}".format(image, obj.character.name))
 
         return '-'
