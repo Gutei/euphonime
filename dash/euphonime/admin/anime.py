@@ -113,28 +113,7 @@ class CharacterAdmin(admin.ModelAdmin):
 
 @admin.register(Quote, site=admin.site)
 class QuoteAdmin(admin.ModelAdmin):
-    list_display = ('get_image', 'get_anime', 'quote')
+    list_display = ('character', 'quote')
     search_fields = ('character__name', 'character__anime__title', 'quote')
     raw_id_fields = ('character',)
     list_per_page = 10
-
-    def get_anime(self, obj):
-        if obj:
-            if obj.character.anime:
-                a = obj.character.anime.title
-                return "{}".format(a)
-        return '-'
-
-    def get_image(self, obj):
-        if obj:
-            if obj.character.image:
-                image = obj.character.image.url
-                return mark_safe("<img src='{}' width='30'> {}".format(image, obj.character.name))
-            elif obj.character.image_url:
-                image = obj.character.image_url
-                return mark_safe("<img src='{}' width='30'> {}".format(image, obj.character.name))
-
-        return '-'
-
-    get_image.admin_order_field = 'image'
-    get_image.short_description = 'Image'
