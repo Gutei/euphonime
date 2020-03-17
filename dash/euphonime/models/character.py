@@ -30,3 +30,14 @@ class Character(models.Model):
 
     def __str__(self):
         return '{}'.format(self.name)
+
+
+class Quote(models.Model):
+    id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False)
+    character = models.ForeignKey('Character', null=True, blank=True, on_delete=models.CASCADE)
+    quote = models.TextField(null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'quotes'

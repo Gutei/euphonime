@@ -62,7 +62,7 @@ def sync_anime(mal_id, task_id):
             par_anime = anime
 
         else:
-            a = Anime()
+            a = Anime.objects.filter(mal_id=id).first()
             a.title = json['title']
             a.native_title = json['title_japanese']
             a.english_title = json['title_english']

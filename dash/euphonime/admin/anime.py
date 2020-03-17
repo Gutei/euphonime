@@ -1,12 +1,16 @@
 from django.utils.html import mark_safe
 from django.contrib import admin
-from euphonime.models import Anime, Character, Studio, Producer, AnimeStudio, AnimeProducer, AnimeGenre, MalAnime
+from euphonime.models import Anime, Character, Studio, Producer, AnimeStudio, AnimeProducer, AnimeGenre, MalAnime, Quote
 
 
 class CharacterInline(admin.TabularInline):
     model = Character
     exclude = ('native_name', 'mal_id', 'image_url', 'description')
     raw_id_fields = ('voice_act',)
+    extra = 1
+
+class QuotesInline(admin.TabularInline):
+    model = Quote
     extra = 1
 
 class AnimeStudioInline(admin.TabularInline):
@@ -73,6 +77,10 @@ class CharacterAdmin(admin.ModelAdmin):
     raw_id_fields = ('voice_act', 'anime')
     list_per_page = 10
 
+    inlines = [
+        QuotesInline,
+    ]
+
     def get_image(self, obj):
         if obj:
             if obj.image:
@@ -101,3 +109,32 @@ class CharacterAdmin(admin.ModelAdmin):
 
     get_actor.admin_order_field = 'actor'
     get_actor.short_description = 'Voice actress/actor'
+
+
+@admin.register(Quote, site=admin.site)
+class QuoteAdmin(admin.ModelAdmin):
+    list_display = ('get_image', 'get_anime', 'quote')
+    search_fields = ('character__name', 'character__anime__title', 'quote')
+    raw_id_fields = ('character',)
+    list_per_page = 10
+
+    def get_anime(self, obj):
+        if obj:
+            if obj.character.anime:
+                a = obj.character.title
+                return "{}".format(a)
+        return '-'
+
+    def get_image(self, obj):
+        if obj:
+            if obj.image:
+                image = obj.image.url
+                return mark_safe("<img src='{}' width='30'> {}".format(image, obj.character.name))
+            elif obj.image_url:
+                image = obj.image_url
+                return mark_safe("<img src='{}' width='30'> {}".format(image, obj.character.name))
+
+        return '-'
+
+    get_image.admin_order_field = 'image'
+    get_image.short_description = 'Image'
