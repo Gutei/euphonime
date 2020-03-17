@@ -9,10 +9,6 @@ class CharacterInline(admin.TabularInline):
     raw_id_fields = ('voice_act',)
     extra = 1
 
-class QuotesInline(admin.TabularInline):
-    model = Quote
-    extra = 1
-
 class AnimeStudioInline(admin.TabularInline):
     model = AnimeStudio
     extra = 1
