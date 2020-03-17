@@ -1,7 +1,7 @@
 from django.utils.html import mark_safe
 from django.contrib import admin
 from euphonime.models import Anime, Character, Studio, Producer, AnimeStudio, AnimeProducer, AnimeGenre, MalAnime, Quote
-
+from euphonime.tasks import sync_anime
 
 class CharacterInline(admin.TabularInline):
     model = Character
@@ -65,6 +65,12 @@ class MalAnimeAdmin(admin.ModelAdmin):
     list_filter = ('created',)
     exclude = ('log',)
     change_form_template = "admin/malanime/change_form.html"
+
+    def save_model(self, request, obj, form, change):
+        # custom stuff here
+
+        sync_anime.apply_async((obj.mal_id, obj.id))
+        super().save_model(request, obj, form, change)
 
 @admin.register(Character, site=admin.site)
 class CharacterAdmin(admin.ModelAdmin):

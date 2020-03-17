@@ -10,7 +10,7 @@ from .voice_act import VoiceAct
 import logging
 
 from ckeditor.fields import RichTextField
-from euphonime.tasks import sync_anime
+
 
 logger = logging.getLogger(__name__)
 
@@ -74,11 +74,6 @@ class MalAnime(models.Model):
     class Meta:
         db_table = 'mal_anime'
         verbose_name = 'Sync from MAL'
-
-    def save(self):
-        sync_anime.apply_async((self.mal_id, self.id))
-        super(MalAnime, self).save()
-        return None
 
 
 
