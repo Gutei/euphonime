@@ -113,6 +113,14 @@ ol {
 	padding: 0;
 	margin: 0;
 }
+th{
+    background: #F6F6F6 url(//myanimelist.net//img/pc/ownlist/bar-table-header.png) no-repeat right 7px / 1px 22px;
+    display: table-cell;
+    border-bottom: #EBEBEB 1px solid;
+    height: 36px;
+    text-align: center;
+    vertical-align: middle;
+}
 
 /*---------------------
   ovveride corrosal
@@ -866,9 +874,12 @@ ol {
 }
 
 .news-item .ni-pic img {
+
 	height: 100px;
-	/*
+		/*
+
 	width: 100px; */
+
 }
 
 .news-item .ni-text {
@@ -1098,7 +1109,7 @@ ol {
 }
 
 .news-item.popular-item .ni-tag.tenis {
-	background: #0054a6;
+	background: #00619D;
 }
 
 .news-item.popular-item .ni-tag.football {
@@ -1480,12 +1491,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', end
 
 .schedule-text .st-table table tbody tr td {
 	width: 150px;
-	padding: 16px 0;
+	padding: 4px 0;
 }
 
 .schedule-text .st-table table tbody tr td img {
-	height: 30px;
-	width: 50px;
+    width: 48px;
+    height: 68px;
+    border: #EBEBEB 1px solid;
 }
 
 .schedule-text .st-table table tbody tr td h4 {
@@ -2645,7 +2657,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', end
 		margin-bottom: 10px;
 	}
 	.club-tab-list .tab-content .club-tab-content .ct-item .ci-text {
-		float: none;
+		/*float: none;*/
 		overflow: hidden;
 	}
 	.club-tab-list .tab-content .club-tab-content .ct-item .ci-name {
