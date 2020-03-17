@@ -15,7 +15,7 @@
                                 <div class="col-lg-6 col-md-6">
                                     <div class="news-item">
                                     <div class="ni-pic">
-                                        <a href="{% url 'article' a.id.hex %}"><img src="{{a.image.url}}" alt=""></a>
+                                        <a href="{% url 'article' a.id.hex %}"><img style="width:174px;height:100px;" src="{{a.image.url}}" alt=""></a>
                                     </div>
                                     <div class="ni-text">
                                         <h5 ><a href="{% url 'article' a.id.hex %}">{{a.title|truncatechars:60}}</a></h5>

@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="cc-pic">
-                            <img src="{{anime.image_url}}" alt="">
+                            <img style="height: 316px;width: 225px;" src="{{anime.image_url}}" alt="">
                         </div>
                         <div class="container" style="margin-top:1em;">
                                     <div class="schedule-text">
@@ -29,7 +29,7 @@
                                                             <h5>Type</h5>
                                                         </td>
                                                         <td class="left-team">
-                                                            <p>{{anime.get_type_display}}</p>
+                                                            <p>{% if anime.type == 'None' %}-{% else %}{{anime.get_type_display}}{% endif %}</p>
                                                         </td>
                                                     </tr>
                                                     <tr>
