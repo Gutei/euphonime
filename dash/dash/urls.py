@@ -21,6 +21,8 @@ from django.contrib.auth import views as auth_views
 from django.conf.urls import url, include
 from euphonime import views
 
+admin.site.site_header = 'EUPHONIME - GOD MODE'
+
 urlpatterns = [
                   url(r'^jet', include('jet.urls', 'jet')),
                   url(r'^ckeditor/', include('ckeditor_uploader.urls')),
