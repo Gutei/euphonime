@@ -156,3 +156,5 @@ def sync_anime(mal_id, task_id):
             ma = MalAnime.objects.filter(id=task_id).first()
             ma.status = status
             ma.save()
+
+            return None
