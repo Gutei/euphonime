@@ -3,6 +3,12 @@
 <title>Euphonime</title>
 {% endblock title %}
 
+{% block site_logo %}
+    <meta property="og:image" content="{% static 'euphonime/img/logo.png' %}">
+
+    <meta name="description" content="Euphonime adalah media, database anime, dan situs komunitas untuk penggemar anime yang dapat saling berinteraksi di Indonesia." />
+{% endblock site_logo %}
+
 {% load static %}
 
     {% block extra_css %}
