@@ -15,7 +15,11 @@
                                 <div class="col-lg-6 col-md-6">
                                     <div class="news-item">
                                     <div class="ni-pic">
-                                        <a href="{% url 'article' a.id.hex %}"><img src="{{a.image.url}}" alt=""></a>
+                                        <a href="{% url 'article' a.id.hex %}"><div style="width:150px; height:150px; background:url('{{a.image.url}}'); background-position:center; background-size:cover;">
+                                        <img src="{% static 'euphonime/img/logo.png' %}" alt="" style="height:30px; visibility:hidden;">
+
+                                        </div></a>
+<!--                                        <a href="{% url 'article' a.id.hex %}"><img src="{{a.image.url}}" alt=""></a>-->
                                     </div>
                                     <div class="ni-text">
                                         <h5 ><a href="{% url 'article' a.id.hex %}">{{a.title|truncatechars:60}}</a></h5>
