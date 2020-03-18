@@ -1,18 +1,18 @@
 from django.core.paginator import Paginator
 from django.db.models import Count
 from django.shortcuts import render
-from euphonime.models import Anime, Character,  Quote
+from euphonime.models import Anime, Character, Quote
 
 
 def get_character(request, pk):
     character = Character.objects.filter(id=pk).first()
     quote = Quote.objects.filter(character=character)
 
-    template_name = 'euphonime/character/get-character2.html'
+    template_name = 'euphonime/character/get-character.html'
 
     context = {
         'character': character,
-        'quotes':quote
+        'quotes': quote
     }
     return render(request, template_name, context)
 
