@@ -10,6 +10,7 @@ from .voice_act import VoiceAct
 import logging
 
 from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 logger = logging.getLogger(__name__)
@@ -37,7 +38,7 @@ class Anime(models.Model):
     native_title = models.CharField(max_length=128, null=True, blank=True)
     english_title = models.CharField(max_length=128, null=True, blank=True)
     type = models.PositiveIntegerField(choices=TYPE, null=True, blank=True )
-    description = RichTextField(blank=True, null=True)
+    description = RichTextUploadingField(blank=True, null=True, extra_plugins=['uploadimage'],)
     airing_date = models.DateTimeField(null=True, blank=True)
     rating = models.CharField(max_length=128, null=True, blank=True)
     mal_id = models.CharField(max_length=128, null=True, blank=True)
