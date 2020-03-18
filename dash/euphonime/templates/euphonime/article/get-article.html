@@ -9,9 +9,9 @@
 
     {% else %}
     <meta property="og:image" content="{{article.image.url}}">
+    {% endif %}
 
     <meta name="description" content="{{article.content|truncatechars:150}}" />
-    {% endif %}
     {% endblock site_logo %}
 
                                                         {% load social_share %}
