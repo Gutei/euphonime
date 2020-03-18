@@ -43,7 +43,6 @@ urlpatterns = [
                   url(r'^articles/$', views.list_article, name='list_article'),
 
                   # Quote
-                  # url(r'^article/(?P<pk>[^/]+)/$', views.get_article, name='article'),
                   url(r'^quotes/$', views.list_quote, name='list_quote'),
 
                   # Character
