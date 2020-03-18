@@ -1,5 +1,18 @@
     {% extends "euphonime/index.html" %}
     {% load static %}
+
+    {% block title %}
+    <title>{{anime.title}} - Euphonime</title>
+    {% endblock title %}
+
+    {% block site_logo %}
+    {% if not anime.image %}
+    <meta property="og:image" content="{{anime.image_url}}">
+    {% else %}
+    <meta property="og:image" content="{{anime.image.url}}">
+    {% endif %}
+    {% endblock site_logo %}
+
     {% block content %}
     <style>
         body {

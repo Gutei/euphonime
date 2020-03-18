@@ -1,5 +1,17 @@
     {% extends "euphonime/index.html" %}
     {% load static %}
+    {% block title %}
+    <title>{{article.title}} - Euphonime</title>
+    {% endblock title %}
+
+    {% block site_logo %}
+    {% if not article.image %}
+
+    {% else %}
+    <meta property="og:image" content="{{article.image.url}}">
+    {% endif %}
+    {% endblock site_logo %}
+
                                                         {% load social_share %}
 
     {% block content %}

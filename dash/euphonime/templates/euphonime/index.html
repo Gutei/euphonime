@@ -8,7 +8,14 @@
     <meta name="keywords" content="Anime, Quote, Manga">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Euphonime</title>
+
+    {% block title %}
+    {% endblock title %}
+
+    <meta name="keywords" content="anime, myanimelist, anime news, manga" />
+
+    {% block site_logo %}
+    {% endblock site_logo %}
 
     {% block css %}
             {% include 'euphonime/__includes/__css/__css.html' %}
