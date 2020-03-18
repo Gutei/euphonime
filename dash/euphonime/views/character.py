@@ -4,14 +4,12 @@ from django.shortcuts import render
 from euphonime.models import Anime, Character,  Quote
 
 
-def get_anime(request, pk):
-    anime = Anime.objects.filter(id=pk).first()
-    character = Character.objects.filter(anime=anime)
+def get_character(request, pk):
+    character = Character.objects.filter(id=pk)
 
-    template_name = 'euphonime/anime/get-anime.html'
+    template_name = 'euphonime/character/get-character.html'
 
     context = {
-        'anime': anime,
         'character': character,
     }
     return render(request, template_name, context)
