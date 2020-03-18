@@ -10,8 +10,6 @@
     {% else %}
     <meta property="og:image" content="{{article.image.url}}">
     {% endif %}
-
-    <meta name="description" content="{{article.content|safe|truncatechars:200}}" />
     {% endblock site_logo %}
 
                                                         {% load social_share %}
