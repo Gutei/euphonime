@@ -21,12 +21,12 @@ def home(request):
     i = 1
 
     for s in anime_season:
-        score = UserAnimeScore.objects.filter(anime=s.anime).aggregate(Avg('score'))
-        polling = UserPolls.objects.filter(anime=s.anime).count()
-        watch = UserWatching.objects.filter(anime=s.anime).count()
+        score = UserAnimeScore.objects.filter(anime=s).aggregate(Avg('score'))
+        polling = UserPolls.objects.filter(anime=s).count()
+        watch = UserWatching.objects.filter(anime=s).count()
         polls.append({
             'number': i,
-            'obj': s.anime,
+            'obj': s,
             'polls': polling if polling < 999999 else '1000000+',
             'watch': watch if watch < 999999 else '1000000+',
             'score': '-' if not score['score__avg'] else score['score__avg'],

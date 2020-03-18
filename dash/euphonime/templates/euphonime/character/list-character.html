@@ -36,10 +36,12 @@
                                             </div>
                                         </td>
                                         <td class="left-team">
+                                            <a href="{% url 'character' ch.id.hex %}">
                                             <img style="width: 48px;height: 68px;" src="{% if ch.image %}{{ch.image.url}}{% else %}{{ ch.image_url }}{% endif %}" alt="">
+                                            </a>
                                         </td>
                                         <td class="st-option" style="padding-left: 8px;text-align: left;">
-                                            <div class="so-text">{{ch.name}}</div>
+                                            <div class="so-text"><a href="{% url 'character' ch.id.hex %}">{{ch.name}}</a></div>
                                         </td>
                                         <td class="st-option">
                                             <div class="so-text">#</div>
