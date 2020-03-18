@@ -4,14 +4,17 @@ from euphonime.models import ProfileUser, UserWatching, UserAnimeScore, UserPoll
 class ScoreInline(admin.TabularInline):
     model = UserAnimeScore
     extra = 1
+    raw_id_fields = ('anime',)
 
 class WatchingInline(admin.TabularInline):
     model = UserWatching
     extra = 1
+    raw_id_fields = ('anime',)
 
 class PollsInline(admin.TabularInline):
     model = UserPolls
     extra = 1
+    raw_id_fields = ('anime',)
 
 @admin.register(ProfileUser, site=admin.site)
 class ProfileUserAdmin(admin.ModelAdmin):

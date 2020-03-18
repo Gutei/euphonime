@@ -146,7 +146,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 JET_SIDE_MENU_COMPACT = True
 
-CKEDITOR_UPLOAD_PATH = '/upload/'
+CKEDITOR_UPLOAD_PATH = 'upload/'
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'profile'
@@ -199,4 +199,11 @@ CACHES = {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
     }
+}
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'removePlugins': 'stylesheetparser',
+    },
 }
