@@ -56,7 +56,13 @@
                     <div class="col-lg-6">
                         <div class="ht-info">
                             <ul>
-                                <li><img src="{% static 'euphonime/img/chibi2.png' %}" width="20"> <a style="color:#00619D;" href="{% url 'login' %}">Sign in</a></li>
+                                <li><img src="{% static 'euphonime/img/chibi2.png' %}" width="20">
+                                    {% if request.user.is_anonymous %}
+                                    <a style="color:#00619D;" href="{% url 'login' %}">Sign in</a>
+                                    {% else %}
+                                    <a style="color:#00619D;" href="{% url 'profile' %}">{{request.user.email}}</a>
+                                    {% endif %}
+                                </li>
                                 <li><a style="color:#00619D;" href="#">Contact</a></li>
                             </ul>
                         </div>

@@ -72,7 +72,8 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                        </div>
+                                        </div><br>
+                                        <img src="{% static 'euphonime/img/banner-gif2.gif' %}">
                                     </div>
 
                         </div>
@@ -89,6 +90,52 @@
                                 <h4>{{ anime.title }}</h4>
                                 <hr>
                                 <p class="text-justify" style="font-size:14px;">{{ anime.description }}</p>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        Rating
+                                        <canvas id="myChart" width="300" height="200"></canvas>
+                                    </div>
+                                    <div class="col-md-6">
+                                        Tanggapan
+                                        <p style="font-size:14px;">Berikan tanggapan anda</p>
+                                        <table class="table table-responsive" cellpadding="5" style="text-align:center; font-size:18px;">
+                                            <tr>
+                                                <td><a href="#">😍</a></td>
+                                                <td><a href="#">😆</a></td>
+                                                <td><a href="#">😄</a></td>
+                                                <td><a href="#">😁</a></td>
+                                                <td><a href="#">😊</a></td>
+                                                <td><a href="#">😋</a></td>
+                                                <td><a href="#">😗</a></td>
+                                                <td><a href="#">😲</a></td>
+                                                <td><a href="#">😶</a></td>
+                                                <td><a href="#">🙃</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:center; font-size:12px;">10</td>
+                                                <td style="text-align:center; font-size:12px;">9</td>
+                                                <td style="text-align:center; font-size:12px;">8</td>
+                                                <td style="text-align:center; font-size:12px;">7</td>
+                                                <td style="text-align:center; font-size:12px;">6</td>
+                                                <td style="text-align:center; font-size:12px;">5</td>
+                                                <td style="text-align:center; font-size:12px;">4</td>
+                                                <td style="text-align:center; font-size:12px;">3</td>
+                                                <td style="text-align:center; font-size:12px;">2</td>
+                                                <td style="text-align:center; font-size:12px;">1</td>
+                                            </tr>
+                                        </table>
+                                        <select name="watching" class="form-control">
+                                            <option value="-">---</option>
+                                            <option value="1">Sedang ditonton</option>
+                                            <option value="2">Selesai ditonton</option>
+                                            <option value="3">Menunda</option>
+                                            <option value="4">Tidak dilanjutkan</option>
+                                        </select>
+                                        <br>
+                                        <button class="btn btn-primary" style="width:100%;">submit</button>
+                                    </div>
+                                </div>
                             </div>
 
                             {% block share %}
@@ -196,3 +243,44 @@
     <!-- Club Section End -->
 
     {% endblock content %}
+
+    {% block extra_js %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdnjs.com/libraries/Chart.js"></script>
+    <script>
+        $(document).ready(() => {
+
+        })
+    </script>
+
+    <script>
+        var ctx = document.getElementById('myChart');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['7/3/2020', '14/3/2020', '21/3/2020', '28/3/2020', '4/4/2020'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 7, 5],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+        </script>
+
+    {% endblock extra_js %}

@@ -65,11 +65,16 @@
 						<img src="{% static 'euphonime/img/text logo.png' %}" style="opacity:0.5" width="200">
 						{% if profile_pic %}
 							<img src="{{profile_pic}}" width="150" style="border-radius:100px;">
+						{% else %}
+						<a href="{% url 'profile' %}">
+							<img src="{% static 'euphonime/img/peek1.png' %}" width="100" style="border-radius:100px;">
+						</a>
 						{% endif %}
 					</center>
 					<span class="login100-form-title">
 						{% if user.username %}
-						{{user.username}}
+						<a href="{% url 'profile' %}"><h3>{{user.username}}</h3></a>
+						<a href="{% url 'profile' %}"><u>Profile</u></a>
 						{% endif %}
 					</span>
 					{% if not user.username %}
