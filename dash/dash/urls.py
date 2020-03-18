@@ -30,7 +30,7 @@ urlpatterns = [
                   url(r'^login/$', views.login, name='login'),
                   url(r'^logout/$', auth_views.LogoutView.as_view(), name='logout'),
                   url(r'^oauth/', include('social_django.urls', namespace='social')),
-                  url(r'^$', views.home, name='home'),
+                  url(r'^', views.home, name='home'),
                   url(r'^profile/', views.profile, name='profile'),
                   url(r'^finish-signup/', views.finish_signup, name='finish_signup'),
 
