@@ -186,9 +186,11 @@
                                     {% for ch in character %}
                                     <div class="ct-item">
                                         <div class="ci-text">
+                                            <a href="{% url 'character' ch.id.hex  %}">
                                             <img style="width:50px;" src="{% if ch.image %}{{ch.image.url}}{% else %}{{ ch.image_url }}{% endif %}" alt="">
+                                            </a>
                                             <div class="row">
-                                                <p><b>{{ch.name}}</b></p>
+                                                <a href="{% url 'character' ch.id.hex  %}"><p><b>{{ch.name}}</b></p></a>
                                                 <p style="font-size:0.7rem;">({{ch.get_role_display}})</p>
                                             </div>
                                         </div>

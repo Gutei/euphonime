@@ -122,10 +122,12 @@
                                 {% for na in news_article %}
                                 <div class="news-item">
                                     <div class="ni-pic">
+                                        <a href="{% url 'article' na.id.hex  %}">
                                         <img style="width:168px;height:100px;" src="{{ na.image.url }}" alt="">
+                                        </a>
                                     </div>
                                     <div class="ni-text">
-                                        <h5><a href="#">{{na.title|truncatechars:30}}</a></h5>
+                                        <h5><a href="{% url 'article' na.id.hex  %}">{{na.title|truncatechars:30}}</a></h5>
                                         <ul>
                                             <li><i class="fa fa-calendar"></i> May 19, 2019</li>
                                         </ul>
