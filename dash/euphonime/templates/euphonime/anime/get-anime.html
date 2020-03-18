@@ -16,11 +16,12 @@
                 <div class="row">
                     <div class="col-lg-4" style="background:#FFF; padding:30px;">
                         <div class="cc-pic">
+
                             <center>
                             <div style="width:200px; height:250px; background:url('{{anime.image_url}}'); background-size:cover;">
                             </div>
                             </center>
-<!--                            <img src="{{anime.image_url}}" alt="">-->
+
                         </div>
                         <div class="container" style="margin-top:1em;">
                                     <div class="schedule-text">
@@ -33,6 +34,7 @@
                                                             <p>Genre</p>
                                                         </td>
                                                         <td class="left-team">
+
                                                             <p style="font-size:14px;">{% if genre %}{% for gr in genre %}{{gr.genre.title}}, {% endfor %}{% else %} - {% endif %}</p>
                                                         </td>
                                                     </tr>

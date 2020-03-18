@@ -47,6 +47,7 @@ urlpatterns = [
                   url(r'^quotes/$', views.list_quote, name='list_quote'),
 
                   # Character
+                  url(r'^character/(?P<pk>[^/]+)/$', views.get_character, name='character'),
                   url(r'^characters/$', views.list_character, name='list_character'),
 
                   url(r'^auth-login/', views.auth_login, name='auth_login'),

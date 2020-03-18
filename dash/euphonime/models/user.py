@@ -2,6 +2,7 @@ import uuid
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class ProfileUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     photo_profile = models.ImageField(upload_to='user/profile', null=True, blank=True)
@@ -13,7 +14,6 @@ class ProfileUser(models.Model):
 
 
 class UserWatching(models.Model):
-
     WATCHING = 1
     FINISHED_WATCHING = 2
     HOLDING = 3
@@ -38,7 +38,6 @@ class UserWatching(models.Model):
 
 
 class UserAnimeScore(models.Model):
-
     id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey('ProfileUser', null=True, blank=True, on_delete=models.CASCADE)
     anime = models.ForeignKey('Anime', null=True, blank=True, on_delete=models.CASCADE)
@@ -51,7 +50,6 @@ class UserAnimeScore(models.Model):
 
 
 class UserPolls(models.Model):
-
     id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey('ProfileUser', null=True, blank=True, on_delete=models.CASCADE)
     anime = models.ForeignKey('Anime', null=True, blank=True, on_delete=models.CASCADE)
