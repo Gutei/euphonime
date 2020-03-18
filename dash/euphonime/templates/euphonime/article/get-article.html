@@ -9,6 +9,8 @@
 
     {% else %}
     <meta property="og:image" content="{{article.image.url}}">
+
+    <meta name="description" content="{{article.content|truncatechars:150}}" />
     {% endif %}
     {% endblock site_logo %}
 
