@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class Character(models.Model):
@@ -17,7 +18,7 @@ class Character(models.Model):
     image_url = models.CharField(null=True, blank=True, max_length=1500)
     name = models.CharField(max_length=128, default="-")
     native_name = models.CharField(max_length=128, null=True, blank=True)
-    description = models.TextField(null=True, blank=True)
+    description = RichTextUploadingField(null=True, blank=True, extra_plugins=['uploadimage'])
     role = models.PositiveIntegerField(choices=ROLE, null=True, blank=True)
     anime = models.ForeignKey('Anime', null=True, blank=True, on_delete=models.CASCADE)
     voice_act = models.ForeignKey('VoiceAct', null=True, blank=True, on_delete=models.PROTECT)

@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from ckeditor_uploader.fields import RichTextUploadingField
 
 class VoiceAct(models.Model):
     id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False)
@@ -9,7 +10,7 @@ class VoiceAct(models.Model):
     given_name = models.CharField(max_length=128, null=True, blank=True, )
     family_name = models.CharField(max_length=128, null=True, blank=True, )
     birth_date = models.DateTimeField(null=True, blank=True,)
-    description = models.TextField(null=True, blank=True)
+    description = RichTextUploadingField(null=True, blank=True, extra_plugins=['uploadimage'])
     mal_id = models.CharField(max_length=128, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

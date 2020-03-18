@@ -42,7 +42,7 @@ class UserAnimeScore(models.Model):
     id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey('ProfileUser', null=True, blank=True, on_delete=models.CASCADE)
     anime = models.ForeignKey('Anime', null=True, blank=True, on_delete=models.CASCADE)
-    score = models.PositiveIntegerField(default=0)
+    score = models.IntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -55,7 +55,7 @@ class UserPolls(models.Model):
     id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey('ProfileUser', null=True, blank=True, on_delete=models.CASCADE)
     anime = models.ForeignKey('Anime', null=True, blank=True, on_delete=models.CASCADE)
-    score = models.BooleanField(default=False)
+    poll = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

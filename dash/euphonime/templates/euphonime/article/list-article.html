@@ -3,19 +3,38 @@
 
     {% block content %}
     <!-- Blog Section Begin -->
-    <section class="blog-section spad">
+    <section class="blog-section spad" style="padding-top:50px;">
         <div class="container">
                     <div class="blog-sidebar">
                         <div class="bs-recent">
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-9">
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="text" placeholder="Cari..." class="form-control">
+                                    </div>
+
+                                </div>
+
+
+
+
+                            </form><br>
                             <div class="section-title sidebar-title">
-                                <h5>Artikel</h5>
+                                <h5>Artikel <span><img src="{% static 'euphonime/img/yuno1.png' %}" height="30px;"></span> </h5>
                             </div>
                             <div class="row">
                                 {% for a in articles %}
                                 <div class="col-lg-6 col-md-6">
                                     <div class="news-item">
                                     <div class="ni-pic">
-                                        <a href="{% url 'article' a.id.hex %}"><img style="width:174px;height:100px;" src="{{a.image.url}}" alt=""></a>
+                                        <a href="{% url 'article' a.id.hex %}"><div style="width:150px; height:150px; background:url('{{a.image.url}}'); background-position:center; background-size:cover;">
+                                        <img src="{% static 'euphonime/img/logo.png' %}" alt="" style="height:30px; visibility:hidden;">
+
+                                        </div></a>
+<!--                                        <a href="{% url 'article' a.id.hex %}"><img src="{{a.image.url}}" alt=""></a>-->
                                     </div>
                                     <div class="ni-text">
                                         <h5 ><a href="{% url 'article' a.id.hex %}">{{a.title|truncatechars:60}}</a></h5>

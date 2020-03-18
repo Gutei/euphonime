@@ -31,6 +31,7 @@
 				<div class="login100-pic js-tilt" data-tilt>
 <!--					Mastaaa...!!!-->
 <!--					<img src="{% static 'euphonime/servant/modred-chibi.png' %}" alt="IMG">-->
+					<h1 class="clock" style="opacity:0.5;">00:00</h1>
 					{% if failed %}
 					<div class="error-message" style="display:none; width:100%; background:rgba(255,255,255,0.8); padding:25px; color:red;">[Failed]<br>{{message}}</div>
 					{% else %}
@@ -64,8 +65,6 @@
 						<img src="{% static 'euphonime/img/text logo.png' %}" style="opacity:0.5" width="200">
 						{% if profile_pic %}
 							<img src="{{profile_pic}}" width="150" style="border-radius:100px;">
-						{% else %}
-							<img src="{% static 'euphonime/img/anonymous.jpg' %}" width="150" style="border-radius:100px;">
 						{% endif %}
 					</center>
 					<span class="login100-form-title">
@@ -131,6 +130,8 @@
 	<script src="{% static 'euphonime/login/vendor/select2/select2.min.js' %}"></script>
 <!--===============================================================================================-->
 
+    <script src="https://momentjs.com/downloads/moment.min.js"></script>
+
 	<script >
 		$('.js-tilt').tilt({
 			scale: 1.1
@@ -141,7 +142,13 @@
 
 	<script>
 		$(document).ready(() => {
-			$('.error-message').show(500)
+			$('.error-message').show(500);
+
+
+            setInterval(() => {
+                $('.clock').text(moment().format('h:mm:ss a'));
+
+                }, 1000);
 		});
 	</script>
 

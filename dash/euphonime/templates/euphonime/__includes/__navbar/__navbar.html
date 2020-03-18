@@ -56,9 +56,8 @@
                     <div class="col-lg-6">
                         <div class="ht-info">
                             <ul>
-                                <li>20:00 - May 19, 2019</li>
-                                <li><a href="{% url 'login' %}">Sign in</a></li>
-                                <li><a href="#">Contact</a></li>
+                                <li><img src="{% static 'euphonime/img/chibi2.png' %}" width="20"> <a style="color:#00619D;" href="{% url 'login' %}">Sign in</a></li>
+                                <li><a style="color:#00619D;" href="#">Contact</a></li>
                             </ul>
                         </div>
                     </div>
@@ -75,14 +74,15 @@
         <div class="header__nav">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-2">
+                    <div class="col-lg-3">
                         <div class="logo">
                             <a href="{% url 'home' %}">
-                                <img src="{% static 'euphonime/img/logo.png' %}" alt="">
+                                <span><img src="{% static 'euphonime/img/dolphin.png' %}" width="50"></span>
+                                <img src="{% static 'euphonime/img/logo.png' %}" alt="" width="150">
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-10">
+                    <div class="col-lg-9">
                         <div class="nav-menu">
                             <ul class="main-menu">
                                 <li id="1"><a href="{% url 'list_article' %}">Artikel</a></li>
