@@ -12,13 +12,6 @@
 
 {% load static %}
 
-    {% block extra_css %}
-        <style>
-        a:hover {
-          color: red;
-        }
-       </style>
-    {% endblock extra_css %}
 
     {% block content %}
     <section class="soccer-section">
@@ -72,7 +65,7 @@
                                 </div>
                                 <div class="ni-text">
                                     <h5><a href="{% url 'anime' sn.id.hex %}">{{sn.title}}</a></h5>
-                                    <p class="text-justify">{{sn.description|truncatechars:150}}<a href="{% url 'anime' sn.id.hex  %}">selengkapnya</a></p>
+                                    <p class="text-justify">{{sn.description|truncatechars:150}}</p>
                                 </div>
                             </div>
                         </div>
