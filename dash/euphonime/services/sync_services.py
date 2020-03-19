@@ -108,17 +108,19 @@ def get_chara(mal_id, par_anime):
                     act = seiyuu
 
 
-            if not existed_chara:
-                if chara_name and chara_name != '':
-                    if c['role'] == 'Main':
-                        role = 1
-                    else:
-                        role = 2
-                    chara_url = "https://api.jikan.moe/v3/character/{}/".format(c['mal_id'])
-                    req_detail_chara = requests.get(chara_url)
-                    logger.debug('ADD CHARACTER {} SUCCESS'.format(c['name']))
-                    if req_detail_chara.status_code == 200:
-                        detail_json = req_detail_chara.json()
+
+            if chara_name and chara_name != '':
+                if c['role'] == 'Main':
+                    role = 1
+                else:
+                    role = 2
+                chara_url = "https://api.jikan.moe/v3/character/{}/".format(c['mal_id'])
+                req_detail_chara = requests.get(chara_url)
+                logger.debug('ADD CHARACTER {} SUCCESS'.format(c['name']))
+                if req_detail_chara.status_code == 200:
+                    detail_json = req_detail_chara.json()
+
+                    if not existed_chara:
 
                         chara = Character(mal_id=c['mal_id'], name=c['name'],
                                                                 native_name=detail_json['name_kanji'],
@@ -139,7 +141,7 @@ def get_chara(mal_id, par_anime):
                                                  voice_act=act,
                                                  role=role)
 
-                        chara = Character.objects.filter(character__mal_id=c['mal_id']).first()
+                        chara = Character.objects.filter(mal_id=c['mal_id']).first()
 
                         anime = par_anime
                         char_anime = AnimeCharacter(character=chara, anime=anime)

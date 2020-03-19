@@ -80,9 +80,19 @@ class MalAnimeAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         # custom stuff here
         if obj.mal_id == "*":
-            all_anime = Anime.objects.all()
-            for a in all_anime:
-                sync_anime.apply_async((a.mal_id, obj.id))
+            ac = AnimeCharacter.objects.all()
+            c = Character.objects.all()
+            ac.delete()
+            c.delete()
+            a = Anime.objects.all()
+            list_a = []
+            for la in a:
+                list_a.append(la.mal_id)
+
+            a = Anime.objects.filter(mal_id__in=list_a)
+            a.delete()
+            for sync in list_a:
+                sync_anime.apply_async((sync, obj.id))
         else:
             sync_anime.apply_async((obj.mal_id, obj.id))
         super().save_model(request, obj, form, change)
