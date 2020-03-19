@@ -114,7 +114,7 @@ def save_watching(request, anime_id):
             return redirect(reverse('login'))
 
         user_watching = UserWatching.objects.filter(user=profile, anime=anime).first()
-        if request.POST.get('status') and request.POST.get('status') != "":
+        if request.POST.get('status') and request.POST.get('status') != "-":
             if user_watching:
                 user_watching.status = int(request.POST.get('status'))
                 user_watching.save()
