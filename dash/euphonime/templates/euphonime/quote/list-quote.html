@@ -23,9 +23,17 @@
 
                         <div class="time-label">
                             <h1 style="background:white;padding-bottom:20px">Quotes <b style="color:red;">Terbaru</b></h1>
-                            {% block search %}
-                            {% include 'euphonime/__includes/__search/__search2.html' %}
-                            {% endblock search %}
+                            <div class="row">
+                                <div class="col-md-8">
+
+                                </div>
+                                <div class="col-md-4">
+                                {% block search %}
+                                    {% include 'euphonime/__includes/__search/__search2.html' %}
+                                {% endblock search %}
+                                </div>
+
+                            </div>
                         </div>
                         {% for q in quotes %}
                             <div>

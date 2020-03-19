@@ -19,9 +19,18 @@
         <div class="container">
                     <div class="blog-sidebar">
                         <div class="bs-recent">
-                            {% block search %}
-                                {% include 'euphonime/__includes/__search/__search2.html' %}
-                            {% endblock search %}
+                            <div class="row">
+                                <div class="col-md-8">
+
+                                </div>
+                                <div class="col-md-4">
+                                {% block search %}
+                                    {% include 'euphonime/__includes/__search/__search2.html' %}
+                                {% endblock search %}
+                                </div>
+
+                            </div>
+
                             <div class="section-title sidebar-title">
                                 <h5>Anime</h5>
                             </div>

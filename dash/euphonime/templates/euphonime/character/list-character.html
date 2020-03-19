@@ -18,9 +18,17 @@
                             <div class="section-title sidebar-title">
                                 <h5>Karakter</h5>
                             </div>
-                            {% block search %}
-                                {% include 'euphonime/__includes/__search/__search2.html' %}
-                            {% endblock search %}
+                            <div class="row">
+                                <div class="col-md-8">
+
+                                </div>
+                                <div class="col-md-4">
+                                {% block search %}
+                                    {% include 'euphonime/__includes/__search/__search2.html' %}
+                                {% endblock search %}
+                                </div>
+
+                            </div>
                         <div class="st-table table table-hover">
                             <table style="padding: 4px 0;border-bottom: #EBEBEB 1px solid;">
                                 <thead>
