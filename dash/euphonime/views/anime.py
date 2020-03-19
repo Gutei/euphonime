@@ -1,20 +1,22 @@
 from django.db.models import Q
 from django.core.paginator import Paginator
 from django.shortcuts import render
-from euphonime.models import Anime, Character, AnimeGenre
+from euphonime.models import Anime, Character, AnimeGenre, Quote
 
 
 def get_anime(request, pk):
     anime = Anime.objects.filter(id=pk).first()
     character = Character.objects.filter(anime=anime)
     genre = AnimeGenre.objects.filter(anime=anime)
+    quote = Quote.objects.filter(character__anime=anime).order_by('-updated')
 
     template_name = 'euphonime/anime/get-anime.html'
 
     context = {
         'anime': anime,
         'character': character,
-        'genre': genre
+        'genre': genre,
+        'quotes': quote
     }
     return render(request, template_name, context)
 
