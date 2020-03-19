@@ -20,18 +20,9 @@
         <div class="container">
                     <div class="blog-sidebar">
                         <div class="bs-recent">
-                            <form>
-                                <div class="row">
-                                    <div class="col-md-9">
-
-                                    </div>
-                                    <div class="col-md-3">
-                                        <input type="text" placeholder="Cari..." class="form-control">
-                                    </div>
-
-                                </div>
-
-                            </form><br>
+                            {% block search %}
+                                {% include 'euphonime/__includes/__search/__search2.html' %}
+                            {% endblock search %}
                             <div class="section-title sidebar-title">
                                 <h5>Artikel <span><img src="{% static 'euphonime/img/peek2.png' %}" height="30px;"></span> </h5>
                             </div>
@@ -47,7 +38,7 @@
 <!--                                        <a href="{% url 'article' a.id.hex %}"><img src="{{a.image.url}}" alt=""></a>-->
                                     </div>
                                     <div class="ni-text">
-                                        <h5 ><a href="{% url 'article' a.id.hex %}">{{a.title|truncatechars:60}}</a></h5>
+                                        <h5 ><a href="{% url 'article' a.id.hex %}">{{a.title|truncatechars:80}}</a></h5>
                                         <ul>
                                             <li><i class="fa fa-calendar"></i> {{a.updated|date:'d F Y'}}</li>
                                         </ul>

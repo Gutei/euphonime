@@ -1,4 +1,5 @@
 from django.core.paginator import Paginator
+from django.db.models import Q
 from django.shortcuts import render
 from euphonime.models import Article
 
@@ -17,6 +18,12 @@ def get_article(request, pk):
 def list_article(request):
     template_name = 'euphonime/article/list-article.html'
     articles = Article.objects.filter(is_publish=True).order_by('-updated')
+
+    search = request.GET.get('search')
+    if request.method == 'GET' and search:
+        # Q(name__icontains=query) | Q(state__icontains=query)
+        articles = Article.objects.filter(Q(title__icontains=search)).order_by('-updated')
+        print(articles)
 
     paginator = Paginator(articles, 9)  # Show 25 contacts per page
     page = request.GET.get('page')
