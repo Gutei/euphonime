@@ -83,8 +83,8 @@ def get_chara(mal_id, anime):
         characters = chara_json['characters']
         for c in characters:
             chara_name = ''
-            clr_chara = Character.objects.filter(mal_id=c['mal_id'])
-            clr_chara.delete()
+            # clr_chara = Character.objects.filter(mal_id=c['mal_id'])
+            # clr_chara.delete()
             existed_chara = Character.objects.filter(mal_id=c['mal_id']).first()
             act = None
             logger.debug('SYNC CHARACTER {}'.format(c['name']))
