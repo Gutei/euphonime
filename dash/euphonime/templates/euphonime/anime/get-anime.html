@@ -211,16 +211,10 @@
                                 <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"><u>Karakter dan Pengisi Suara</u></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"><u>Opening</u></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"><u>Ending</u></a>
+                                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"><u>Anime Soundtrack</u></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#tabs-4" role="tab"><u>Quote</u></a>
-                            </li>
-                            <li class="nav-item" hidden>
-                                <a class="nav-link" data-toggle="tab" href="#tabs-5" role="tab">Berita Terkait</a>
                             </li>
                         </ul><!-- Tab panes -->
                         <div class="tab-content">
@@ -228,18 +222,17 @@
                                 <div class="club-tab-content" style="max-height:500px; overflow-y:scroll;">
                                     {% for ch in character %}
                                     <div class="ct-item">
-                                        <div class="ci-text">
+                                        <div class="ci-text" style="width:200px;float:left;">
                                             <a href="{% url 'character' ch.id.hex  %}">
                                             <img style="width:50px;" src="{% if ch.image %}{{ch.image.url}}{% else %}{{ ch.image_url }}{% endif %}" alt="">
                                             </a>
-                                            <div class="row">
-                                                <a href="{% url 'character' ch.id.hex  %}"><p><b>{{ch.name}}</b></p></a>
+                                                <a href="{% url 'character' ch.id.hex  %}"><p style="font-size:14px"><b>{{ch.name}}</b></p></a>
                                                 <p style="font-size:0.7rem;">({{ch.get_role_display}})</p>
-                                            </div>
+
                                         </div>
                                         <div class="ci-text" style="width:200px;float:right;">
                                             <img style="width:50px;" src="{% if ch.voice_act.image %}{{ch.voice_act.image.url}}{% else %}{{ ch.voice_act.image_url }}{% endif %}" alt="">
-                                            <p>{{ch.voice_act.name}}</p>
+                                            <p style="font-size:14px">{{ch.voice_act.name}}</p>
                                         </div>
                                     </div>
                                     {% endfor %}
@@ -247,22 +240,18 @@
                             </div>
                             <div class="tab-pane" id="tabs-2" role="tabpanel">
                                 <div class="club-tab-content">
-                                    <div class="ct-item">
-                                        <div class="ci-text">
+                                    {% for o in ost %}
+                                         <div class="ct-item">
+                                        <div class="ci-text" style="width:200px;float:left;">
+                                                <p style="font-size:14px"><b>{{o.title}}</b></p>
+                                                <p style="font-size:0.7rem;">({{o.get_type_display}})</p>
                                         </div>
-                                        <div class="ci-name"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="tabs-3" role="tabpanel">
-                                <div class="club-tab-content">
-                                    <div class="ct-item">
-                                        <div class="ci-text">
-                                            <img src="img/club/p-1.jpg" alt="">
-                                            <h5>12. Buddy Peck</h5>
+                                        <div class="ci-text" style="width:200px;float:right;">
+                                            <img style="width:50px;" src="{% if o.author.icon %}{{o.author.icon.url}}{% else %}{% static 'euphonime/img/no-img.png' %}{% endif %}" alt="">
+                                            <p style="font-size:14px">{{o.author.name}}</p>
                                         </div>
-                                        <div class="ci-name">Forward</div>
                                     </div>
+                                    {% endfor %}
                                 </div>
                             </div>
                             <div class="tab-pane" id="tabs-4" role="tabpanel">
@@ -312,17 +301,6 @@
                                                   <!-- /.col -->
                                                 </div>
                                               </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="tabs-5" role="tabpanel">
-                                <div class="club-tab-content">
-                                    <div class="ct-item">
-                                        <div class="ci-text">
-                                            <img src="img/club/p-3.jpg" alt="">
-                                            <h5>18. Hanry Edison</h5>
-                                        </div>
-                                        <div class="ci-name">Goalkeeper </div>
                                     </div>
                                 </div>
                             </div>

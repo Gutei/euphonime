@@ -1,16 +1,18 @@
 from django.db.models import Q
 from django.core.paginator import Paginator
 from django.shortcuts import render
-from euphonime.models import Anime, Character, AnimeGenre, Quote, UserAnimeScore, ProfileUser
+from euphonime.models import Anime, Character, AnimeGenre, Quote, UserAnimeScore, ProfileUser,Ost
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+
 
 def get_anime(request, pk):
     anime = Anime.objects.filter(id=pk).first()
     character = Character.objects.filter(anime=anime)
     genre = AnimeGenre.objects.filter(anime=anime)
     quote = Quote.objects.filter(character__anime=anime).order_by('-updated')
+    ost = Ost.objects.filter(anime=anime).order_by('-updated')
 
     template_name = 'euphonime/anime/get-anime.html'
 
@@ -32,23 +34,23 @@ def get_anime(request, pk):
     rating_counter_9 = UserAnimeScore.objects.filter(anime=anime, score=9).count()
     rating_counter_10 = UserAnimeScore.objects.filter(anime=anime, score=10).count()
 
-
     context = {
         'anime': anime,
         'character': character,
         'genre': genre,
         'quotes': quote,
+        'ost': ost,
         'user_rate': user_rate,
-        'rating_counter_1':rating_counter_1,
-        'rating_counter_2':rating_counter_2,
-        'rating_counter_3':rating_counter_3,
-        'rating_counter_4':rating_counter_4,
-        'rating_counter_5':rating_counter_5,
-        'rating_counter_6':rating_counter_6,
-        'rating_counter_7':rating_counter_7,
-        'rating_counter_8':rating_counter_8,
-        'rating_counter_9':rating_counter_9,
-        'rating_counter_10':rating_counter_10,
+        'rating_counter_1': rating_counter_1,
+        'rating_counter_2': rating_counter_2,
+        'rating_counter_3': rating_counter_3,
+        'rating_counter_4': rating_counter_4,
+        'rating_counter_5': rating_counter_5,
+        'rating_counter_6': rating_counter_6,
+        'rating_counter_7': rating_counter_7,
+        'rating_counter_8': rating_counter_8,
+        'rating_counter_9': rating_counter_9,
+        'rating_counter_10': rating_counter_10,
     }
     return render(request, template_name, context)
 
@@ -69,6 +71,7 @@ def list_anime(request):
     }
     return render(request, template_name, context)
 
+
 @login_required
 def save_rate(request, anime_id, rate):
     profile = ProfileUser.objects.filter(user=request.user).first()
@@ -80,9 +83,9 @@ def save_rate(request, anime_id, rate):
     user_rate = UserAnimeScore.objects.filter(user=profile, anime=anime).first()
 
     if user_rate:
-        return redirect(reverse('anime', args=[anime.id,]))
+        return redirect(reverse('anime', args=[anime.id, ]))
 
     user_rate = UserAnimeScore(user=profile, anime=anime, score=rate)
     user_rate.save()
 
-    return redirect(reverse('anime', args=[anime.id,]))
+    return redirect(reverse('anime', args=[anime.id, ]))

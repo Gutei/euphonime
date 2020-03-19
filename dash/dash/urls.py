@@ -26,8 +26,9 @@ admin.site.site_header = 'EUPHONIME - GOD MODE'
 urlpatterns = [
                   url(r'^jet', include('jet.urls', 'jet')),
                   url(r'^ckeditor/', include('ckeditor_uploader.urls')),
-                  url(r'^admin/', admin.site.urls),
+                  url(r'^teh-olong/', admin.site.urls),
                   url(r'^login/$', views.login, name='login'),
+                  url(r'^register/$', views.register, name='register'),
                   url(r'^logout/$', auth_views.LogoutView.as_view(), name='logout'),
                   url(r'^oauth/', include('social_django.urls', namespace='social')),
                   url(r'^$', views.home, name='home'),
