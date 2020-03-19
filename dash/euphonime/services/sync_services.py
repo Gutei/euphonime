@@ -118,8 +118,9 @@ def get_chara(mal_id, anime):
                     role = 2
                 chara_url = "https://api.jikan.moe/v3/character/{}/".format(c['mal_id'])
                 req_detail_chara = requests.get(chara_url)
-                logger.debug('ADD CHARACTER {} SUCCESS'.format(c['name']))
+
                 if req_detail_chara.status_code == 200:
+
                     detail_json = req_detail_chara.json()
 
                     if not existed_chara:
@@ -130,24 +131,45 @@ def get_chara(mal_id, anime):
                                                                 description=detail_json['about'],
                                                                 voice_act=act,
                                                                 role=role)
-                        chara.save()
+
+                        try:
+                            chara.save()
+                        except Exception as e:
+                            logger.debug('ADD CHARACTER {} FOR ANIME {} FAILED BECAUSE {}'.format(c['name'], par_anime.title, e))
+
+                        logger.debug('ADD CHARACTER {} FOR ANIME {} SUCCESS'.format(c['name'], par_anime.title))
 
                         # anime = par_anime
                         char_anime = AnimeCharacter(character=chara, anime=par_anime)
-                        char_anime.save()
 
+                        try:
+                            char_anime.save()
+                        except Exception as e:
+                            logger.debug('LINK CHARACTER {} FOR ANIME {} FAILED'.format(c['name'], par_anime.title))
+
+                        logger.debug('LINK CHARACTER {} FOR ANIME {} SUCCESS'.format(c['name'], par_anime.title))
 
                     else:
-                        Character.objects.update(mal_id=c['mal_id'], name=c['name'],
-                                                 image_url=c['image_url'],
-                                                 voice_act=act,
-                                                 role=role)
+                        try:
+                            Character.objects.update(mal_id=c['mal_id'], name=c['name'],
+                                                     image_url=c['image_url'],
+                                                     voice_act=act,
+                                                     role=role)
+                        except Exception as e:
+                            logger.debug('UPDATE CHARACTER {} FOR ANIME {} FAILED BECAUSE {}'.format(c['name'], par_anime.title, e))
+
+                        logger.debug('UPDATE CHARACTER {} FOR ANIME {} FAILED BECAUSE {}'.format(c['name'], par_anime.title, e))
 
                         chara = Character.objects.filter(mal_id=c['mal_id']).first()
 
                         # anime = par_anime
                         char_anime = AnimeCharacter(character=chara, anime=par_anime)
-                        char_anime.save()
+                        try:
+                            char_anime.save()
+                        except Exception as e:
+                            logger.debug('LINK CHARACTER {} FOR ANIME {} FAILED'.format(c['name'], par_anime.title))
+
+                        logger.debug('LINK CHARACTER {} FOR ANIME {} SUCCESS'.format(c['name'], par_anime.title))
 
 
 
