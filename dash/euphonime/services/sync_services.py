@@ -5,7 +5,7 @@ import requests
 
 logger = logging.getLogger(__name__)
 
-from euphonime.models import Anime, Character, VoiceAct, MalAnime
+from euphonime.models import Anime, Character, VoiceAct, MalAnime, AnimeCharacter
 
 
 def get_anime(mal_id, task_id):
@@ -14,6 +14,7 @@ def get_anime(mal_id, task_id):
     exist_anime = Anime.objects.filter(mal_id=id).first()
     if exist_anime:
         logger.debug('[----ANIME EXSIST----]'.format(id))
+        get_chara(id, exist_anime)
         return None
 
     logger.debug('===========STARTING SYNC FOR MAL ID {}============'.format(id))
@@ -80,6 +81,9 @@ def get_chara(mal_id, par_anime):
         characters = chara_json['characters']
         for c in characters:
             chara_name = ''
+            clr_chara = Character.objects.filter(mal_id=c['mal_id'])
+            clr_chara.delete()
+            existed_chara = Character.objects.filter(mal_id=c['mal_id']).first()
             act = None
             logger.debug('SYNC CHARACTER {}'.format(c['name']))
             for v in c['voice_actors']:
@@ -102,31 +106,46 @@ def get_chara(mal_id, par_anime):
 
                     chara_name = c['name']
                     act = seiyuu
-            if chara_name and chara_name != '':
-                if c['role'] == 'Main':
-                    role = 1
-                else:
-                    role = 2
-                chara_url = "https://api.jikan.moe/v3/character/{}/".format(c['mal_id'])
-                req_detail_chara = requests.get(chara_url)
-                logger.debug('ADD CHARACTER {} SUCCESS'.format(c['name']))
-                if req_detail_chara.status_code == 200:
-                    detail_json = req_detail_chara.json()
-
-                    chara, chara_created = Character.objects.get_or_create(mal_id=c['mal_id'], name=c['name'],
-                                                                           native_name=detail_json[
-                                                                               'name_kanji'],
-                                                                           image_url=detail_json['image_url'],
-                                                                           description=detail_json['about'],
-                                                                           anime=par_anime, voice_act=act,
-                                                                           role=role)
 
 
-                else:
-                    chara, chara_created = Character.objects.get_or_create(mal_id=c['mal_id'], name=c['name'],
-                                                                           image_url=c['image_url'],
-                                                                           anime=par_anime, voice_act=act,
-                                                                           role=role)
+            if not existed_chara:
+                if chara_name and chara_name != '':
+                    if c['role'] == 'Main':
+                        role = 1
+                    else:
+                        role = 2
+                    chara_url = "https://api.jikan.moe/v3/character/{}/".format(c['mal_id'])
+                    req_detail_chara = requests.get(chara_url)
+                    logger.debug('ADD CHARACTER {} SUCCESS'.format(c['name']))
+                    if req_detail_chara.status_code == 200:
+                        detail_json = req_detail_chara.json()
+
+                        chara = Character(mal_id=c['mal_id'], name=c['name'],
+                                                                native_name=detail_json['name_kanji'],
+                                                                image_url=detail_json['image_url'],
+                                                                description=detail_json['about'],
+                                                                voice_act=act,
+                                                                role=role)
+                        chara.save()
+
+                        anime = par_anime
+                        char_anime = AnimeCharacter(character=chara, anime=anime)
+                        char_anime.save()
+
+
+                    else:
+                        Character.objects.update(mal_id=c['mal_id'], name=c['name'],
+                                                 image_url=c['image_url'],
+                                                 voice_act=act,
+                                                 role=role)
+
+                        chara = Character.objects.filter(character__mal_id=c['mal_id']).first()
+
+                        anime = par_anime
+                        char_anime = AnimeCharacter(character=chara, anime=anime)
+                        char_anime.save()
+
+
 
         status = "[SUCCESS] Sync from MyAnimeList for {}, with title: {}.".format(id, par_anime.title)
 
