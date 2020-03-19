@@ -132,8 +132,8 @@ def get_chara(mal_id, anime):
                                                                 role=role)
                         chara.save()
 
-                        anime = par_anime
-                        char_anime = AnimeCharacter(character=chara, anime=anime)
+                        # anime = par_anime
+                        char_anime = AnimeCharacter(character=chara, anime=par_anime)
                         char_anime.save()
 
 
@@ -145,8 +145,8 @@ def get_chara(mal_id, anime):
 
                         chara = Character.objects.filter(mal_id=c['mal_id']).first()
 
-                        anime = par_anime
-                        char_anime = AnimeCharacter(character=chara, anime=anime)
+                        # anime = par_anime
+                        char_anime = AnimeCharacter(character=chara, anime=par_anime)
                         char_anime.save()
 
 
