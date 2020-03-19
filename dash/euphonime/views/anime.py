@@ -1,16 +1,21 @@
 from django.db.models import Q
 from django.core.paginator import Paginator
 from django.shortcuts import render
-from euphonime.models import Anime, Character, AnimeGenre, Quote, UserAnimeScore, ProfileUser, UserWatching
+from euphonime.models import Anime, Character, AnimeGenre, Quote, UserAnimeScore, ProfileUser, UserWatching, AnimeCharacter
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 def get_anime(request, pk):
     anime = Anime.objects.filter(id=pk).first()
-    character = Character.objects.filter(anime=anime)
+    anime_character = AnimeCharacter.objects.filter(anime=anime)
+    characters = []
+    for ac in anime_character:
+        characters.append(ac.character)
+
     genre = AnimeGenre.objects.filter(anime=anime)
-    quote = Quote.objects.filter(character__anime=anime).order_by('-updated')
+
+    quote = Quote.objects.filter(character__in=characters).order_by('-updated')
 
     status = "Status menonton"
 
@@ -49,7 +54,7 @@ def get_anime(request, pk):
 
     context = {
         'anime': anime,
-        'character': character,
+        'character': characters,
         'genre': genre,
         'quotes': quote,
         'user_rate': user_rate,

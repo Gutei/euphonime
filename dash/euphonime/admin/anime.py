@@ -1,13 +1,12 @@
 from django.utils.html import mark_safe
 from django.contrib import admin
 from euphonime.models import (Anime, Character, Studio, Producer, AnimeStudio, AnimeProducer, AnimeGenre, MalAnime,
-                              Quote, Season, AnimeSeason)
+                              Quote, Season, AnimeSeason, AnimeCharacter)
 from euphonime.tasks import sync_anime
 
 class CharacterInline(admin.TabularInline):
-    model = Character
-    exclude = ('native_name', 'mal_id', 'image_url', 'description')
-    raw_id_fields = ('voice_act',)
+    model = AnimeCharacter
+    raw_id_fields = ('character',)
     extra = 1
 
 class AnimeSeasonInline(admin.TabularInline):
@@ -22,10 +21,12 @@ class QuoteInline(admin.TabularInline):
 class AnimeStudioInline(admin.TabularInline):
     model = AnimeStudio
     extra = 1
+    raw_id_fields = ('studio',)
 
 class AnimeProducerInline(admin.TabularInline):
     model = AnimeProducer
     extra = 1
+    raw_id_fields = ('producer',)
 
 class AnimeGenreInline(admin.TabularInline):
     model = AnimeGenre
@@ -33,7 +34,7 @@ class AnimeGenreInline(admin.TabularInline):
 
 @admin.register(Anime, site=admin.site)
 class AnimeAdmin(admin.ModelAdmin):
-    list_display = ('title', 'get_image', 'is_publish', 'created','updated')
+    list_display = ('title', 'get_image', 'is_publish', 'created', 'updated')
     search_fields = ('title',)
     list_filter = ('is_publish', 'created', 'updated')
     inlines = [
@@ -78,20 +79,41 @@ class MalAnimeAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         # custom stuff here
-
-        sync_anime.apply_async((obj.mal_id, obj.id))
+        if obj.mal_id == "*":
+            all_anime = Anime.objects.all()
+            for a in all_anime:
+                sync_anime.apply_async((a.mal_id, obj.id))
+        else:
+            sync_anime.apply_async((obj.mal_id, obj.id))
         super().save_model(request, obj, form, change)
 
 @admin.register(Character, site=admin.site)
 class CharacterAdmin(admin.ModelAdmin):
-    list_display = ('get_image', 'role', 'anime', 'get_actor')
+    list_display = ('get_image', 'role', 'get_anime', 'get_actor')
     search_fields = ('name', 'voice_act__name')
-    raw_id_fields = ('voice_act', 'anime')
+    raw_id_fields = ('voice_act',)
     list_per_page = 10
 
     inlines = [
         QuoteInline,
     ]
+
+    def get_anime(self, obj):
+        text = ""
+        if obj:
+            ac = AnimeCharacter.objects.filter(character=obj)
+            if ac:
+                for a in ac:
+                    title = a.anime.title
+                    res = "{}{},".format(text, title)
+                    text = "{}".format(res)
+
+                return text
+
+        return '-'
+
+    get_anime.admin_order_field = 'anime'
+    get_anime.short_description = 'Anime(s)'
 
     def get_image(self, obj):
         if obj:
@@ -126,14 +148,15 @@ class CharacterAdmin(admin.ModelAdmin):
 @admin.register(Quote, site=admin.site)
 class QuoteAdmin(admin.ModelAdmin):
     list_display = ('get_image', 'get_anime', 'quote')
-    search_fields = ('character__name', 'character__anime__title', 'quote')
+    search_fields = ('character__name', 'quote')
     raw_id_fields = ('character',)
     list_per_page = 10
 
     def get_anime(self, obj):
         if obj:
-            if obj.character.anime:
-                a = obj.character.anime.title
+            if obj.character:
+                anime_character = AnimeCharacter.objects.filter(character=obj.character).first()
+                a = anime_character.anime.title
                 return "{}".format(a)
         return '-'
 

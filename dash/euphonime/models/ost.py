@@ -11,6 +11,9 @@ class OstAuthor(models.Model):
     class Meta:
         db_table = 'ost_authors'
 
+    def __str__(self):
+        return "{}".format(self.name)
+
 
 class Ost(models.Model):
 
