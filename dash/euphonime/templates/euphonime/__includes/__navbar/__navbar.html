@@ -17,9 +17,17 @@
         <div class="header__top--canvas">
             <div class="ht-info">
                 <ul>
-                    <li>20:00 - May 19, 2019</li>
-                    <li><a href="{% url 'login' %}">Sign in</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li>
+                        {% block time %}
+                        {% endblock time %}
+                    </li>
+                    <li><img src="{% static 'euphonime/img/chibi2.png' %}" width="20">
+                                    {% if request.user.is_anonymous %}
+                                    <a style="color:#00619D;" href="{% url 'login' %}">Sign in</a>
+                                    {% else %}
+                                    <a style="color:#00619D;" href="{% url 'profile' %}">{{request.user.email}}</a>
+                                    {% endif %}
+                                </li>
                 </ul>
             </div>
             <div class="ht-links">
@@ -29,20 +37,12 @@
             </div>
         </div>
         <ul class="main-menu mobile-menu">
-            <li class="active"><a href="./index.html">Home</a></li>
-            <li><a href="./club.html">Club</a></li>
-            <li><a href="./schedule.html">Schedule</a></li>
-            <li><a href="./result.html">Results</a></li>
-            <li><a href="#">Sport</a></li>
-            <li><a href="#">Pages</a>
-                <ul class="dropdown">
-                    <li><a href="./blog.html">Blog</a></li>
-                    <li><a href="./blog-details.html">Blog Details</a></li>
-                    <li><a href="#">Schedule</a></li>
-                    <li><a href="#">Results</a></li>
-                </ul>
-            </li>
-            <li><a href="./contact.html">Contact Us</a></li>
+            <li class="active"><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'list_article' %}">Aritkel</a></li>
+            <li><a href="{% url 'list_anime' %}">Anime</a></li>
+            <li><a href="{% url 'list_character' %}">Karakter</a></li>
+            <li><a href="{% url 'list_quote' %}">Quote</a></li>
+            <li><a href="{% url 'contact' %}">Kontak & Media Partner</a></li>
         </ul>
         <div id="mobile-menu-wrap"></div>
     </div>
@@ -63,7 +63,7 @@
                                     <a style="color:#00619D;" href="{% url 'profile' %}">{{request.user.email}}</a>
                                     {% endif %}
                                 </li>
-                                <li><a style="color:#00619D;" href="#">Contact</a></li>
+                                <li><a style="color:#00619D;" href="{% url 'contact' %}">Kontak & Media Partner</a></li>
                             </ul>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                                 <li id="2"><a href="{% url 'list_anime' %}">Anime</a></li>
                                 <li id="3"><a href="{% url 'list_character' %}">Karakter</a></li>
                                 <li id="4"><a href="{% url 'list_quote' %}">Quote</a></li>
-                                <li><a href="./contact.html">Contact Us</a></li>
+                                <li id="5"><a href="{% url 'contact' %}">Kontak & Media Partner</a></li>
                             </ul>
                             <div class="nm-right search-switch">
                                 <i class="fa fa-search"></i>

@@ -26,8 +26,9 @@ admin.site.site_header = 'EUPHONIME - GOD MODE'
 urlpatterns = [
                   url(r'^jet', include('jet.urls', 'jet')),
                   url(r'^ckeditor/', include('ckeditor_uploader.urls')),
-                  url(r'^admin/', admin.site.urls),
+                  url(r'^teh-olong/', admin.site.urls),
                   url(r'^login/$', views.login, name='login'),
+                  url(r'^register/$', views.register, name='register'),
                   url(r'^logout/$', auth_views.LogoutView.as_view(), name='logout'),
                   url(r'^oauth/', include('social_django.urls', namespace='social')),
                   url(r'^$', views.home, name='home'),
@@ -50,6 +51,13 @@ urlpatterns = [
                   # Character
                   url(r'^character/(?P<pk>[^/]+)/$', views.get_character, name='character'),
                   url(r'^characters/$', views.list_character, name='list_character'),
+
+                  # Footer Conrtent
+                  url(r'^disclaimer/$', views.get_disclaimer, name='disclaimer'),
+                  url(r'^privacy-policy/$', views.get_privacy_policy, name='privacy_policy'),
+
+                  # Contact
+                  url(r'^contact-&-media-partner/$', views.get_contact, name='contact'),
 
                   url(r'^auth-login/', views.auth_login, name='auth_login'),
 

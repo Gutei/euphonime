@@ -1,0 +1,57 @@
+    {% extends "euphonime/index.html" %}
+    {% load static %}
+
+    {% block title %}
+    <title>Privacy Policy - EuphoNime</title>
+    {% endblock title %}
+
+
+    {% block extra_css %}
+        <style>
+            body {
+                background: #eaeaea;
+            }
+            .header__top {
+                background: #FFFFFF;
+            }
+            p{
+              text-align: justify;
+              text-justify: inter-word;
+              }
+        </style>
+    {% endblock extra_css %}
+
+
+    {% block content %}
+    <!-- Club Section Begin -->
+    <section class="contact-section spad" style="padding-top:30px; padding-bottom:0;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8" style="background:#FFF; padding:30px;">
+                    <div class="contact-form" style="width:100%; height:100%; background:url('{% static 'euphonime/img/contact-media-partner.jpg' %}'); background-size:cover;">
+                    </div>
+                </div>
+                <div class="col-lg-4" style="background:#FFF; padding:30px;">
+                    <div class="contact-info">
+                        <h2>Tentang Kami</h2>
+                        <p>Euphonime adalah media, database anime, dan situs komunitas untuk penggemar anime yang dapat saling berinteraksi di Indonesia.</p>
+                        <div class="ci-address">
+                            <h5>Media Partner</h5>
+                            <p>Euphonime mendukung segala upaya untuk memajukan kreatif industri anime sebagai media jurnalisme, komunitas, dan database anime di Indonesia. </p>
+                        </div>
+                        <div class="ci-address">
+                            <h5>Kontak</h5>
+                            <p>Kirimkan siaran pers, aktivitas usaha, event anime dan karya kreatif yang nantinya akan dimuat di Euphonime melalui <b>email:</b><span style="color:#00619D">projecteupho@gmail.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Club Section End -->
+
+    {% endblock content %}
+
+    {% block extra_js %}
+    {% endblock extra_js %}
+
