@@ -10,6 +10,7 @@ def home(request):
     template_name = 'euphonime/home.html'
     this_sesason = Season.objects.filter(is_season=True).first()
     polls = []
+    result_polls = []
     anime_season = ses_anime
     if this_sesason:
         ses_anime = []
@@ -33,7 +34,6 @@ def home(request):
             i += 1
 
         ranking = 1
-        result_polls = []
         sorted_polls = sorted(polls, key = lambda i : i['score'], reverse=True)
         for s_polls in sorted_polls:
             s_polls['number'] = ranking
