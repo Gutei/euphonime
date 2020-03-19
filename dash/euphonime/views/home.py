@@ -26,9 +26,9 @@ def home(request):
             polls.append({
                 'number': i,
                 'obj': s.anime,
-                'polls': polling if polling < 999999 else '1000000+',
-                'watch': watch if watch < 999999 else '1000000+',
-                'score': '-' if not score['score__avg'] else score['score__avg'],
+                'polls': polling,
+                'watch': watch,
+                'score': 0 if not score['score__avg'] else score['score__avg'],
             })
             i += 1
 
@@ -36,6 +36,6 @@ def home(request):
         'season_nime': ses_anime,
         'new_anime': new_anime,
         'article': article,
-        'polls': polls,
+        'polls': sorted(polls, key = lambda i : i['score'], reverse=True),
     }
     return render(request, template_name, context)
