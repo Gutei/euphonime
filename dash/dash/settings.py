@@ -25,7 +25,7 @@ SECRET_KEY = 'e@1px*bikzuvir@uks18812blh0o+88b!$9lv4r_=9rtjxmt^i'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '51.79.165.146',]
+ALLOWED_HOSTS = ['localhost', '51.79.165.146', 'euphonime.com', 'www.euphonime.com', '127.0.0.1',]
 
 
 # Application definition
