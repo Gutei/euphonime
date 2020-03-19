@@ -68,8 +68,10 @@ def get_anime(mal_id, task_id):
     return None
 
 
-def get_chara(mal_id, par_anime):
+def get_chara(mal_id, anime):
     id = mal_id
+
+    par_anime = Anime.objects.filter(mal_id=id).first()
 
     logger.debug('===========STARTING SYNC CHARACTER FROM MAL ID {}============'.format(id))
     url = "https://api.jikan.moe/v3/anime/{}".format(id)
