@@ -135,7 +135,7 @@ def get_chara(mal_id, anime):
                         try:
                             chara.save()
                         except Exception as e:
-                            logger.debug('ADD CHARACTER {} FOR ANIME {} FAILED BECAUSE {}'.format(c['name'], par_anime.title))
+                            logger.debug('ADD CHARACTER {} FOR ANIME {} FAILED'.format(c['name'], par_anime.title))
 
                         logger.debug('ADD CHARACTER {} FOR ANIME {} SUCCESS'.format(c['name'], par_anime.title))
 
@@ -156,9 +156,9 @@ def get_chara(mal_id, anime):
                                                      voice_act=act,
                                                      role=role)
                         except Exception as e:
-                            logger.debug('UPDATE CHARACTER {} FOR ANIME {} FAILED BECAUSE {}'.format(c['name'], par_anime.title))
+                            logger.debug('UPDATE CHARACTER {} FOR ANIME {} FAILED BECAUSE'.format(c['name'], par_anime.title))
 
-                        logger.debug('UPDATE CHARACTER {} FOR ANIME {} FAILED BECAUSE {}'.format(c['name'], par_anime.title))
+                        logger.debug('UPDATE CHARACTER {} FOR ANIME {} FAILED BECAUSE'.format(c['name'], par_anime.title))
 
                         chara = Character.objects.filter(mal_id=c['mal_id']).first()
 
