@@ -1,89 +1,88 @@
-    {% extends "euphonime/index.html" %}
-    {% load static %}
+{% extends "euphonime/index.html" %}
+{% load static %}
 
-    {% block extra_css %}
+    {% block title %}
+    <title>Quotes - EuphoNime</title>
+    {% endblock title %}
 
-    {% endblock extra_css %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'euphonime/css/adminlte.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'euphonime/css/quote-list.css' %}" type="text/css">
+{% endblock extra_css %}
 
 
-    {% block content %}
+{% block content %}
     <section class="schedule-section spad">
         <div class="container">
             <div class="col-lg-12 left-blog-pad">
-                    <div class="schedule-text">
-                            <div class="section-title sidebar-title">
-                                <h5>Quote</h5>
-                            </div>
-                        <div class="st-table table table-hover">
-                            <table style="padding: 4px 0;border-bottom: #EBEBEB 1px solid;">
-                                <thead>
-                                    <tr>
-                                        <th width="5%">#</th>
-                                        <th width="10%" style="padding-left: 8px;text-align: left;">Image</th>
-                                        <th width="15%" style="padding-left: 8px;text-align: left;">Name</th>
-                                        <th width="55%">Quote</th>
-                                        <th width="15%">Anime</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                {% for q in quotes %}
-                                    <tr>
+                <div class="schedule-text">
+                    <div class="section-title sidebar-title">
+                        <img width="100px" src="{% static 'euphonime/img/chitanda.png' %}">
+                    </div>
+                    <div class="timeline" style="margin:0 20px 45px">
 
-                                        <td class="st-option">
-                                            <div class="so-text">
-                                                {{ forloop.counter0|add:quotes.start_index }}
-                                            </div>
-                                        </td>
-                                        <td class="left-team">
-                                            <a href="{% url 'character' q.character.id.hex %}"><img src="{% if q.image %}{{q.character.image.url}}{% else %}{{ q.character.image_url }}{% endif %}" alt=""></a>
-                                        </td>
-                                        <td class="st-option" style="padding-left: 8px;text-align: left;">
-                                            <div class="so-text"><a href="{% url 'character' q.character.id.hex %}">{{q.character.name}}</a></div>
-                                        </td>
-                                        <td class="st-option">
-                                            <div class="so-text">
-                                                <p>
-                                                    <span class="fa fa-quote-left"></span>
-                                                    <span class="text-justify" style="padding:4px">{{q.quote}}</span>
-                                                    <span class="fa fa-quote-right"></span>
-                                                </p>
-                                            </div>
-                                        </td>
-                                        <td class="st-option">
-                                            <div class="so-text">{{q.character.anime.title}}</div>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
+                        <div class="time-label">
+                            <h1 style="background:white;padding-bottom:20px">Quotes <b style="color:red;">Terbaru</b></h1>
+                            {% block search %}
+                            {% include 'euphonime/__includes/__search/__search2.html' %}
+                            {% endblock search %}
                         </div>
+                        {% for q in quotes %}
+                            <div>
+                                <i class="fa fa-quote-left"></i>
+                                <div class="timeline-body">
+                                    <div class="avatar">
+                                    </div>
+
+                                    <div class="avatar">
+                                        <a href="{% url 'character' q.character.id.hex %}">
+                                            <img src="{% if q.character.image %}{{q.character.image.url}}{% else %}{{ q.character.image_url }}{% endif %}">
+                                        </a>
+                                    </div>
+                                    <div class="bubble-container">
+                                        <div class="bubble">
+                                            <a href="{% url 'character' q.character.id.hex %}">
+                                                <h3>{{ q.character.name }}</h3>
+                                            </a>
+                                            <p style="font-size:14px;">{{q.quote}}</p>
+                                            <div class="timeline-footer text-right">
+                                                <span style="font-size:12px">{{q.updated|date:'d F Y'}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <div>
+                            <i class="fa fa-quote-right"></i>
+                         </div>
                     </div>
                 </div>
-            <div class="more-blog">
-                <span>
-                    {% if quotes.has_previous %}
-                        <a href="?page={{ quotes.previous_page_number }}"><i class="fa fa-long-arrow-left"></i> Back</a>
-                    {% endif %}
-
-                    {% if quotes.has_next %}
-                        <a href="?page={{ quotes.next_page_number }}"> Next<i class="fa fa-long-arrow-right"></i></a>
-                    {% endif %}
-                </span>
-                <span >
-                        Page {{ quotes.number }} of {{ quotes.paginator.num_pages }}.
-                </span>
             </div>
+            <div class="more-blog">
+                                <span>
+                                    {% if quotes.has_previous %}
+                                        <a href="?page={{ quotes.previous_page_number }}"><i class="fa fa-long-arrow-left"></i> Back</a>
+                                    {% endif %}
+
+                                    {% if quotes.has_next %}
+                                        <a href="?page={{ quotes.next_page_number }}"> Next<i class="fa fa-long-arrow-right"></i></a>
+                                    {% endif %}
+                                </span>
+                                <span >
+                                        Page {{ quotes.number }} of {{ quotes.paginator.num_pages }}.
+                                </span>
+                            </div>
         </div>
     </section>
-    {% endblock content %}
+{% endblock content %}
 
 
-    {% block extra_js %}
+{% block extra_js %}
     <script>
 
     $(document).ready(function(){
         $('#4').addClass("active");
     });
     </script>
-    {% endblock extra_js %}
-
+{% endblock extra_js %}
