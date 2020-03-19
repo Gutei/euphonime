@@ -185,7 +185,11 @@
                                             <hr>
                                         </div>
                                         {% endif %}
-                                        <select name="watching" class="form-control">
+                                        <hr>
+                                        {{status}}
+                                        <form method="post" action="{% url 'watch_anime' anime.id %}">
+                                            {% csrf_token %}
+                                        <select name="status" class="form-control">
                                             <option value="-">---</option>
                                             <option value="1">Sedang ditonton</option>
                                             <option value="2">Selesai ditonton</option>
@@ -193,7 +197,8 @@
                                             <option value="4">Tidak dilanjutkan</option>
                                         </select>
                                         <br>
-                                        <button class="btn btn-primary" style="width:100%;">submit</button>
+                                        <input type="submit" class="btn btn-primary" style="width:100%;" ></input>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
