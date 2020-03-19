@@ -1,7 +1,7 @@
 from django.db.models import Q
 from django.core.paginator import Paginator
 from django.shortcuts import render
-from euphonime.models import Anime, Character, AnimeGenre, Quote, UserAnimeScore, ProfileUser, UserWatching, Ost
+from euphonime.models import Anime, Character, AnimeGenre, Quote, UserAnimeScore, ProfileUser, UserWatching, Ost, UserPolls
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -92,6 +92,7 @@ def list_anime(request):
 def save_rate(request, anime_id, rate):
     profile = ProfileUser.objects.filter(user=request.user).first()
     anime = Anime.objects.filter(id=anime_id).first()
+    user_polls = UserPolls.objects.filter(anime=anime, user=profile).first()
 
     if not profile:
         return redirect(reverse('login'))
@@ -103,6 +104,10 @@ def save_rate(request, anime_id, rate):
 
     user_rate = UserAnimeScore(user=profile, anime=anime, score=rate)
     user_rate.save()
+
+    if not user_polls:
+        user_polls = UserPolls(user=profile, anime=anime, poll=True)
+        user_polls.save()
 
     return redirect(reverse('anime', args=[anime.id,]))
 
