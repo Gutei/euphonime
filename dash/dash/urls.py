@@ -49,6 +49,13 @@ urlpatterns = [
                   url(r'^character/(?P<pk>[^/]+)/$', views.get_character, name='character'),
                   url(r'^characters/$', views.list_character, name='list_character'),
 
+                  # Footer Conrtent
+                  url(r'^disclaimer/$', views.get_disclaimer, name='disclaimer'),
+                  url(r'^privacy-policy/$', views.get_privacy_policy, name='privacy_policy'),
+
+                  # Contact
+                  url(r'^contact-&-media-partner/$', views.get_contact, name='contact'),
+
                   url(r'^auth-login/', views.auth_login, name='auth_login'),
 
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL,

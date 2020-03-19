@@ -20,7 +20,6 @@
                     <li>
                         {% block time %}
                         {% endblock time %}
-
                     </li>
                     <li><img src="{% static 'euphonime/img/chibi2.png' %}" width="20">
                                     {% if request.user.is_anonymous %}
@@ -43,7 +42,7 @@
             <li><a href="{% url 'list_anime' %}">Anime</a></li>
             <li><a href="{% url 'list_character' %}">Karakter</a></li>
             <li><a href="{% url 'list_quote' %}">Quote</a></li>
-            <li><a href="./contact.html">Contact Us</a></li>
+            <li><a href="{% url 'contact' %}">Kontak & Media Partner</a></li>
         </ul>
         <div id="mobile-menu-wrap"></div>
     </div>
@@ -64,7 +63,7 @@
                                     <a style="color:#00619D;" href="{% url 'profile' %}">{{request.user.email}}</a>
                                     {% endif %}
                                 </li>
-                                <li><a style="color:#00619D;" href="#">Contact</a></li>
+                                <li><a style="color:#00619D;" href="{% url 'contact' %}">Kontak & Media Partner</a></li>
                             </ul>
                         </div>
                     </div>
@@ -96,7 +95,7 @@
                                 <li id="2"><a href="{% url 'list_anime' %}">Anime</a></li>
                                 <li id="3"><a href="{% url 'list_character' %}">Karakter</a></li>
                                 <li id="4"><a href="{% url 'list_quote' %}">Quote</a></li>
-                                <li><a href="./contact.html">Contact Us</a></li>
+                                <li id="5"><a href="{% url 'contact' %}">Kontak & Media Partner</a></li>
                             </ul>
                             <div class="nm-right search-switch">
                                 <i class="fa fa-search"></i>
