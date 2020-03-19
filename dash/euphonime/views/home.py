@@ -32,10 +32,18 @@ def home(request):
             })
             i += 1
 
+        ranking = 1
+        result_polls = []
+        sorted_polls = sorted(polls, key = lambda i : i['score'], reverse=True)
+        for s_polls in sorted_polls:
+            s_polls['number'] = ranking
+            result_polls.append(s_polls)
+            ranking += 1
+
     context = {
         'season_nime': ses_anime,
         'new_anime': new_anime,
         'article': article,
-        'polls': sorted(polls, key = lambda i : i['score'], reverse=True),
+        'polls': result_polls,
     }
     return render(request, template_name, context)
