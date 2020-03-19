@@ -36,6 +36,7 @@ urlpatterns = [
 
                   # Anime
                   url(r'^anime/(?P<pk>[^/]+)/$', views.get_anime, name='anime'),
+                  url(r'^rate-anime/(?P<anime_id>[^/]+)/(?P<rate>[^/]+)/$', views.save_rate, name='rate_anime'),
                   url(r'^animes/$', views.list_anime, name='list_anime'),
 
                   # Article

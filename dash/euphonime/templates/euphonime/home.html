@@ -128,14 +128,14 @@
                                     <td>{{a.number}}</td>
                                     <td class="team-name">
                                         {% if not a.obj.image %}
-                                        <img src="{{a.obj.image_url}}" alt="{{a.obj.title}}" style="width:64px; height:100px;">
+                                        <a href="{% url 'anime' a.obj.id.hex %}"><img src="{{a.obj.image_url}}" alt="{{a.obj.title}}" style="width:64px; height:100px;"></a>
                                         {% elif a.obj.image %}
-                                        <img src="{{a.obj.image.url}}" alt="{{a.obj.title}}" style="width:64px; height:100px;">
+                                        <a href="{% url 'anime' a.obj.id.hex %}"><img src="{{a.obj.image.url}}" alt="{{a.obj.title}}" style="width:64px; height:100px;"></a>
                                         {% else %}
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png" alt="" width="150">
+                                        <a href="{% url 'anime' a.obj.id.hex %}"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png" alt="" width="150"></a>
                                         {% endif %}
                                         <br>
-                                        {{a.obj.title|truncatechars:15}}
+                                        <a href="{% url 'anime' a.obj.id.hex %}">{{a.obj.title|truncatechars:15}}</a>
                                     </td>
                                     <td>{{a.polls}}</td>
                                     <td>{{a.watch}}</td>

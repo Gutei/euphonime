@@ -119,20 +119,21 @@
                                         <canvas id="myChart" width="300" height="200"></canvas>
                                     </div>
                                     <div class="col-md-6">
-                                        Tanggapan
-                                        <p style="font-size:14px;">Berikan tanggapan anda</p>
+                                        {% if not user_rate %}
+                                        Skor
+                                        <p style="font-size:14px;">Berikan skor anda</p>
                                         <table class="table table-responsive" cellpadding="5" style="text-align:center; font-size:18px;">
                                             <tr>
-                                                <td><a href="#">😍</a></td>
-                                                <td><a href="#">😆</a></td>
-                                                <td><a href="#">😄</a></td>
-                                                <td><a href="#">😁</a></td>
-                                                <td><a href="#">😊</a></td>
-                                                <td><a href="#">😋</a></td>
-                                                <td><a href="#">😗</a></td>
-                                                <td><a href="#">😲</a></td>
-                                                <td><a href="#">😶</a></td>
-                                                <td><a href="#">🙃</a></td>
+                                                <td><a class="emot" href="{% url 'rate_anime' anime.id 10 %}">😍</a></td>
+                                                <td><a class="emot" href="{% url 'rate_anime' anime.id 9 %}">😆</a></td>
+                                                <td><a class="emot" href="{% url 'rate_anime' anime.id 8 %}">😄</a></td>
+                                                <td><a class="emot" href="{% url 'rate_anime' anime.id 7 %}">😁</a></td>
+                                                <td><a class="emot" href="{% url 'rate_anime' anime.id 6 %}">😊</a></td>
+                                                <td><a class="emot" href="{% url 'rate_anime' anime.id 5 %}">😋</a></td>
+                                                <td><a class="emot" href="{% url 'rate_anime' anime.id 4 %}">😗</a></td>
+                                                <td><a class="emot" href="{% url 'rate_anime' anime.id 3 %}">😲</a></td>
+                                                <td><a class="emot" href="{% url 'rate_anime' anime.id 2 %}">😶</a></td>
+                                                <td><a class="emot" href="{% url 'rate_anime' anime.id 1 %}">🙃</a></td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align:center; font-size:12px;">10</td>
@@ -147,6 +148,43 @@
                                                 <td style="text-align:center; font-size:12px;">1</td>
                                             </tr>
                                         </table>
+                                        {% else %}
+                                        <div class="tanggapan">
+                                            Anda memberikan anime ini skor:
+                                            {% if user_rate.score == 10 %}
+                                            <h2>😍</h2>
+                                            {{user_rate.score}}
+                                            {% elif user_rate.score == 9 %}
+                                            <h2>😆</h2>
+                                            {{user_rate.score}}
+                                            {% elif user_rate.score == 8 %}
+                                            <h2>😄</h2>
+                                            {{user_rate.score}}
+                                            {% elif user_rate.score == 7 %}
+                                            <h2>😁</h2>
+                                            {{user_rate.score}}
+                                            {% elif user_rate.score == 6 %}
+                                            <h2>😊</h2>
+                                            {{user_rate.score}}
+                                            {% elif user_rate.score == 5 %}
+                                            <h2>😋</h2>
+                                            {{user_rate.score}}
+                                            {% elif user_rate.score == 4 %}
+                                            <h2>😗</h2>
+                                            {{user_rate.score}}
+                                            {% elif user_rate.score == 3 %}
+                                            <h2>😲</h2>
+                                            {{user_rate.score}}
+                                            {% elif user_rate.score == 2 %}
+                                            <h2>😶</h2>
+                                            {{user_rate.score}}
+                                            {% elif user_rate.score == 1 %}
+                                            <h2>🙃</h2>
+                                            {{user_rate.score}}
+                                            {% endif %}
+                                            <hr>
+                                        </div>
+                                        {% endif %}
                                         <select name="watching" class="form-control">
                                             <option value="-">---</option>
                                             <option value="1">Sedang ditonton</option>
@@ -321,10 +359,10 @@
         var myChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ['7/3/2020', '14/3/2020', '21/3/2020', '28/3/2020', '4/4/2020'],
+                labels: ['🙃', '😶', '😲', '😗', '😋', '😊', '😁', '😄', '😆', '😍'],
                 datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 7, 5],
+                    label: 'Pemberi skor (jumlah orang)',
+                    data: [{{rating_counter_1}}, {{rating_counter_2}}, {{rating_counter_3}}, {{rating_counter_4}}, {{rating_counter_5}}, {{rating_counter_6}}, {{rating_counter_7}}, {{rating_counter_8}}, {{rating_counter_9}}, {{rating_counter_10}}],
                     backgroundColor: [
                         'rgba(54, 162, 235, 0.2)',
                     ],
