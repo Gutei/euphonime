@@ -36,7 +36,6 @@
                                         <th width="10%" style="padding-left: 8px;text-align: left;">Image</th>
                                         <th width="40%" style="padding-left: 8px;text-align: left;">Name</th>
                                         <th width="25%">Anime</th>
-                                        <th width="10%">Type</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -49,18 +48,19 @@
                                             </div>
                                         </td>
                                         <td class="left-team">
-                                            <a href="{% url 'character' ch.id.hex %}">
-                                            <img style="width: 48px;height: 68px;" src="{% if ch.image %}{{ch.image.url}}{% else %}{{ ch.image_url }}{% endif %}" alt="">
+                                            <a href="{% url 'character' ch.character.id.hex %}">
+                                            <img style="width: 48px;height: 68px;" src="{% if ch.character.image %}{{ch.character.image.url}}{% else %}{{ ch.character.image_url }}{% endif %}" alt="">
                                             </a>
                                         </td>
                                         <td class="st-option" style="padding-left: 8px;text-align: left;">
-                                            <div class="so-text"><a href="{% url 'character' ch.id.hex %}">{{ch.name}}</a></div>
+                                            <div class="so-text"><a href="{% url 'character' ch.character.id.hex %}">{{ch.character.name}}</a></div>
                                         </td>
                                         <td class="st-option">
-                                            <div class="so-text">{{ch.anime.title}}</div>
-                                        </td>
-                                        <td class="st-option">
-                                            <div class="so-text">{{ch.anime.get_type_display}}</div>
+                                            <div class="so-text">
+                                                {% for a in ch.anime_character %}
+                                                [<a href="{% url 'anime' a.anime.id %}">{{a.anime.title}}</a>]
+                                                {% endfor %}
+                                            </div>
                                         </td>
                                     </tr>
                                 {% endfor %}
