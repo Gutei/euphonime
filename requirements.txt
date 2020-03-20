@@ -38,3 +38,4 @@ django-social-share
 gunicorn
 django-celery-results
 celery[redis]
+django-allauth

@@ -38,14 +38,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'django.contrib.sites',
+    'django.contrib.sites',
     'social_django',
     'euphonime',
     'django_extensions',
     'ckeditor',
     'django_social_share',
-    'django_celery_results'
+    'django_celery_results',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -83,7 +88,8 @@ WSGI_APPLICATION = 'dash.wsgi.application'
 AUTHENTICATION_BACKENDS = (
     # 'social_core.backends.google.GoogleOAuth2',
     # 'social_core.backends.twitter.TwitterOAuth',
-    'social_core.backends.facebook.FacebookOAuth2',
+    # 'social_core.backends.facebook.FacebookOAuth2',
+    'euphonime.custom_facebook_auth.CustomFacebookOauth',
 
     'django.contrib.auth.backends.ModelBackend',
 )
@@ -207,3 +213,15 @@ CKEDITOR_CONFIGS = {
         'removePlugins': 'stylesheetparser',
     },
 }
+
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+)
+
+SITE_ID = 1

@@ -1,4 +1,5 @@
 {% load static %}
+{% load socialaccount %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,6 +25,28 @@
 </head>
 <!--<body style="background-image: url({% static 'euphonime/img/stars.jpg' %}); background-repeat:repeat;)">-->
 <body style="background-image: url({% static 'euphonime/login/images/background login.png' %});background-position: center;background-repeat: no-repeat; background-size: cover;">
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '{your-app-id}',
+      cookie     : true,
+      xfbml      : true,
+      version    : '{api-version}'
+    });
+
+    FB.AppEvents.logPageView();
+
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
 
 	<div class="limiter">
 		<div class="container-login100">
@@ -99,7 +122,7 @@
 					</div>
 
                     <div class="container-login100-form-btn">
-						<a href="{% url 'social:begin' 'facebook' %}" class="login100-form-btn" style="background-color:#2183ad; opacity:0.5;">
+						<a href="{% provider_login_url 'facebook' method='oauth2' %}" class="login100-form-btn" style="background-color:#2183ad; opacity:0.5;">
 							Login with Facebook
 						</a>
 					</div>
