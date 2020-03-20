@@ -105,8 +105,8 @@
                         <div class="cc-text">
                             <div class="ct-title">
                                 <div class="row">
-                                <a style="background:#00619D; font-size:14px; color:white; padding:10px;">{{anime.get_type_display}}</a>
-                                <p style="font-size:14px; padding:5px;">{% if anime.rating == "None" %} - {% else %}{{ anime.rating }}{% endif %}</p>
+                                    <a style="background:#00619D; font-size:14px; color:white; padding:20px;">{{anime.get_type_display}}</a>
+                                    <p style="font-size:14px; padding:5px;">{% if anime.rating == "None" %} - {% else %}{{ anime.rating }}{% endif %}</p>
                                 </div>
                                 <br>
                                 <h4>{{ anime.title }}</h4>
@@ -150,44 +150,45 @@
                                         </table>
                                         {% else %}
                                         <div class="tanggapan">
-                                            Anda memberikan anime ini skor:
+                                            <h5>Anda memberikan anime ini skor:</h5>
+                                            <h2 style="text-align:center !important">
                                             {% if user_rate.score == 10 %}
-                                            <h2>😍</h2>
+                                            😍
                                             {{user_rate.score}}
                                             {% elif user_rate.score == 9 %}
-                                            <h2>😆</h2>
+                                            😆
                                             {{user_rate.score}}
                                             {% elif user_rate.score == 8 %}
-                                            <h2>😄</h2>
+                                            😄
                                             {{user_rate.score}}
                                             {% elif user_rate.score == 7 %}
-                                            <h2>😁</h2>
+                                            😁
                                             {{user_rate.score}}
                                             {% elif user_rate.score == 6 %}
-                                            <h2>😊</h2>
+                                            😊
                                             {{user_rate.score}}
                                             {% elif user_rate.score == 5 %}
-                                            <h2>😋</h2>
+                                            😋
                                             {{user_rate.score}}
                                             {% elif user_rate.score == 4 %}
-                                            <h2>😗</h2>
+                                            😗
                                             {{user_rate.score}}
                                             {% elif user_rate.score == 3 %}
-                                            <h2>😲</h2>
+                                            😲
                                             {{user_rate.score}}
                                             {% elif user_rate.score == 2 %}
-                                            <h2>😶</h2>
+                                            😶
                                             {{user_rate.score}}
                                             {% elif user_rate.score == 1 %}
-                                            <h2>🙃</h2>
+                                            🙃
                                             {{user_rate.score}}
-                                            {% endif %}
-                                            <hr>
+                                                {% endif %}</h2>
                                         </div>
                                         {% endif %}
-                                        <hr>
-                                        {{status}}
-                                        <form method="post" action="{% url 'watch_anime' anime.id %}">
+                                        <br><center>
+                                        <a style="background:#00619D; font-size:14px; color:white; padding:10px;">{{status}}</a>
+                                        </center><br>
+                                        <form style="top:20px" method="post" action="{% url 'watch_anime' anime.id %}">
                                             {% csrf_token %}
                                         <select name="status" class="form-control">
                                             <option value="-">---</option>
