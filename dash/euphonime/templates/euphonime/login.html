@@ -1,5 +1,6 @@
 {% load static %}
 {% load socialaccount %}
+{% providers_media_js %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,28 +26,6 @@
 </head>
 <!--<body style="background-image: url({% static 'euphonime/img/stars.jpg' %}); background-repeat:repeat;)">-->
 <body style="background-image: url({% static 'euphonime/login/images/background login.png' %});background-position: center;background-repeat: no-repeat; background-size: cover;">
-
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '{your-app-id}',
-      cookie     : true,
-      xfbml      : true,
-      version    : '{api-version}'
-    });
-
-    FB.AppEvents.logPageView();
-
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
 
 	<div class="limiter">
 		<div class="container-login100">
