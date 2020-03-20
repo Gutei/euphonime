@@ -10,6 +10,9 @@ class Producer(models.Model):
     class Meta:
         db_table = 'producers'
 
+    def __str__(self):
+        return "{}".format(self.name)
+
 class AnimeProducer(models.Model):
     id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False)
     producer = models.ForeignKey('Producer', null=True, blank=True, on_delete=models.CASCADE)
@@ -17,3 +20,6 @@ class AnimeProducer(models.Model):
 
     class Meta:
         db_table = 'anime_producers'
+
+    def __str__(self):
+        return "{} - {}".format(self.producer.name, self.anime.title)

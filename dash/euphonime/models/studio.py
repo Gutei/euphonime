@@ -10,6 +10,9 @@ class Studio(models.Model):
     class Meta:
         db_table = 'studios'
 
+    def __str__(self):
+        return "{}".format(self.name)
+
 
 class AnimeStudio(models.Model):
     id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False)
@@ -18,3 +21,6 @@ class AnimeStudio(models.Model):
 
     class Meta:
         db_table = 'anime_studios'
+
+    def __str__(self):
+        return "{} - {}".format(self.studio.name, self.anime.title)
