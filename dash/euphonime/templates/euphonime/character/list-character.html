@@ -27,7 +27,6 @@
                                     {% include 'euphonime/__includes/__search/__search2.html' %}
                                 {% endblock search %}
                                 </div>
-
                             </div>
                         <div class="st-table table table-hover">
                             <table style="padding: 4px 0;border-bottom: #EBEBEB 1px solid;">
@@ -36,7 +35,6 @@
                                         <th width="5%">#</th>
                                         <th width="10%" style="padding-left: 8px;text-align: left;">Image</th>
                                         <th width="40%" style="padding-left: 8px;text-align: left;">Name</th>
-                                        <th width="10%">Score</th>
                                         <th width="25%">Anime</th>
                                         <th width="10%">Type</th>
                                     </tr>
@@ -57,9 +55,6 @@
                                         </td>
                                         <td class="st-option" style="padding-left: 8px;text-align: left;">
                                             <div class="so-text"><a href="{% url 'character' ch.id.hex %}">{{ch.name}}</a></div>
-                                        </td>
-                                        <td class="st-option">
-                                            <div class="so-text">#</div>
                                         </td>
                                         <td class="st-option">
                                             <div class="so-text">{{ch.anime.title}}</div>

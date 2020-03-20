@@ -32,8 +32,11 @@ urlpatterns = [
                   url(r'^logout/$', auth_views.LogoutView.as_view(), name='logout'),
                   url(r'^accounts/', include('allauth.urls')),
                   url(r'^$', views.home, name='home'),
-                  url(r'^profile/', views.profile, name='profile'),
                   url(r'^finish-signup/', views.finish_signup, name='finish_signup'),
+
+                  # Profil
+                  url(r'^profile/', views.profile, name='profile'),
+                  url(r'^edit-profile/(?P<id>[^/]+)/$', views.edit_profile, name='edit_profile'),
 
                   # Anime
                   url(r'^anime/(?P<pk>[^/]+)/$', views.get_anime, name='anime'),
