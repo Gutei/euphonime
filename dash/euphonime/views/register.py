@@ -3,6 +3,7 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.db import transaction
+from euphonime.models import ProfileUser
 
 
 @transaction.atomic
@@ -25,12 +26,16 @@ def register(request):
             context['message'] = 'You have tried to Register and Failed. Email already exist .'
             return render(request, template_name, context)
         try:
-            User.objects.create(
+            user = User.objects.create(
                 username=username,
                 email=email,
                 password=make_password(password),
                 is_active=True,
                 is_staff=False,
+            )
+
+            ProfileUser.objects.create(
+                user=user
             )
         except Exception as e:
             print(e)

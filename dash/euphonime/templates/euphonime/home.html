@@ -65,16 +65,12 @@
                                 </div>
                                 <div class="ni-text">
                                     <h5><a href="{% url 'anime' sn.id.hex %}">{{sn.title}}</a></h5>
-<<<<<<< HEAD
-                                    <p class="text-justify">{{sn.description|truncatechars:150}}</p>
-=======
+
                                     <p class="text-justify">
                                         {% autoescape off %}
                                         {{sn.description|truncatechars:150}}
                                         {% endautoescape %}
 
-                                        <a href="{% url 'anime' sn.id.hex  %}">selengkapnya</a></p>
->>>>>>> aa97870e1ea016514eec981ea8901bd7f3dd96e2
                                 </div>
                             </div>
                         </div>
