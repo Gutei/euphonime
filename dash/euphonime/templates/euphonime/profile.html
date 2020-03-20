@@ -90,8 +90,17 @@
 
                                         <div class="col-sm-6">
                                             <div style="font-size:12px;">
-                                                <h6>Bukan Biodata</h6><br>
-                                                Lorem ipsum, atau ringkasnya lipsum, adalah teks standar yang ditempatkan untuk mendemostrasikan elemen grafis atau presentasi visual seperti font, tipografi, dan tata letak.
+                                                <h6>Anime yang ditonton:</h6><br>
+                                                {% if user_watching %}
+                                                <ul>
+                                                    {% for a in user_watching %}
+                                                    <li>{{a.anime.title}}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                                {% else %}
+                                                <p>Belum ada anime yang ditonton.</p>
+                                                {% endif %}
+
                                             </div>
                                         </div>
                                     </div>
@@ -300,6 +309,11 @@
             options: {
                 scales: {
                     yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }],
+                    xAxes: [{
                         ticks: {
                             beginAtZero: true
                         }

@@ -92,6 +92,7 @@ AUTHENTICATION_BACKENDS = (
     'euphonime.custom_facebook_auth.CustomFacebookOauth',
 
     'django.contrib.auth.backends.ModelBackend',
+    "allauth.account.auth_backends.AuthenticationBackend",
 )
 
 
@@ -155,7 +156,7 @@ JET_SIDE_MENU_COMPACT = True
 CKEDITOR_UPLOAD_PATH = 'upload/'
 
 LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'profile'
 LOGOUT_URL = 'logout'
 LOGOUT_REDIRECT_URL = 'home'
 

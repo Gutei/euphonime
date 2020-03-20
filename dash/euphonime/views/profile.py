@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from euphonime.models import ProfileUser, UserWatching, UserAnimeScore
+from euphonime.models import ProfileUser, UserWatching, UserAnimeScore, Season, Anime, AnimeSeason
 from django.shortcuts import redirect
 from social_django.models import UserSocialAuth
 from django.db import transaction
@@ -14,6 +14,10 @@ def profile(request):
     user = request.user
     profile = ProfileUser.objects.filter(user=user).first()
     social = UserSocialAuth.objects.filter(user=user).first()
+
+    this_season = Season.objects.filter(is_season=True).first()
+    anime = AnimeSeason.objects.filter(season=this_season)
+
 
     context = {'profile': profile}
 
@@ -52,6 +56,8 @@ def profile(request):
         score_anime.filter(score=2).count(),
         score_anime.filter(score=1).count(),
     ]
+
+    context['user_watching'] = watch_anime
 
     return render(request, 'euphonime/profile.html', context)
 
