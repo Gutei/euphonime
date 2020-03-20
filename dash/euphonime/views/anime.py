@@ -1,7 +1,7 @@
 from django.db.models import Q
 from django.core.paginator import Paginator
 from django.shortcuts import render
-from euphonime.models import Anime, Character, AnimeGenre, Quote, UserAnimeScore, ProfileUser, UserWatching, AnimeCharacter
+from euphonime.models import Anime, Character, AnimeGenre, Quote, UserAnimeScore, ProfileUser, UserWatching, AnimeCharacter, Ost, UserPolls
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -17,7 +17,9 @@ def get_anime(request, pk):
 
     quote = Quote.objects.filter(character__in=characters).order_by('-updated')
 
-    status = "Status menonton"
+    ost = Ost.objects.filter(anime=anime)
+
+    status = "Status belum Ada"
 
     template_name = 'euphonime/anime/get-anime.html'
 
@@ -57,6 +59,7 @@ def get_anime(request, pk):
         'character': characters,
         'genre': genre,
         'quotes': quote,
+        'ost':ost,
         'user_rate': user_rate,
         'rating_counter_1':rating_counter_1,
         'rating_counter_2':rating_counter_2,
@@ -104,6 +107,9 @@ def save_rate(request, anime_id, rate):
 
     user_rate = UserAnimeScore(user=profile, anime=anime, score=rate)
     user_rate.save()
+
+    user_poll = UserPolls(user=profile, anime=anime, poll=True)
+    user_poll.save()
 
     return redirect(reverse('anime', args=[anime.id,]))
 

@@ -58,7 +58,7 @@
                                         <td class="st-option">
                                             <div class="so-text">
                                                 {% for a in ch.anime_character %}
-                                                <b><a href="{% url 'anime' a.anime.id %}">#{{a.anime.title}}</a></b>,
+                                                <b><a href="{% url 'anime' a.anime.id %}">{{a.anime.title}}</a></b>,
                                                 {% endfor %}
                                             </div>
                                         </td>
