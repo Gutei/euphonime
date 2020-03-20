@@ -33,6 +33,12 @@ def list_character(request):
     search = request.GET.get('search')
     if request.method == 'GET' and search:
         character = Character.objects.filter(Q(name__icontains=search)).order_by('name')
+        chr = []
+        for c in character:
+            chr.append({
+                'character': c,
+                'anime_character': AnimeCharacter.objects.filter(character=c)
+            })
 
     paginator = Paginator(chr, 10)  # Show 25 contacts per page
     page = request.GET.get('page')
