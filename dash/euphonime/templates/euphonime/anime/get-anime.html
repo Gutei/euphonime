@@ -89,7 +89,13 @@
                                                             <p>Studio</p>
                                                         </td>
                                                         <td class="left-team">
-                                                            <p style="font-size:14px;">{% if anime.studio %}{{anime.studio.name}}{% else %}-{%endif%}</p>
+                                                            <p style="font-size:14px;">
+                                                                <ul>
+                                                                {% for s in studios %}
+                                                                    <li><p style="font-size:14px;">{{s.studio.name}}</p></li>
+                                                                {% endfor %}
+                                                                </ul>
+                                                            </p>
                                                         </td>
                                                     </tr>
                                                 </tbody>

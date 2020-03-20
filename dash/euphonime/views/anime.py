@@ -1,7 +1,8 @@
 from django.db.models import Q
 from django.core.paginator import Paginator
 from django.shortcuts import render
-from euphonime.models import Anime, Character, AnimeGenre, Quote, UserAnimeScore, ProfileUser, UserWatching, AnimeCharacter, Ost, UserPolls
+from euphonime.models import (Anime, Character, AnimeGenre, Quote, UserAnimeScore, ProfileUser, UserWatching,
+                              AnimeCharacter, Ost, UserPolls, AnimeStudio, Studio)
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -53,6 +54,7 @@ def get_anime(request, pk):
     rating_counter_9 = UserAnimeScore.objects.filter(anime=anime, score=9).count()
     rating_counter_10 = UserAnimeScore.objects.filter(anime=anime, score=10).count()
 
+    studios = AnimeStudio.objects.filter(anime=anime)
 
     context = {
         'anime': anime,
@@ -71,7 +73,8 @@ def get_anime(request, pk):
         'rating_counter_8':rating_counter_8,
         'rating_counter_9':rating_counter_9,
         'rating_counter_10':rating_counter_10,
-        'status': status
+        'status': status,
+        'studios': studios,
     }
     return render(request, template_name, context)
 
