@@ -4,18 +4,23 @@
 
 {{ block.super }}
 <div style="padding:10px; background:#FFFFFF; padding:15px;">
-    <div class="form-row">
-        <div style="width:500px;">
+    <div class="form-row" style="width:500px; overflow-x:scroll;">
+        <div>
             <img src="{% static 'euphonime/servant/modred-chibi.png' %}" width="150" style="float:left;">
-            <div style="border:1px solid red; border-radius:5px; width:300px; float:right; padding:10px; color:red;">
+        </div>
+        <div>
+            <div style="border:1px solid red; border-radius:5px; width:300px; float:right; padding:10px; color:red; background:white;">
+                <div style="width:500px;">
+                    <h3>MORDRED v0.3.28<br>EUPHONIME API SYNC</h3>
+                </div>
+                <br>
                 Harap digunakan dengan bijak ya, mastaa...!<br>
-                Proses sinkronisasi bisa jadi membutuhkan<br>
-                waktu yang lama.<br><br>
-                Jangan lakukan apa pun saat sinkronisasi<br>
-                sedang berjalan.<br><br>
-                Proses ini nge-pull data anime, karakter,<br>
-                seiyuu, beserta resource multimedia ukuran HD.<br>
-                (Jika tersedia)
+                Proses sinkronisasi dijalankan di background service.<br><br>
+                Isi mal_id dengan tanda * untuk re-sync semua<br>
+                data anime yang kita miliki denga data anime di MAL.<br><br>
+                Penggunaan tanda * bukan untuk becanda ya mastaa,<br>
+                karena bisa berbahaya bagi jasmani dan roh anda.<br><br>
+                Proses ini nge-pull data di MAL.<br>
             </div>
         </div>
     </div>

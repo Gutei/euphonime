@@ -4,12 +4,12 @@ DEBUG = False
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'euphonime',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
-        'USER': 'root',
+        'USER': 'airi',
         'PASSWORD': 'airichan2020',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 

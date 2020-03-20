@@ -46,7 +46,11 @@
                                             <a href="{% url 'anime' a.id.hex %}"><img style="padding-top:10px" src="{% if a.image %}{{a.image.url}}{% else %}{{a.image_url}}{% endif %}" alt=""></a>
                                         </div>
                                         <div class="ni-text">
-                                            <p class="text-justify">{{a.description|truncatechars:60}}</p>
+                                            <p class="text-justify">
+                                                {% autoescape off %}
+                                                {{a.description|truncatechars:60}}
+                                                {% endautoescape %}
+                                            </p>
                                             <ul>
                                                 <li><i class="fa fa-film"></i>&emsp;{{a.get_type_display}}</li>
                                             </ul>

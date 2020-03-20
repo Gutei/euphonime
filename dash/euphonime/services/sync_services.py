@@ -68,8 +68,10 @@ def get_anime(mal_id, task_id):
     return None
 
 
-def get_chara(mal_id, par_anime):
+def get_chara(mal_id, anime):
     id = mal_id
+
+    par_anime = Anime.objects.filter(mal_id=id).first()
 
     logger.debug('===========STARTING SYNC CHARACTER FROM MAL ID {}============'.format(id))
     url = "https://api.jikan.moe/v3/anime/{}".format(id)
@@ -81,70 +83,92 @@ def get_chara(mal_id, par_anime):
         characters = chara_json['characters']
         for c in characters:
             chara_name = ''
-            clr_chara = Character.objects.filter(mal_id=c['mal_id'])
-            clr_chara.delete()
+            # clr_chara = Character.objects.filter(mal_id=c['mal_id'])
+            # clr_chara.delete()
             existed_chara = Character.objects.filter(mal_id=c['mal_id']).first()
             act = None
-            logger.debug('SYNC CHARACTER {}'.format(c['name']))
-            for v in c['voice_actors']:
-                if v['language'] == 'Japanese':
-                    seiyuu_url = "https://api.jikan.moe/v3/person/{}/".format(v['mal_id'])
-                    req_seiyuu = requests.get(seiyuu_url)
-                    if req_seiyuu.status_code == 200:
-                        logger.debug('GET SEIYUU {} FOR CHARACTER {} SUCCESS'.format(v['name'], c['name']))
-                        seiyuu_json = req_seiyuu.json()
-                        seiyuu, created = VoiceAct.objects.get_or_create(mal_id=v['mal_id'], name=v['name'],
-                                                                         given_name=seiyuu_json['given_name'],
-                                                                         family_name=seiyuu_json['family_name'],
-                                                                         image_url=seiyuu_json['image_url'],
-                                                                         description=seiyuu_json['about'],
-                                                                         birth_date=seiyuu_json['birthday'], )
 
-                    else:
-                        seiyuu, created = VoiceAct.objects.get_or_create(mal_id=v['mal_id'], name=v['name'],
-                                                                         image_url=v['image_url'])
+            if existed_chara:
+                char_anime = AnimeCharacter(character=existed_chara, anime=par_anime)
+                try:
+                    char_anime.save()
+                except Exception as e:
+                    logger.debug('LINK CHARACTER {} FOR ANIME {} FAILED'.format(c['name'], par_anime.title))
 
-                    chara_name = c['name']
-                    act = seiyuu
+                logger.debug('LINK CHARACTER {} FOR ANIME {} SUCCESS'.format(c['name'], par_anime.title))
+            else:
+                logger.debug('SYNC CHARACTER {}'.format(c['name']))
 
+                for v in c['voice_actors']:
+                    if v['language'] == 'Japanese':
+                        seiyuu_url = "https://api.jikan.moe/v3/person/{}/".format(v['mal_id'])
+                        req_seiyuu = requests.get(seiyuu_url)
+                        if req_seiyuu.status_code == 200:
+                            logger.debug('GET SEIYUU {} FOR CHARACTER {} SUCCESS'.format(v['name'], c['name']))
+                            seiyuu_json = req_seiyuu.json()
 
-            if not existed_chara:
+                            sei = VoiceAct.objects.filter(mal_id=v['mal_id']).first()
+
+                            if not sei:
+
+                                sei = VoiceAct.objects.create(mal_id=v['mal_id'], name=v['name'],
+                                                              given_name=seiyuu_json['given_name'],
+                                                              family_name=seiyuu_json['family_name'],
+                                                              image_url=seiyuu_json['image_url'],
+                                                              description=seiyuu_json['about'],
+                                                              birth_date=seiyuu_json['birthday'], )
+                                try:
+                                    sei.save()
+                                except Exception as e:
+                                    logger.debug('ADD SEIYUU {} FAILED'.format(v['name']))
+                                    return None
+
+                                act = sei
+
+                            else:
+                                act = sei
+
+                        else:
+                            logger.debug('ADD SEIYUU FAILED')
+
+                chara_name = c['name']
+
                 if chara_name and chara_name != '':
                     if c['role'] == 'Main':
                         role = 1
                     else:
                         role = 2
+
                     chara_url = "https://api.jikan.moe/v3/character/{}/".format(c['mal_id'])
                     req_detail_chara = requests.get(chara_url)
-                    logger.debug('ADD CHARACTER {} SUCCESS'.format(c['name']))
+
                     if req_detail_chara.status_code == 200:
+
                         detail_json = req_detail_chara.json()
 
                         chara = Character(mal_id=c['mal_id'], name=c['name'],
-                                                                native_name=detail_json['name_kanji'],
-                                                                image_url=detail_json['image_url'],
-                                                                description=detail_json['about'],
-                                                                voice_act=act,
-                                                                role=role)
-                        chara.save()
+                                          native_name=detail_json['name_kanji'],
+                                          image_url=detail_json['image_url'],
+                                          description=detail_json['about'],
+                                          voice_act=act,
+                                          role=role)
 
-                        anime = par_anime
-                        char_anime = AnimeCharacter(character=chara, anime=anime)
-                        char_anime.save()
+                        try:
+                            chara.save()
+                        except Exception as e:
+                            logger.debug('ADD CHARACTER {} FOR ANIME {} FAILED'.format(c['name'], par_anime.title))
 
+                        logger.debug('ADD CHARACTER {} FOR ANIME {} SUCCESS'.format(c['name'], par_anime.title))
 
-                    else:
-                        Character.objects.update(mal_id=c['mal_id'], name=c['name'],
-                                                 image_url=c['image_url'],
-                                                 voice_act=act,
-                                                 role=role)
+                        # anime = par_anime
+                        char_anime = AnimeCharacter(character=chara, anime=par_anime)
 
-                        chara = Character.objects.filter(character__mal_id=c['mal_id']).first()
+                        try:
+                            char_anime.save()
+                        except Exception as e:
+                            logger.debug('LINK CHARACTER {} FOR ANIME {} FAILED'.format(c['name'], par_anime.title))
 
-                        anime = par_anime
-                        char_anime = AnimeCharacter(character=chara, anime=anime)
-                        char_anime.save()
-
+                        logger.debug('LINK CHARACTER {} FOR ANIME {} SUCCESS'.format(c['name'], par_anime.title))
 
 
         status = "[SUCCESS] Sync from MyAnimeList for {}, with title: {}.".format(id, par_anime.title)
