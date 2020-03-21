@@ -28,9 +28,7 @@
                             <img src="{% static 'euphonime/servant/modred-chibi.png' %}" alt="" width="100"><br>
                             <p>halo mastaa....!!</p>
                             {% endif %}
-                            {% if sosmed_pic %}
-                            {{sosmed_pic}}
-                            {% endif %}
+
                         </div>
                         <div class="container" style="margin-top:1em;">
                             <div class="schedule-text">
@@ -68,6 +66,9 @@
                             <div class="ct-title">
                                 <hr>
                                 <div>
+                                    {% if sosmed_pic %}
+                                    <img src="{{sosmed_pic}}" width="70">
+                                    {% endif %}
                                     <a href="{% url 'logout' %}" style="background:#00619D; color:#FFF; padding:10px;">Logout</a>
                                     <hr>
                                     <div class="row">
