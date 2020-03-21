@@ -68,7 +68,7 @@ def profile(request):
         score_anime.filter(score=1).count(),
     ]
 
-    context['user_watching'] = watch_anime
+    context['user_watching'] = watch_anime.filter(status__in=[UserWatching.WATCHING, UserWatching.HOLDING, UserWatching.FINISHED_WATCHING]).order_by('-updated')[:10]
 
     return render(request, 'euphonime/profile.html', context)
 
