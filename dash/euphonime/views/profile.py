@@ -65,6 +65,8 @@ def profile(request):
 
     context['user_watching'] = watch_anime
 
+    logger.debug('===========GET CONTEXT {}============'.format(context))
+
     return render(request, 'euphonime/profile.html', context)
 
 
