@@ -36,6 +36,8 @@ def profile(request):
             image_url = allauth.extra_data['picture']
             logger.debug('GET PROFILE PIC {}'.format(image_url))
 
+            context['sosmed_pic'] = image_url
+
     if not profile:
         return redirect('finish_signup')
 
