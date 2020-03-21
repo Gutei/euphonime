@@ -29,7 +29,7 @@ def profile(request):
         image = social.get_avatar_url()
         logger.debug('===========GET PROFILE PIC {}============'.format(id))
         context = {
-            'profile_pic': image,
+            'profile_pic': str(image),
         }
 
     if not profile:
