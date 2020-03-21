@@ -1,7 +1,7 @@
 from django.utils.html import mark_safe
 from django.contrib import admin
 from euphonime.models import (Anime, Character, Studio, Producer, AnimeStudio, AnimeProducer, AnimeGenre, MalAnime,
-                              Quote, Season, AnimeSeason, AnimeCharacter)
+                              Quote, Season, AnimeSeason, AnimeCharacter, UserAnimeReview)
 from euphonime.tasks import sync_anime
 
 class CharacterInline(admin.TabularInline):
@@ -206,3 +206,17 @@ class SeasonAdmin(admin.ModelAdmin):
                 season.save()
 
         super().save_model(request, obj, form, change)
+
+# @admin.register(UserAnimeReview, site=admin.site)
+# class UserAnimeReviewAdmin(admin.ModelAdmin):
+#     list_display = ('get_user', 'anime', 'created', 'updated',)
+#     search_fields = ('user__username', 'user__email', 'anime__title',)
+#     list_filter = ('created', 'updated',)
+#
+#     def get_user(self, obj):
+#         user = obj.user.user.email
+#
+#         return '{}'.format(user)
+#
+#     get_user.admin_order_field = 'user'
+#     get_user.short_description = 'User'

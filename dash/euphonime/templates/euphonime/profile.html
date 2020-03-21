@@ -26,7 +26,13 @@
                             <img src="{{profile_pic}}" alt="" width="100">
                             {% else %}
                             <img src="{% static 'euphonime/servant/modred-chibi.png' %}" alt="" width="100"><br>
-                            <p>halo mastaa....!!</p>
+<!--                            <p style="padding:3px; border:1px solid #f5e79f; background:rgba(252, 239, 169, 0.5); color: #c9b755;">halo mastaa....!!</p>-->
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert" style="font-size:12px;">
+                              Mastaa...! Lengkapi profilenya!
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
                             {% endif %}
 
                         </div>
@@ -50,6 +56,24 @@
                                                                 </a>
                                                             </p>
                                                             <p>{% if profile.birth_date %}{{profile.birth_date|date:'d F Y'}}{% else %} - {% endif %}</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="left-team">
+                                                            <p style="font-size:12px;">Gender
+                                                                <a href="" data-toggle="modal" data-target="#gender">
+                                                                    <i class="fa fa-edit"></i>
+                                                                </a>
+                                                            </p>
+                                                            <p>{% if profile.gender %}
+                                                                    {% if profile.gender == 1 %}
+                                                                        M
+                                                                    {% else %}
+                                                                        F
+                                                                    {% endif %}
+                                                                {% else %}
+                                                                -
+                                                                {% endif %}</p>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -221,8 +245,8 @@
                         <textarea class="form-control" name="biodata"></textarea>
                     </div>
                     <div class="group-in text-right">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="button" class="btn btn-secondary" style="background:red;" data-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary" style="background:blue;">Simpan</button>
                     </div>
                 </form>
             </div>
@@ -245,8 +269,8 @@
               <p class="text-justify">{{profile.biodata|safe}}</p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-secondary" style="background:red;" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" style="background:blue;">Save changes</button>
           </div>
         </div>
       </div>
@@ -271,8 +295,39 @@
                                            value="{{ profile.birth_date|date:'m/d/Y' }}">
                     </div>
                     <div class="group-in text-right">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="button" class="btn btn-secondary" style="background:red;" data-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary" style="background:blue;">Simpan</button>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal gender-->
+    <div class="modal fade" id="gender" tabindex="-1" role="dialog"  aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" >Gender</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="contact-form">
+                <form method="post" action="{% url 'edit_profile' profile.id %}">{% csrf_token %}
+                    <div class="group-in">
+                        <select name="gender" class="form-control">
+                            <option value="">Don't show my gender</option>
+                            <option value="1">Male</option>
+                            <option value="2">Female</option>
+                        </select>
+                    </div>
+                    <div class="group-in text-right">
+                        <button type="button" class="btn btn-secondary" style="background:red;" data-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary" style="background:blue;">Simpan</button>
                     </div>
                 </form>
             </div>
@@ -295,34 +350,40 @@
     <script>
         var ctx = document.getElementById('myPieChart');
         var myChart = new Chart(ctx, {
-            type: 'radar',
+            type: 'pie',
             data: {
-                labels: ['😍', '😆', '😄', '😁', '😊', '😋', '😗', '😲', '😶', '🙃'],
+                labels: ['(😍 10)', '(😆 9)', '(😄 8)', '(😁 7)', '(😊 6)', '(😋 5)', '(😗 4)', '(😲 3)', '(😶 2)', '(🙃 1)'],
                 datasets: [{
-                    label: '# of Score',
+                    label: 'Memberikan skor',
                     data: {{score_data}},
                     backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(120, 9, 1, 0.2)',
+                        'rgba(34, 110, 50, 0.2)',
+                        'rgba(110, 34, 88, 0.2)',
+                        'rgba(0, 0, 0, 0.2)',
                     ],
                     borderColor: [
+                        'rgba(255, 99, 132, 1)',
                         'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(120, 9, 1, 1)',
+                        'rgba(34, 110, 50, 0.2)',
+                        'rgba(110, 34, 88, 0.2)',
+                        'rgba(0, 0, 0, 0.2)',
                     ],
                     borderWidth: 1
                 }]
             },
             options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }],
-                    xAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
             }
         });
         </script>
@@ -334,7 +395,7 @@
             data: {
                 labels: ['Selesai  ditonton', 'Sedang ditonton', 'Menunda', 'Tidak melanjutkan'],
                 datasets: [{
-                    label: '# of Votes',
+                    label: 'Status',
                     data: {{watch_data}},
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',

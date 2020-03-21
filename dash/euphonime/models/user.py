@@ -1,6 +1,7 @@
 import uuid
 from django.db import models
 from django.contrib.auth.models import User
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class ProfileUser(models.Model):
@@ -22,6 +23,9 @@ class ProfileUser(models.Model):
 
     class Meta:
         db_table = 'user_profiles'
+
+    def __str__(self):
+        return '{}'.format(self.user.email)
 
 
 class UserWatching(models.Model):
@@ -71,3 +75,16 @@ class UserPolls(models.Model):
     class Meta:
         db_table = 'user_polls'
         verbose_name = 'Polling'
+
+
+class UserAnimeReview(models.Model):
+    id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey('ProfileUser', null=True, blank=True, on_delete=models.CASCADE)
+    anime = models.ForeignKey('Anime', null=True, blank=True, on_delete=models.CASCADE)
+    review = RichTextUploadingField(blank=True, null=True,)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'user_reviews'
+        verbose_name = 'Anime Review From User'

@@ -83,10 +83,14 @@ def edit_profile(request, id):
     if request.method == 'POST':
         biodata = request.POST.get('biodata')
         birth_date = request.POST.get('birth_date')
+        gender = request.POST.get('gender')
         if biodata:
             usr_prof.biodata = biodata
         if birth_date:
             usr_prof.birth_date = ps.parse(birth_date)
+        if gender:
+            print(gender)
+            usr_prof.gender = gender
         try:
             usr_prof.save()
         except Exception as e:
