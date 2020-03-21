@@ -4,10 +4,21 @@ from django.contrib.auth.models import User
 
 
 class ProfileUser(models.Model):
+
+    MALE = 1
+    FEMALE = 2
+
+    GENDER = (
+        (MALE, 'Laki-laki'),
+        (FEMALE, 'Perempuan'),
+    )
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     photo_profile = models.ImageField(upload_to='user/profile', null=True, blank=True)
     biodata = models.TextField(null=True, blank=True)
+    gender = models.PositiveIntegerField(choices=GENDER, null=True, blank=True)
     birth_date = models.DateField(null=True, blank=True)
+    website = models.CharField(max_length=512, null=True, blank=True)
 
     class Meta:
         db_table = 'user_profiles'
