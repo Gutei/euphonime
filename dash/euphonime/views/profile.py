@@ -26,10 +26,10 @@ def profile(request):
     context = {'profile': profile}
 
     if social:
-        image = social.get_avatar_url()
+        image = social.extra_data['picture']
         logger.debug('===========GET PROFILE PIC {}============'.format(image))
         context = {
-            'profile_pic': str(image),
+            'profile_pic': image,
         }
         logger.debug('===========GET CONTEXT {}============'.format(context))
 
