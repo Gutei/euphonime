@@ -1,3 +1,4 @@
+import logging
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from euphonime.models import ProfileUser, UserWatching, UserAnimeScore, Season, Anime, AnimeSeason
@@ -8,7 +9,7 @@ from django.db.models import Count
 from dateutil import parser as ps
 from django.db.models import Q
 from allauth.socialaccount.models import SocialAccount
-
+logger = logging.getLogger(__name__)
 
 @login_required
 def profile(request):
@@ -19,6 +20,8 @@ def profile(request):
     this_season = Season.objects.filter(is_season=True).first()
     anime = AnimeSeason.objects.filter(season=this_season)
 
+    allauth = SocialAccount.objects.filter(user=user).first()
+    logger.debug('AUTHENTICATION FROM SOCIAL MEDIA {}'.format(allauth))
 
     context = {'profile': profile}
 
@@ -27,6 +30,14 @@ def profile(request):
         context = {
             'profile_pic': image,
         }
+
+    if allauth:
+        if "picture" in allauth.extra_data:
+            image = allauth.extra_data['picture']
+            logger.debug('GET PROFILE PIC {}'.format(image))
+            context = {
+                'profile_pic': image,
+            }
 
     if not profile:
         return redirect('finish_signup')
