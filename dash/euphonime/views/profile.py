@@ -31,6 +31,7 @@ def profile(request):
         context = {
             'profile_pic': str(image),
         }
+        logger.debug('===========GET CONTEXT {}============'.format(context))
 
     if not profile:
         return redirect('finish_signup')
