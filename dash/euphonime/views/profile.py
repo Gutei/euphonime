@@ -7,13 +7,14 @@ from django.db import transaction
 from django.db.models import Count
 from dateutil import parser as ps
 from django.db.models import Q
+from allauth.socialaccount.models import SocialAccount
 
 
 @login_required
 def profile(request):
     user = request.user
     profile = ProfileUser.objects.filter(user=user).first()
-    social = UserSocialAuth.objects.filter(user=user).first()
+    social = SocialAccount.objects.filter(user=user).first()
 
     this_season = Season.objects.filter(is_season=True).first()
     anime = AnimeSeason.objects.filter(season=this_season)
@@ -22,7 +23,7 @@ def profile(request):
     context = {'profile': profile}
 
     if social:
-        image = social.extra_data['picture']['data']['url']
+        image = social.get_avatar_url()
         context = {
             'profile_pic': image,
         }
