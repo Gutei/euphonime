@@ -1,4 +1,3 @@
-import logging
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from euphonime.models import ProfileUser, UserWatching, UserAnimeScore, Season, Anime, AnimeSeason
@@ -10,15 +9,13 @@ from dateutil import parser as ps
 from django.db.models import Q
 from allauth.socialaccount.models import SocialAccount
 
-logger = logging.getLogger(__name__)
-
 
 @login_required
 def profile(request):
     user = request.user
     profile = ProfileUser.objects.filter(user=user).first()
-    social = SocialAccount.objects.filter(user=user).first()
-    logger.debug('===========LOGIN {}============'.format(social))
+    social = UserSocialAuth.objects.filter(user=user).first()
+
     this_season = Season.objects.filter(is_season=True).first()
     anime = AnimeSeason.objects.filter(season=this_season)
 
@@ -26,12 +23,10 @@ def profile(request):
     context = {'profile': profile}
 
     if social:
-        image = social.extra_data['picture']
-        logger.debug('===========GET PROFILE PIC {}============'.format(image))
+        image = social.extra_data['picture']['data']['url']
         context = {
-            'profile_pic': None,
+            'profile_pic': image,
         }
-        logger.debug('===========GET CONTEXT {}============'.format(context))
 
     if not profile:
         return redirect('finish_signup')
@@ -64,8 +59,6 @@ def profile(request):
     ]
 
     context['user_watching'] = watch_anime
-
-    logger.debug('===========GET CONTEXT {}============'.format(context))
 
     return render(request, 'euphonime/profile.html', context)
 
