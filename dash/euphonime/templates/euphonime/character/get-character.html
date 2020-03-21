@@ -55,7 +55,13 @@
                                                             <p>Anime</p>
                                                         </td>
                                                         <td class="left-team">
-                                                            <p style="font-size:14px;">{{ character.anime.title }}</p>
+                                                            <p style="font-size:14px;">
+                                                                <ul>
+                                                                    {% for a in anime %}
+                                                                    <li><p style="font-size:14px;"><a href="{% url 'anime' a.anime.id %}">{{a.anime.title}}</a></p></li>
+                                                                    {% endfor %}
+                                                                </ul>
+                                                            </p>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -95,7 +101,6 @@
                             <div class="ct-title">
                                 <div class="row">
                                 <a style="background:#00619D; font-size:14px; color:white; padding:10px;">{{character.name}}</a>
-                                <p style="font-size:14px; padding:5px;">{% if anime.rating == "None" %} - {% else %}{{ anime.rating }}{% endif %}</p>
                                 </div>
                                 <br>
                                 <h4>{{ anime.title }}</h4>
@@ -109,9 +114,20 @@
                                     </center>
                                 {% endif %}                            </div>
 
-                            {% block share %}
-                                {% include 'euphonime/__includes/__sosmed/__share.html' %}
-                            {% endblock share %}
+                            <div id="fb-root"></div>
+                              <script>(function(d, s, id) {
+                                var js, fjs = d.getElementsByTagName(s)[0];
+                                if (d.getElementById(id)) return;
+                                js = d.createElement(s); js.id = id;
+                                js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+                                fjs.parentNode.insertBefore(js, fjs);
+                              }(document, 'script', 'facebook-jssdk'));</script>
+
+                              <!-- Your share button code -->
+                              <div class="fb-share-button"
+                                data-href="{% url 'character' character.id %}"
+                                data-layout="button_count">
+                              </div>
 
                         </div>
                         <div class="club-tab-list">

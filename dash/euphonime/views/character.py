@@ -11,9 +11,12 @@ def get_character(request, pk):
 
     template_name = 'euphonime/character/get-character.html'
 
+    anime = AnimeCharacter.objects.filter(character=character)
+
     context = {
         'character': character,
-        'quotes': quote
+        'quotes': quote,
+        'anime': anime
     }
     return render(request, template_name, context)
 
