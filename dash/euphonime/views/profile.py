@@ -29,7 +29,7 @@ def profile(request):
         image = social.extra_data['picture']
         logger.debug('===========GET PROFILE PIC {}============'.format(image))
         context = {
-            'profile_pic': image,
+            'profile_pic': None,
         }
         logger.debug('===========GET CONTEXT {}============'.format(context))
 
