@@ -33,11 +33,8 @@ def profile(request):
 
     if allauth:
         if "picture" in allauth.extra_data:
-            image = allauth.extra_data['picture']
-            logger.debug('GET PROFILE PIC {}'.format(image))
-            context = {
-                'profile_pic': image,
-            }
+            image_url = allauth.extra_data['picture']
+            logger.debug('GET PROFILE PIC {}'.format(image_url))
 
     if not profile:
         return redirect('finish_signup')
