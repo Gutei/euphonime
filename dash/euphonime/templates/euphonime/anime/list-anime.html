@@ -39,7 +39,7 @@
                                     <div class="col-lg-4 col-md-6" >
                                         <div class="news-item border" style="padding:5px;">
                                             <div class="ct-title" style="border-bottom: 1.5px solid #f2f2f2;">
-                                                <h5 ><a style="color: black;" href="{% url 'anime' a.id.hex %}">{{a.title|truncatechars:40}}</a></h5>
+                                                <a style="color: black; text-decoration:none;" href="{% url 'anime' a.id.hex %}">{{a.title|truncatechars:40}}</a>
                                             </div>
 
                                         <div class="ni-pic">
