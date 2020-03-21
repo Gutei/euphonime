@@ -5,11 +5,7 @@
     {% endblock title %}
 
     {% block site_logo %}
-    {% if not article.image %}
-
-    {% else %}
     <meta property="og:image" content="{{article.image.url}}">
-    {% endif %}
     {% endblock site_logo %}
 
 
