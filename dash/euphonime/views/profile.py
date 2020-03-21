@@ -1,3 +1,4 @@
+import logging
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from euphonime.models import ProfileUser, UserWatching, UserAnimeScore, Season, Anime, AnimeSeason
@@ -9,13 +10,15 @@ from dateutil import parser as ps
 from django.db.models import Q
 from allauth.socialaccount.models import SocialAccount
 
+logger = logging.getLogger(__name__)
+
 
 @login_required
 def profile(request):
     user = request.user
     profile = ProfileUser.objects.filter(user=user).first()
     social = SocialAccount.objects.filter(user=user).first()
-
+    logger.debug('===========LOGIN {}============'.format(social))
     this_season = Season.objects.filter(is_season=True).first()
     anime = AnimeSeason.objects.filter(season=this_season)
 
@@ -24,6 +27,7 @@ def profile(request):
 
     if social:
         image = social.get_avatar_url()
+        logger.debug('===========GET PROFILE PIC {}============'.format(id))
         context = {
             'profile_pic': image,
         }
