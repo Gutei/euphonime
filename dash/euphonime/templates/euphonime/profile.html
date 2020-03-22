@@ -95,6 +95,17 @@
                                     {% endif %}
                                     <a href="{% url 'logout' %}" style="background:#00619D; color:#FFF; padding:10px;">Logout</a>
                                     <hr>
+                                    <table>
+                                        <tr>
+                                            <td><img src="{% static 'euphonime/img/mordred_symbol.png' %}" width="30"></td>
+                                            <td style="padding:10px;">{{profile.symbol}}</td>
+                                            <td><a href="" data-toggle="modal" data-target="#release-note">[?]</a></td>
+                                        </tr>
+                                    </table><br>
+                                    {% if profile.symbol %}
+                                    <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#pesan-mordred">Gunakan Simbol</button>
+                                    {% endif %}
+                                    <hr>
                                     <div class="row">
 
                                         <div class="col-sm-6">
@@ -117,7 +128,7 @@
                                         </div>
 
                                         <div class="col-sm-6">
-                                            <div style="font-size:12px;">
+                                            <div style="font-size:12px; padding:10px;">
                                                 <h6>Anime terakhir yang ditonton:</h6><br>
                                                 {% if user_watching %}
                                                 <ul>
@@ -332,6 +343,64 @@
       </div>
     </div>
 
+    <!-- Modal gender-->
+    <div class="modal fade" id="release-note" tabindex="-1" role="dialog"  aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" >Release Note v0.5.45</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="contact-form">
+                <p style="font-size:14px;">Demi lingkungan komunitas yang baik, damai, dan sejahtera baik lahir dan batin,
+                    di versi ini kami membuka fitur baru!
+                    <br>
+                    <img src="{% static 'euphonime/servant/modred-chibi.png' %}" alt="" width="50">
+                    Anak ini bernama Mordred.
+                    <br>
+                    Dia servant sekaligus teman untuk semua user.<br>
+                    <img src="{% static 'euphonime/img/mordred_symbol.png' %}" width="30"> Ini adalah simbol perintah untuknya.<br>
+                    Dengan menggunakan simbol ini, setiap user dapat memberi perintah mutlak kepada Mordred untuk mengirim pesan secara langsung kepada developer tanpa melalui perantara admin.<br><br>
+                    Kami, para developer akan mendengarkan curhatan kalian. Katakan pada kami keinginan kalian, atau saran, agar platform ini terus berjalan dengan baik dan dapat terus menjadi wadah komunitas yang sejahtera, adil, dan makmur untuk para user/anggota komunitas.<br><br>
+                    <b>Simbol Mordred hanya bisa digunakan maksimal 3x</b> sampai di reset pada rilis berikutnya. Gunakan dengan bijak.
+                </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% if profile.symbol %}
+    <div class="modal fade" id="pesan-mordred" tabindex="-1" role="dialog"  aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" >Pesan</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="contact-form">
+                <p style="font-size:12px;">*) Kelengkapan profil akan menjadi prioritas utama para developer. Melengkapi profil memperbesar peluang pesanmu ditanggapi lebih cepat.</p>
+                <form method="post" action="{% url 'mordred' profile.id %}">{% csrf_token %}
+                    <div class="group-in">
+                        <textarea class="form-control" name="mordred"></textarea>
+                    </div>
+                    <div class="group-in text-right">
+                        <button type="submit" class="btn btn-sm btn-primary" style="background:blue;">Kirim (akan menggunakan 1x simbol)</button>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
     {% endblock content %}
 
     {% block extra_js %}
@@ -339,7 +408,7 @@
     <script src="https://cdnjs.com/libraries/Chart.js"></script>
     <script>
         $(document).ready(() => {
-            $('.header__top').hide();
+            $('.header__top').hide();https://www.imdb.com/
         })
     </script>
 

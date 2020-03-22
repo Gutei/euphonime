@@ -1,7 +1,7 @@
 import logging
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from euphonime.models import ProfileUser, UserWatching, UserAnimeScore, Season, Anime, AnimeSeason
+from euphonime.models import ProfileUser, UserWatching, UserAnimeScore, Season, Anime, AnimeSeason, UserMessage
 from django.shortcuts import redirect
 from social_django.models import UserSocialAuth
 from django.db import transaction
@@ -9,6 +9,9 @@ from django.db.models import Count
 from dateutil import parser as ps
 from django.db.models import Q
 from allauth.socialaccount.models import SocialAccount
+
+from euphonime.tasks import send_email_to_user
+
 logger = logging.getLogger(__name__)
 
 @login_required
@@ -96,4 +99,28 @@ def edit_profile(request, id):
         except Exception as e:
             print(e)
             return redirect('profile')
+    return redirect('profile')
+
+@login_required
+def contact_modred(request, id):
+    user = request.user
+    username= user.username
+    sender = 'projecteupho@gmail.com'
+    email = []
+    email.append(user.email)
+    recipients = email
+    subject = "{}, Kamu dapat pesan dari Mordred".format(username)
+
+    if request.POST.get('mordred'):
+        reply = "Pesan anda telah kami terima. Kami akan mendengarkan setiap kritik dan masukan dari kalian. Setelah semuanya diproses, kami akan membalas kembali pesanmu tanpa robot otomatis. Tenang saja, kami sangat membenci spam!<br><br><a href='https://euphonime.com/'>Kembalilah bersenang-senang!!</a>"
+        content = "<img src='https://euphonime.com/static/euphonime/servant/modred-chibi.png' width='100'><br>Mastaa!! Pesan anda kepada developer telah saya sampaikan.<br>Begini kata mereka:<br><div style='padding:10px; border:1px solid #467f8a; border-radius:10px; background-color: #d1ebf0; max-width:400px;'><b>{}</b></div><br>".format(reply)
+        send_email_to_user.apply_async((username, sender, recipients, subject, content),)
+        user_profile = ProfileUser.objects.filter(user=user).first()
+        user_profile.symbol -= 1
+        user_profile.save()
+        user_message = UserMessage(user=user_profile, message=request.POST.get('mordred'))
+        user_message.save()
+
+        return redirect('profile')
+
     return redirect('profile')
