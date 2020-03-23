@@ -38,7 +38,7 @@
                 <div class="video-slider owl-carousel">
                     {% for sn in season_nime %}
 
-                    <div class="col-lg-3 col-sm-6 p-0 this-season" style="width:150px;">
+                    <div class="col-lg-3 col-sm-6 p-0 this-season" style="width:150px; visibility:hidden;">
                         <div class="soccer-item set-bg" data-setbg="{{ sn.image_url }}" onclick="location.href='{% url 'anime' sn.id.hex %}';">
                             <div class="si-tag">{{sn.get_type_display}}</div>
                             <div class="si-text">
@@ -181,7 +181,10 @@
         });
         $('.si-tag').ready(() => {
             setTimeout( function() { $('.load-this-season').hide(); }, 1000 );
-            setTimeout( function() { $('.this-season').show(1000); }, 1000 );
+            setTimeout( function() {
+                $('.this-season').css('visibility', 'visible');
+                $('.this-season').slideDown(1000);
+            }, 1000 );
         })
 
     </script>
