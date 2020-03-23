@@ -107,7 +107,7 @@
 
                     <div class="col-lg-3 col-sm-6 p-0 this-season" style="width:150px; visibility:hidden;">
                         <div class="soccer-item set-bg" data-setbg="{{ sn.image_url }}" onclick="location.href='{% url 'anime' sn.id.hex %}';">
-                            <div class="si-tag">{{sn.get_type_display}}</div>
+                            <div class="si-tag content-sitag">{{sn.get_type_display}}</div>
                             <div class="si-text">
                                 <h6 style="font-size:0.9rem;"><a style="color:#fff;" href="{% url 'anime' sn.id.hex %}">{{ sn.title|truncatechars:18 }}</a></h6>
                             </div>
@@ -246,7 +246,7 @@
         $('.si-tag').ready(() => {
             $('.this-season').hide();
         });
-        $('.si-tag').ready(() => {
+        $('.content-sitag').ready(() => {
             setTimeout( function() { $('.load-this-season').hide(); }, 1000 );
             setTimeout( function() {
                 $('.this-season').slideDown('slow');
