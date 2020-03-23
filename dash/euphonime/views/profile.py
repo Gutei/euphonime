@@ -58,7 +58,7 @@ def profile(request):
 
     score_anime = UserAnimeScore.objects.filter(user=profile)
 
-    context['score_data'] = [
+    l = [
         score_anime.filter(score=10).count(),
         score_anime.filter(score=9).count(),
         score_anime.filter(score=8).count(),
@@ -70,6 +70,7 @@ def profile(request):
         score_anime.filter(score=2).count(),
         score_anime.filter(score=1).count(),
     ]
+    context['score_data'] = l[::-1]
 
     context['user_watching'] = watch_anime.filter(status__in=[UserWatching.WATCHING, UserWatching.HOLDING, UserWatching.FINISHED_WATCHING]).order_by('-updated')[:10]
 
