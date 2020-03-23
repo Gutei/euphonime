@@ -28,15 +28,28 @@
                 </div>
 
             </div>
-            <center>
-                    <div class="load-this-season">
-                        Loading...
-                    </div>
-                </center>
 
             <div class="row">
+
                 <div class="video-slider owl-carousel">
+
+<!--                <center>-->
+<!--                    <div class="load-this-season">-->
+<!--                        <center>-->
+<!--                        Loading...-->
+<!--                        </center>-->
+<!--                    </div>-->
+<!--                </center>-->
                     {% for sn in season_nime %}
+
+                    <div class="col-lg-3 col-sm-6 p-0 load-this-season" style="width:150px;">
+                        <div class="soccer-item set-bg" data-setbg="" onclick="location.href='{% url 'anime' sn.id.hex %}';" style=" background:#efefef;">
+                            <div class="si-tag"></div>
+                            <div class="si-text">
+                                <h6 style="font-size:0.9rem;"><a style="color:#fff;" href="{% url 'anime' sn.id.hex %}">Loading...</a></h6>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="col-lg-3 col-sm-6 p-0 this-season" style="width:150px; visibility:hidden;">
                         <div class="soccer-item set-bg" data-setbg="{{ sn.image_url }}" onclick="location.href='{% url 'anime' sn.id.hex %}';">
@@ -182,13 +195,13 @@
         $('.si-tag').ready(() => {
             setTimeout( function() { $('.load-this-season').hide(); }, 1000 );
             setTimeout( function() {
-                $('.this-season').show(1000);
+                $('.this-season').slideDown('slow');
 
             }, 1000 );
             setTimeout( function() {
                 $('.this-season').css('visibility', 'visible');
 
-            }, 2000 );
+            }, 1000 );
         })
 
     </script>
