@@ -18,6 +18,7 @@
     {% block content %}
 
     {% block extra_css %}
+    <link rel="stylesheet" href="{% static 'euphonime/css/quote-list.css' %}" type="text/css">
         <style>
             body {
                 background: #eaeaea;
@@ -140,17 +141,15 @@
                                     <div class="timeline">
                                       <!-- timeline time label -->
                                       <div class="time-label">
-                                        <span class="bg-red">Quote</span>
+                                        <span class="bg-red"><h5 style="color:#00619D;"><b>Quote</b></h5></span>
                                       </div>
                                         {% if quotes %}
                                           {% for q in quotes %}
                                           <div>
-                                            <i class="fa fa-quote-left"></i>
                                             <div class="timeline-item">
                                               <span class="time" style="color:#fff;"><i class="fas fa-clock"></i> {{q.updated}}</span>
-                                              <h3 style="background:#00619D; color:#fff;" class="timeline-header">{{ character.name }}</h3>
-
-                                              <div class="timeline-body">
+                                              <h3 style="background:#00619D; color:#fff; padding:10px;" class="timeline-header"><i class="fa fa-quote-left"></i> {{ character.name }}</h3>
+                                              <div class="timeline-body" style="padding:10px; margin-top:0;">
                                                   <p class="text-justify">{{q.quote}}</p>
                                               </div>
 
