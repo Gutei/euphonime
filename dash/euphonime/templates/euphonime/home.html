@@ -182,9 +182,13 @@
         $('.si-tag').ready(() => {
             setTimeout( function() { $('.load-this-season').hide(); }, 1000 );
             setTimeout( function() {
-                $('.this-season').css('visibility', 'visible');
                 $('.this-season').show(1000);
+
             }, 1000 );
+            setTimeout( function() {
+                $('.this-season').css('visibility', 'visible');
+
+            }, 2000 );
         })
 
     </script>
