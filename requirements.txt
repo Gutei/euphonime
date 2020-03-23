@@ -39,3 +39,4 @@ gunicorn
 django-celery-results
 celery[redis]
 django-allauth
+django-cookies-samesite
