@@ -43,6 +43,11 @@
                 </div>
 
             </div>
+            <center>
+                <div class="video-slider owl-carousel load-this-season" style="display:none;">
+                    Loading...
+                </div>
+            </center>
 
         </div>
 
@@ -166,6 +171,11 @@
 
     {% block extra_js %}
     <script>
+        setTimeout( function() { $('.load-this-season').show(); } );
+        $(document).ready(() => {
+            setTimeout( function() { $('.load-this-season').hide(); }, 4000 );
+        })
+
     </script>
 
     {% endblock extra_js %}
