@@ -63,6 +63,8 @@ urlpatterns = [
                   # Contact
                   url(r'^contact-&-media-partner/$', views.get_contact, name='contact'),
 
+                  url(r'^sitemap.xml$', views.get_sitemaps, name='sitemaps'),
+
                   url(r'^auth-login/', views.auth_login, name='auth_login'),
 
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL,

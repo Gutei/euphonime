@@ -8,3 +8,4 @@ from .character import *
 from ._footer_content import *
 from ._contact import *
 from .profile import *
+from .sitemaps import *
