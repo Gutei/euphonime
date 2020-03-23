@@ -100,15 +100,15 @@
 
             </div>
 
-            <div class="row">
+            <div class="row content-sitag">
 
-                <div class="video-slider owl-carousel this-season-wrapper" style="visibility:hidden;">
+                <div class="video-slider owl-carousel this-season-wrapper content-sitag" style="visibility:hidden;">
                     {% for sn in season_nime %}
 
                     <div class="col-lg-3 col-sm-6 p-0 this-season" style="width:150px; visibility:hidden;">
-                        <div class="soccer-item set-bg" data-setbg="{{ sn.image_url }}" onclick="location.href='{% url 'anime' sn.id.hex %}';">
+                        <div class="soccer-item set-bg content-sitag" data-setbg="{{ sn.image_url }}" onclick="location.href='{% url 'anime' sn.id.hex %}';">
                             <div class="si-tag content-sitag">{{sn.get_type_display}}</div>
-                            <div class="si-text">
+                            <div class="si-text content-sitag">
                                 <h6 style="font-size:0.9rem;"><a style="color:#fff;" href="{% url 'anime' sn.id.hex %}">{{ sn.title|truncatechars:18 }}</a></h6>
                             </div>
                         </div>
