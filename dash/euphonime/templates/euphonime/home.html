@@ -28,7 +28,7 @@
                 </div>
             </div>
 
-            <div class="row this-season">
+            <div class="row this-season" style="display:none;">
                 <div class="video-slider owl-carousel">
                     {% for sn in season_nime %}
 
@@ -176,6 +176,7 @@
     <script>
         $('.si-tag').ready(() => {
             setTimeout( function() { $('.load-this-season').hide(); }, 3000 );
+            $('.this-season').fadeIn(2000)
         })
 
     </script>
