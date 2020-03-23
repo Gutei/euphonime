@@ -35,10 +35,10 @@
                 </center>
 
             <div class="row">
-                <div class="video-slider owl-carousel this-season" style="display:none;">
+                <div class="video-slider owl-carousel">
                     {% for sn in season_nime %}
 
-                    <div class="col-lg-3 col-sm-6 p-0" style="width:150px">
+                    <div class="col-lg-3 col-sm-6 p-0 this-season" style="width:150px;">
                         <div class="soccer-item set-bg" data-setbg="{{ sn.image_url }}" onclick="location.href='{% url 'anime' sn.id.hex %}';">
                             <div class="si-tag">{{sn.get_type_display}}</div>
                             <div class="si-text">
@@ -177,8 +177,11 @@
     {% block extra_js %}
     <script>
         $('.si-tag').ready(() => {
+            $('.this-season').hide();
+        });
+        $('.si-tag').ready(() => {
             setTimeout( function() { $('.load-this-season').hide(); }, 1000 );
-            setTimeout( function() { $('.this-season').css('display', 'block'); }, 1000 );
+            setTimeout( function() { $('.this-season').show(1000); }, 1000 );
         })
 
     </script>
