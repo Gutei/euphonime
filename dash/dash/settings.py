@@ -56,6 +56,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'django_cookies_samesite.middleware.CookiesSameSite',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -245,4 +246,9 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'projecteupho@gmail.com'
 EMAIL_HOST_PASSWORD = 'eupho2020'
 
-SESSION_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_SAMESITE = 'None'
+
+SESSION_COOKIE_SAMESITE_KEYS = {'euphonime-cookies'}
+
+SESSION_COOKIE_SAMESITE_FORCE_ALL = True
