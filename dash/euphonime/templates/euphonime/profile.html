@@ -40,10 +40,16 @@
                                             <table>
                                                 <tbody>
                                                     <tr>
+                                                        <td>
+                                                            <center><p><a href="{% url 'public_profile' user.username %}" target="_blank">Preview</a></p></center>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
                                                         <td class="left-team">
                                                             <p>{{user.email}}</p>
                                                         </td>
                                                     </tr>
+
                                                     <tr>
                                                         <td class="left-team">
                                                             <p style="font-size:12px;">Tanggal Lahir &emsp;
