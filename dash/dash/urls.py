@@ -39,6 +39,10 @@ urlpatterns = [
                   url(r'^edit-profile/(?P<id>[^/]+)/$', views.edit_profile, name='edit_profile'),
                   url(r'^mordred/(?P<id>[^/]+)/$', views.contact_modred, name='mordred'),
                   url(r'^user/(?P<username>[^/]+)/$', views.public_profile, name='public_profile'),
+                  url(r'^user/page/(?P<id>[^/]+)/$', views.read_story, name='read_story'),
+                  # url(r'^(?P<username>[^/]+)/(?P<id>[^/]+)/$', views.read_story, name='read_story'),
+                  url(r'^create-story/(?P<id>[^/]+)/$', views.create_story, name='create_story'),
+                  url(r'^delete-story/(?P<id>[^/]+)/$', views.delete_story, name='delete_story'),
 
                   # Anime
                   url(r'^anime/(?P<pk>[^/]+)/$', views.get_anime, name='anime'),

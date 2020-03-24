@@ -144,42 +144,49 @@
                                         </div>
                                     </div>
                                     <hr>
-                                    <p style="background:#00619D; color:#FFF; padding:10px;">Tulisan <button><i class="fa fa-pencil"></i></button></p>
+                                    <p style="background:#00619D; color:#FFF; padding:10px;">Tulisan &emsp;<button onclick="$('.stry').css('display', 'block');"><i class="fa fa-pencil"></i></button></p>
                                     <hr>
                                     <div class="row">
-                                        <div class="col-sm-12" style="tulisan-baru">
-                                            <form method="post">
-                                            <textarea></textarea>
+                                        <div class="col-sm-12 stry" style="display:none;">
+                                            <form method="post" action="{% url 'create_story' profile.id %}">{% csrf_token %}
+                                            <textarea name="content"></textarea>
                                                 <br>
                                                 <input type="submit" class="btn btn-sm btn-primary">
                                             </form>
                                             <hr>
                                         </div>
                                         <div class="col-sm-12" style="padding:10px;">
+                                            {% if not story_page %}
                                             <center>
                                             Belum ada tulisan
                                             </center>
+                                            {% endif %}
+                                            {% for us in story_page %}
                                             <div class="text-justify" style="padding:20px; font-size:14px;">
-                                                23 Mar 2020<br>
-                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                                                <a href="#">Read More</a>
+                                                <form method="post" action="{% url 'delete_story' us.id %}">{% csrf_token %}
+                                                    <span>{{us.created}}
+                                                        &emsp;<button type="submit" class="btn btn-sm btn-danger" ><i class="fa fa-trash"></i></button>
+                                                    </span>
+                                                </form>
+                                                <br>
+                                                {{us.content|safe|truncatechars:700}}<a href="{% url 'read_story' us.id.hex %}">Baca Lagi</a>
                                             </div>
-                                            <div class="text-justify" style="padding:20px; font-size:14px;">
-                                                23 Mar 2020<br>
-                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                                                <a href="#">Read More</a>
-                                            </div>
-                                            <div class="text-justify" style="padding:20px; font-size:14px;">
-                                                23 Mar 2020<br>
-                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                                                <a href="#">Read More</a>
-                                            </div>
+                                            {% endfor %}
                                             <center>
-                                            <a href="#">1</a>
-                                            <a href="#">2</a>
-                                            <a href="#">3</a>
-                                                ...
-                                            <a href="#">20</a>
+                                                <div class="more-blog">
+                                                    <span>
+                                                        {% if story_page.has_previous %}
+                                                            <a href="?page={{ story_page.previous_page_number }}"><i class="fa fa-long-arrow-left"></i> Back</a>
+                                                        {% endif %}
+
+                                                        {% if story_page.has_next %}
+                                                            <a href="?page={{ story_page.next_page_number }}"> Next<i class="fa fa-long-arrow-right"></i></a>
+                                                        {% endif %}
+                                                    </span>
+                                                    <span >
+                                                            Page {{ story_page.number }} of {{ story_page.paginator.num_pages }}.
+                                                    </span>
+                                                </div>
                                             </center>
                                         </div>
                                     </div>
