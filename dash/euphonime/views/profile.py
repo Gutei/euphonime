@@ -14,6 +14,8 @@ from allauth.socialaccount.models import SocialAccount
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from euphonime.tasks import send_email_to_user
+from django.utils.text import Truncator
+from django.utils.safestring import mark_safe
 
 logger = logging.getLogger(__name__)
 
@@ -31,7 +33,18 @@ def profile(request):
     logger.debug('AUTHENTICATION FROM SOCIAL MEDIA {}'.format(allauth))
 
     usr_story = UserPost.objects.filter(user=profile).order_by('-created')[:100]
-    paginator = Paginator(usr_story, 3)  # Show 25 contacts per page
+    us_st = []
+    for s in usr_story:
+        release_content = s.content
+        truncated_text = Truncator(release_content).words(150)
+
+        us_st.append({
+            'id': s.id,
+            'story': release_content,
+            'created': s.created,
+        })
+
+    paginator = Paginator(us_st, 1)  # Show 25 contacts per page
     page = request.GET.get('page')
     story_page = paginator.get_page(page)
 
@@ -154,7 +167,7 @@ def public_profile(request, username):
     profile = ProfileUser.objects.filter(user=user).first()
     allauth = SocialAccount.objects.filter(user=user).first()
     usr_story = UserPost.objects.filter(user=profile).order_by('-created')[:100]
-    paginator = Paginator(usr_story, 3)  # Show 25 contacts per page
+    paginator = Paginator(usr_story, 1)  # Show 25 contacts per page
     page = request.GET.get('page')
     story_page = paginator.get_page(page)
 

@@ -140,26 +140,31 @@
                                             {% endif %}
                                             {% for us in story_page %}
                                             <div class="text-justify" style="padding:20px; font-size:14px;">
-                                                <br>
-                                                {{us.content|safe|truncatechars:700}}<a href="{% url 'read_story' us.id.hex %}">Selengkapnya</a>
-                                            </div>
-                                            {% endfor %}
-                                            <center>
-                                                <div class="more-blog">
-                                                    <span>
-                                                        {% if story_page.has_previous %}
-                                                            <a href="?page={{ story_page.previous_page_number }}"><i class="fa fa-long-arrow-left"></i> Back</a>
-                                                        {% endif %}
+                                                {{us.created}}<hr>
+                                                <div class="row">
+                                                    <div class="col-sm-2">
+                                                        <a href="{% url 'read_story' us.id.hex %}" class="btn btn-sm btn-success" style="min-width:100px;">View</a><br>
+                                                    </div>
+                                                    <div class="col-sm-10">
+                                                        <div style="float:right;">
+                                                            <span>
+                                                                {% if story_page.has_previous %}
+                                                                    <a href="?page={{ story_page.previous_page_number }}" class="btn btn-sm btn-primary"><i class="fa fa-long-arrow-left"></i> Lebih Baru</a>
+                                                                {% endif %}
 
-                                                        {% if story_page.has_next %}
-                                                            <a href="?page={{ story_page.next_page_number }}"> Next<i class="fa fa-long-arrow-right"></i></a>
-                                                        {% endif %}
-                                                    </span>
-                                                    <span >
-                                                            Page {{ story_page.number }} of {{ story_page.paginator.num_pages }}.
-                                                    </span>
+                                                                {% if story_page.has_next %}
+                                                                    <a href="?page={{ story_page.next_page_number }}" class="btn btn-sm btn-primary"> Lebih Lama <i class="fa fa-long-arrow-right"></i></a>
+                                                                {% endif %}
+                                                            </span>
+                                                        </div>
+                                                    </div>
                                                 </div>
+                                                {{us.content|safe}}
+                                            </div>
+                                            <center>
+                                                <a href="{% url 'read_story' us.id.hex %}" class="btn btn-sm btn-warning" style="min-width:100px;"> <i class="fa fa-comment"></i> Tulis Komentar</a><br>
                                             </center>
+                                            {% endfor %}
                                         </div>
                                     </div>
 
