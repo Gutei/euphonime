@@ -182,7 +182,10 @@
                                                     </span>
                                                 </form>
                                                 <br>
-                                                {{us.content|safe|truncatechars:700}}<a href="{% url 'read_story' us.id.hex %}">Preview</a>
+                                                {% autoescape off %}
+                                                {{us.content|truncatechars:700}}
+                                                {% endautoescape %}</p>
+                                                <a href="{% url 'read_story' us.id.hex %}">Preview</a>
                                             </div>
                                             {% endfor %}
                                             <center>
