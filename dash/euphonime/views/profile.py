@@ -53,6 +53,10 @@ def profile(request):
 
     context['biodata'] = escape_biod
 
+    #exeption user
+    if profile.user.email == "hixotow831@upcmaill.com":
+        context['biodata'] = biod
+
     watch_anime = UserWatching.objects.filter(user=profile)
 
     context['watch_data'] = [
