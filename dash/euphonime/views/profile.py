@@ -120,15 +120,16 @@ def edit_profile(request, id):
         biodata = request.POST.get('biodata')
         birth_date = request.POST.get('birth_date')
         gender = request.POST.get('gender')
-        photo = request.FILES['photo']
+        photo = request.FILES.get('photo', False)
         if biodata:
+            photo = None
             usr_prof.biodata = biodata
         if birth_date:
             usr_prof.birth_date = ps.parse(birth_date)
         if gender:
             usr_prof.gender = gender
         if photo:
-            usr_prof.photo_profile = photo
+            usr_prof.photo_profile = request.FILES['photo']
         try:
             usr_prof.save()
         except Exception as e:
