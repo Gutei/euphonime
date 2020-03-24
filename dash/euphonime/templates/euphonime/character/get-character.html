@@ -157,14 +157,14 @@
                                           </div>
                                           {% endfor %}
                                         {% else %}
+                                        <br>
                                         <div>
-                                        <i class="fa fa-quote-left"></i>
                                         <div class="timeline-item">
-                                          <span class="time" style="color:#fff;"><i class="fas fa-clock"></i> Unkown</span>
-                                          <h3 style="background:#00619D; color:#fff;" class="timeline-header">{{ character.name }}</h3>
+                                          <span class="time" style="color:#fff;"><i class="fas fa-clock"></i> {{q.updated}}</span>
+                                          <h3 style="background:#00619D; color:#fff; padding:10px;" class="timeline-header"><i class="fa fa-quote-left"></i> {{ character.name }}</h3>
 
                                           <div class="timeline-body" style="height:150px;background:url({% static 'euphonime/img/noquote.png' %}); background-position:center;background-size:cover;">
-                                                <h1>No Quote !!</h1>
+                                                <h1 style="color:gray;">No Quote !!</h1>
                                           </div>
                                         </div>
                                       </div>
