@@ -38,6 +38,7 @@ urlpatterns = [
                   url(r'^profile/', views.profile, name='profile'),
                   url(r'^edit-profile/(?P<id>[^/]+)/$', views.edit_profile, name='edit_profile'),
                   url(r'^mordred/(?P<id>[^/]+)/$', views.contact_modred, name='mordred'),
+                  url(r'^user/(?P<username>[^/]+)/$', views.public_profile, name='public_profile'),
 
                   # Anime
                   url(r'^anime/(?P<pk>[^/]+)/$', views.get_anime, name='anime'),
@@ -63,7 +64,7 @@ urlpatterns = [
                   # Contact
                   url(r'^contact-&-media-partner/$', views.get_contact, name='contact'),
 
-                  url(r'^sitemap.xml$', views.get_sitemaps, name='sitemaps'),
+                  url(r'^sitemap.xml', views.get_sitemaps, name='sitemaps'),
 
                   url(r'^auth-login/', views.auth_login, name='auth_login'),
 

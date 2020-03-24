@@ -1,0 +1,147 @@
+    {% extends "euphonime/index.html" %}
+    {% load static %}
+
+    {% block title %}
+    <title>EuphoNime</title>
+    {% endblock title %}
+
+    {% block extra_css %}
+        <link rel="stylesheet" href="{% static 'euphonime/plugins/daterangepicker/daterangepicker.css' %}">
+    {% endblock extra_css %}
+
+    {% block content %}
+    <!-- Club Section Begin -->
+    <style>
+        body {
+        background: #eaeaea;
+        }
+    </style>
+    <section class="club-section spad" style="padding-top:10px;">
+        <div class="container">
+            <div class="club-content">
+                <div class="row">
+                    <div class="col-lg-3" style="background:#FFFFFF; padding:10px;">
+                        <div class="cc-pic" style="margin-top:20px;">
+                            {% if sosmed_pic %}
+                            <img src="{{sosmed_pic}}" width="100">
+                            {% else %}
+
+                                {% if profile_pic %}
+                                <img src="{{profile_pic}}" alt="" width="100">
+                                    {% else %}
+                                <img src="{% static 'euphonime/img/dolphin.png' %}" alt="" width="100"><br>
+                                {% endif %}
+
+                            {% endif %}
+
+                        </div>
+                        <div class="container" style="margin-top:1em;">
+                            <div class="schedule-text">
+                                        <h4 style="background:#00619D; color:#ffffff; font-size:18px; padding:10px; text-align:center;">{{user.username}}</h4>
+                                        <br>
+                                        <div class="st-table" style="font-size:12px;">
+                                            <table>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="left-team">
+                                                            <p>{{user.email}}</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="left-team">
+                                                            <p style="font-size:12px;">Tanggal Lahir</p>
+                                                            <p>{% if profile.birth_date %}{{profile.birth_date|date:'d F Y'}}{% else %} - {% endif %}</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="left-team">
+                                                            <p style="font-size:12px;">Gender</p>
+                                                            <p>{% if profile.gender %}
+                                                                    {% if profile.gender == 1 %}
+                                                                        M
+                                                                    {% else %}
+                                                                        F
+                                                                    {% endif %}
+                                                                {% else %}
+                                                                -
+                                                                {% endif %}</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-9" style="background:#FFFFFF; border-left:1px solid #00619D;">
+                        <div class="cc-text">
+                            <div class="ct-title">
+                                <hr>
+                                <div>
+                                    {% if sosmed_pic %}
+                                    <img src="{{sosmed_pic}}" width="70">
+                                    {% endif %}
+                                    <div class="row">
+
+                                        <div class="col-sm-6">
+                                            <div style="font-size:12px;">
+                                                <h6>Biodata</h6><br>
+                                                {% if profile.biodata %}
+                                                <p class="text-justify" style="font-size:14px">{% autoescape off %}{{biodata|truncatechars:380}}{% endautoescape %} <a href="" data-toggle="modal" data-target="#biodataReadMore">Cek Lebih</a></p>
+                                                {% else %}
+                                                <div class="row" style="padding:10px">
+                                                <img src="{% static 'euphonime/img/dance2.gif' %}" alt="" width="150px">
+                                                &emsp;
+                                                <span>Biodata Kosong...</span>
+                                                </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div style="font-size:12px; padding:10px;">
+                                                <h6>Anime terakhir yang ditonton:</h6><br>
+                                                {% if user_watching %}
+                                                <ul>
+                                                    {% for a in user_watching %}
+                                                    <li>{{a.anime.title}}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                                {% else %}
+                                                <p>Belum ada anime yang ditonton.</p>
+                                                {% endif %}
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <p style="background:#00619D; color:#FFF; padding:10px;">Status</p>
+                                    <hr>
+                                    <div class="row">
+
+                                        <div class="col-sm-12">
+                                        </div>
+                                        <div class="col-sm-12">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Club Section End -->
+    {% endblock content %}
+
+    {% block extra_js %}
+
+    {% endblock extra_js %}

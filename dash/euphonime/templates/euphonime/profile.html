@@ -144,6 +144,46 @@
                                         </div>
                                     </div>
                                     <hr>
+                                    <p style="background:#00619D; color:#FFF; padding:10px;">Tulisan <button><i class="fa fa-pencil"></i></button></p>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-12" style="tulisan-baru">
+                                            <form method="post">
+                                            <textarea></textarea>
+                                                <br>
+                                                <input type="submit" class="btn btn-sm btn-primary">
+                                            </form>
+                                            <hr>
+                                        </div>
+                                        <div class="col-sm-12" style="padding:10px;">
+                                            <center>
+                                            Belum ada tulisan
+                                            </center>
+                                            <div class="text-justify" style="padding:20px; font-size:14px;">
+                                                23 Mar 2020<br>
+                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                                                <a href="#">Read More</a>
+                                            </div>
+                                            <div class="text-justify" style="padding:20px; font-size:14px;">
+                                                23 Mar 2020<br>
+                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                                                <a href="#">Read More</a>
+                                            </div>
+                                            <div class="text-justify" style="padding:20px; font-size:14px;">
+                                                23 Mar 2020<br>
+                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                                                <a href="#">Read More</a>
+                                            </div>
+                                            <center>
+                                            <a href="#">1</a>
+                                            <a href="#">2</a>
+                                            <a href="#">3</a>
+                                                ...
+                                            <a href="#">20</a>
+                                            </center>
+                                        </div>
+                                    </div>
+                                    <hr>
                                     <p style="background:#00619D; color:#FFF; padding:10px;">Statistik</p>
                                     <hr>
                                     <div class="row">
@@ -159,77 +199,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="club-tab-list">
-                            <div class="row">
-                                <div class="col-lg-12 m-auto">
-                                    <div class="tab-content">
-                                        <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                                            <div class="club-tab-content">
-                                                {% for ch in character %}
-                                                <div class="ct-item">
-                                                    <div class="ci-text">
-                                                        <img style="width:50px;" src="{% if ch.image %}{{ch.image.url}}{% else %}{{ ch.image_url }}{% endif %}" alt="">
-                                                        <div class="row">
-                                                            <h5>{{ch.name}}</h5>
-                                                            <p style="font-size:0.7rem;">({{ch.get_role_display}})</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="ci-text" style="width:200px;float:right;">
-                                                        <img style="width:50px;" src="{% if ch.voice_act.image %}{{ch.voice_act.image.url}}{% else %}{{ ch.voice_act.image_url }}{% endif %}" alt="">
-                                                        <h5>{{ch.voice_act.name}}</h5>
-                                                    </div>
-                                                </div>
-                                                {% endfor %}
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane" id="tabs-2" role="tabpanel">
-                                            <div class="club-tab-content">
-                                                <div class="ct-item">
-                                                    <div class="ci-text">
-                                                        <img src="img/club/p-5.jpg" alt="">
-                                                        <h5>09. John Thompson</h5>
-                                                    </div>
-                                                    <div class="ci-name">Central midfielder</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane" id="tabs-3" role="tabpanel">
-                                            <div class="club-tab-content">
-                                                <div class="ct-item">
-                                                    <div class="ci-text">
-                                                        <img src="img/club/p-1.jpg" alt="">
-                                                        <h5>12. Buddy Peck</h5>
-                                                    </div>
-                                                    <div class="ci-name">Forward</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane" id="tabs-4" role="tabpanel">
-                                            <div class="club-tab-content">
-                                                <div class="ct-item">
-                                                    <div class="ci-text">
-                                                        <img src="img/club/p-1.jpg" alt="">
-                                                        <h5>12. Buddy Peck</h5>
-                                                    </div>
-                                                    <div class="ci-name">Forward</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane" id="tabs-5" role="tabpanel">
-                                            <div class="club-tab-content">
-                                                <div class="ct-item">
-                                                    <div class="ci-text">
-                                                        <img src="img/club/p-3.jpg" alt="">
-                                                        <h5>18. Hanry Edison</h5>
-                                                    </div>
-                                                    <div class="ci-name">Goalkeeper </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
 
                     </div>
 
@@ -406,6 +376,9 @@
     {% block extra_js %}
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
     <script src="https://cdnjs.com/libraries/Chart.js"></script>
+
+    <script src="https://cdn.tiny.cloud/1/1zn4egdiw66btnzwz9jkgk930l7vp0aw270sppxtdms538w9/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>tinymce.init({selector:'textarea'});</script>
     <script>
         $(document).ready(() => {
             $('.header__top').hide();
