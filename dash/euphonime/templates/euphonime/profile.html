@@ -181,13 +181,13 @@
                                                         &emsp;<button type="submit" class="btn btn-sm btn-danger" ><i class="fa fa-trash"></i></button>
                                                     </span>
                                                 </form>
-                                                <br>
-                                                <p>
+                                                <a href="{% url 'read_story' us.id.hex %}">Preview</a>
+
                                                 {% autoescape off %}
                                                 {{us.content|truncatechars:700}}
-                                                {% endautoescape %}</p>
-                                                <a href="{% url 'read_story' us.id.hex %}">Preview</a>
-                                            </div>
+                                                {% endautoescape %}
+
+                                            </div><hr>
                                             {% endfor %}
                                             <center>
                                                 <div class="more-blog">
@@ -200,7 +200,7 @@
                                                             <a href="?page={{ story_page.next_page_number }}"> Next<i class="fa fa-long-arrow-right"></i></a>
                                                         {% endif %}
                                                     </span>
-                                                    <span >
+                                                    <span>
                                                             Page {{ story_page.number }} of {{ story_page.paginator.num_pages }}.
                                                     </span>
                                                 </div>
