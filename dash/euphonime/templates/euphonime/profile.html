@@ -93,7 +93,12 @@
                                 <hr>
                                 <div>
                                     {% if sosmed_pic %}
-                                    <img src="{{sosmed_pic}}" width="70">
+                                    <img class="photo-display" src="{{sosmed_pic}}" width="70">
+                                    <form method="post" action="{% url 'edit_profile' profile.id %}" enctype="multipart/form-data" style="display:none;">
+                                        {% csrf_token %}
+                                        <input type="file" class="photo-profile" name="photo">
+                                        <input type="submit" class="submit-photo">
+                                    </form>
                                     {% else %}
                                         {% if profile_pic %}
                                             <img class="photo-display"  src="{{profile_pic}}" alt="" width="70">
