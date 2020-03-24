@@ -7,6 +7,7 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
+
 def get_anime(request, pk):
     anime = Anime.objects.filter(id=pk).first()
     anime_character = AnimeCharacter.objects.filter(anime=anime)
@@ -61,18 +62,18 @@ def get_anime(request, pk):
         'character': characters,
         'genre': genre,
         'quotes': quote,
-        'ost':ost,
+        'ost': ost,
         'user_rate': user_rate,
-        'rating_counter_1':rating_counter_1,
-        'rating_counter_2':rating_counter_2,
-        'rating_counter_3':rating_counter_3,
-        'rating_counter_4':rating_counter_4,
-        'rating_counter_5':rating_counter_5,
-        'rating_counter_6':rating_counter_6,
-        'rating_counter_7':rating_counter_7,
-        'rating_counter_8':rating_counter_8,
-        'rating_counter_9':rating_counter_9,
-        'rating_counter_10':rating_counter_10,
+        'rating_counter_1': rating_counter_1,
+        'rating_counter_2': rating_counter_2,
+        'rating_counter_3': rating_counter_3,
+        'rating_counter_4': rating_counter_4,
+        'rating_counter_5': rating_counter_5,
+        'rating_counter_6': rating_counter_6,
+        'rating_counter_7': rating_counter_7,
+        'rating_counter_8': rating_counter_8,
+        'rating_counter_9': rating_counter_9,
+        'rating_counter_10': rating_counter_10,
         'status': status,
         'studios': studios,
     }
@@ -95,6 +96,7 @@ def list_anime(request):
     }
     return render(request, template_name, context)
 
+
 @login_required
 def save_rate(request, anime_id, rate):
     profile = ProfileUser.objects.filter(user=request.user).first()
@@ -106,7 +108,7 @@ def save_rate(request, anime_id, rate):
     user_rate = UserAnimeScore.objects.filter(user=profile, anime=anime).first()
 
     if user_rate:
-        return redirect(reverse('anime', args=[anime.id,]))
+        return redirect(reverse('anime', args=[anime.id, ]))
 
     user_rate = UserAnimeScore(user=profile, anime=anime, score=rate)
     user_rate.save()
@@ -114,7 +116,8 @@ def save_rate(request, anime_id, rate):
     user_poll = UserPolls(user=profile, anime=anime, poll=True)
     user_poll.save()
 
-    return redirect(reverse('anime', args=[anime.id,]))
+    return redirect(reverse('anime', args=[anime.id, ]))
+
 
 @login_required
 def save_watching(request, anime_id):
@@ -136,4 +139,4 @@ def save_watching(request, anime_id):
                 user_watching = UserWatching(user=profile, anime=anime, status=int(request.POST.get('status')))
                 user_watching.save()
 
-    return redirect(reverse('anime', args=[anime.id,]))
+    return redirect(reverse('anime', args=[anime.id, ]))
