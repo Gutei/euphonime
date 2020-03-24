@@ -289,12 +289,13 @@
                                                         {% if quotes %}
                                                           {% for q in quotes %}
                                                           <div>
-                                                            <i class="fa fa-quote-left"></i>
                                                             <div class="timeline-item">
-                                                              <span class="time" style="color:#fff;"><i class="fas fa-clock"></i> {{q.updated}}</span>
-                                                              <h3 style="background:#00619D; color:#fff;" class="timeline-header">{{ q.character.name }}</h3>
-
-                                                              <div class="timeline-body">
+                                                                <div class="timeline-header" style=";padding:6px;background:#00619D;">
+                                                                  <h5 style="color:#fff;"><i class="fa fa-quote-left"></i>&emsp;{{ q.character.name }}
+<!--                                                                      <span class="time float-right" style="font-size:14px"><i class="fas fa-clock"></i> {{q.updated}}</span>-->
+                                                                  </h5>
+                                                                </div>
+                                                              <div class="timeline-body" style="padding-top:5px">
                                                                   <p class="text-justify">{{q.quote}}</p>
                                                               </div>
                                                             </div>
@@ -302,23 +303,21 @@
                                                           {% endfor %}
                                                         {% else %}
                                                         <div>
-                                                        <i class="fa fa-quote-left"></i>
                                                         <div class="timeline-item">
-                                                          <span class="time" style="color:#fff;"><i class="fas fa-clock"></i> Unkown</span>
-                                                          <h3 style="background:#00619D; color:#fff;" class="timeline-header"> - </h3>
-
-                                                          <div class="timeline-body" style="height:150px;background:url({% static 'euphonime/img/noquote.png' %}); background-position:center;background-size:cover;">
-                                                                <h1>No Quote !!</h1>
+                                                                <div class="timeline-header" style=";padding:6px 6px;background:#00619D; ">
+                                                                  <h5 style="color:#fff"><i class="fa fa-quote-left"></i>&emsp; -
+<!--                                                                    <span class="time float-right" style="font-size:14px"><i class="fas fa-clock"></i> Unkown </span>-->
+                                                                  </h5>
+                                                                </div>
+                                                                <div class="timeline-body" style="height:150px;background:url({% static 'euphonime/img/noquote.png' %}); background-position:center;background-size:cover;">
+                                                                <h2 style="padding-left:10px;padding-top:5px">No Quote !!</h2>
                                                           </div>
                                                         </div>
                                                       </div>
                                                         {% endif %}
 
-                                                      <!-- END timeline item -->
-                                                      <!-- timeline item -->
                                                     </div>
                                                   </div>
-                                                  <!-- /.col -->
                                                 </div>
                                               </div>
                                     </div>

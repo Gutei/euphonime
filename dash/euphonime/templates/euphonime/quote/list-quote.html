@@ -7,6 +7,9 @@
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'euphonime/css/quote-list.css' %}" type="text/css">
+    <style>
+
+</style>
 {% endblock extra_css %}
 
 
@@ -16,13 +19,7 @@
             <div class="col-lg-12 left-blog-pad">
                 <div class="schedule-text">
                     <div class="section-title sidebar-title">
-                        <img width="100px" src="{% static 'euphonime/img/chitanda.png' %}">
-                    </div>
-                    <div class="timeline" style="margin:0 20px 45px">
-
-                        <div class="time-label">
-                            <h1 style="background:white;padding-bottom:20px">Quotes <b style="color:red;">Terbaru</b></h1>
-                            <div class="row">
+                        <div class="row">
                                 <div class="col-md-8">
 
                                 </div>
@@ -33,6 +30,12 @@
                                 </div>
 
                             </div>
+                        <img width="100px" src="{% static 'euphonime/img/chitanda.png' %}">
+                    </div>
+                    <div class="timeline" style="margin:0 20px 45px">
+
+                        <div class="time-label">
+                            <h2 style="background:white;padding-bottom:20px">Quotes <b style="color:red;">Terbaru</b></h2>
                         </div>
                         {% for q in quotes %}
                             <div>

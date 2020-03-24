@@ -48,3 +48,15 @@ h3 {
   font-weight: bold;
   margin-bottom: .2em;
   color: #95a5a6; }
+
+ .arrow {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 12px;
+  bottom: 25%;
+  height: 0;
+  width: 0;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-right: 20px solid #ecf0f1; }

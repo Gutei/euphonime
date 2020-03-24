@@ -13,12 +13,8 @@
     {% block content %}
     <section class="schedule-section spad">
         <div class="container">
-            <div class="col-lg-12 left-blog-pad">
                     <div class="schedule-text">
-                            <div class="section-title sidebar-title">
-                                <h5>Karakter</h5>
-                            </div>
-                            <div class="row">
+                        <div class="row">
                                 <div class="col-md-8">
 
                                 </div>
@@ -27,6 +23,9 @@
                                     {% include 'euphonime/__includes/__search/__search2.html' %}
                                 {% endblock search %}
                                 </div>
+                            </div>
+                            <div class="section-title sidebar-title">
+                                <h5>Karakter</h5>
                             </div>
                         <div class="st-table table table-hover">
                             <table style="padding: 4px 0;border-bottom: #EBEBEB 1px solid;">
@@ -68,7 +67,6 @@
                             </table>
                         </div>
                     </div>
-            </div>
             <div class="more-blog">
                 <span>
                     {% if characters.has_previous %}
