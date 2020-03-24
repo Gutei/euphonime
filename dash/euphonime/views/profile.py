@@ -111,17 +111,18 @@ def edit_profile(request, id):
         biodata = request.POST.get('biodata')
         birth_date = request.POST.get('birth_date')
         gender = request.POST.get('gender')
+        photo = request.FILES['photo']
         if biodata:
             usr_prof.biodata = biodata
         if birth_date:
             usr_prof.birth_date = ps.parse(birth_date)
         if gender:
-            print(gender)
             usr_prof.gender = gender
+        if photo:
+            usr_prof.photo_profile = photo
         try:
             usr_prof.save()
         except Exception as e:
-            print(e)
             return redirect('profile')
     return redirect('profile')
 
@@ -182,6 +183,9 @@ def public_profile(request, username):
 
             context['sosmed_pic'] = image_url
 
+    if profile.photo_profile:
+        context['profile_pic'] = profile.photo_profile.url
+
     context['user_watching'] = UserWatching.objects.filter(
         status__in=[UserWatching.WATCHING, UserWatching.HOLDING, UserWatching.FINISHED_WATCHING]).order_by('-updated')[
                                :10]
@@ -205,7 +209,6 @@ def create_story(request, id):
                     content=content,
                 )
             except Exception as e:
-                print(e)
                 return redirect('profile')
     return redirect('profile')
 
@@ -214,7 +217,6 @@ def create_story(request, id):
 @transaction.atomic
 def delete_story(request, id):
     usr_story = UserPost.objects.filter(id=id).first()
-    print(usr_story)
     if not usr_story:
         return redirect('finish_signup')
 
@@ -222,7 +224,6 @@ def delete_story(request, id):
         try:
             usr_story.delete()
         except Exception as e:
-            print(e)
             return redirect('profile')
     return redirect('profile')
 
@@ -233,6 +234,7 @@ def read_story(request, id):
     user = usr_story.user.user
     social = UserSocialAuth.objects.filter(user=user).first()
     allauth = SocialAccount.objects.filter(user=user).first()
+    profile = ProfileUser.objects.filter(user=user).first()
 
     logger.debug('AUTHENTICATION FROM SOCIAL MEDIA {}'.format(allauth))
 

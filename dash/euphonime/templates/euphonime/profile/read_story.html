@@ -5,6 +5,21 @@
     <title>EuphoNime</title>
     {% endblock title %}
 
+    {% block site_logo %}
+
+    {% if sosmed_pic %}
+    <meta property="og:image" content="{{sosmed_pic}}">
+    {% else %}
+        {% if profile_pic %}
+            <meta property="og:image" content="{{profile_pic}}">
+        {% else %}
+            <meta property="og:image" content="{% static 'euphonime/img/anonymous.jpg' %}">
+        {% endif %}
+    {% endif %}
+
+    <meta name="description" content="{{story.content|safe|truncatechars:400}}" />
+    {% endblock site_logo %}
+
     {% block extra_css %}
         <link rel="stylesheet" href="{% static 'euphonime/plugins/daterangepicker/daterangepicker.css' %}">
     {% endblock extra_css %}
@@ -22,17 +37,19 @@
                 <div class="row">
                     <div class="col-lg-3" style="background:#FFFFFF; padding:10px;">
                         <div class="cc-pic" style="margin-top:20px;">
-                            {% if profile_pic %}
-                            <img src="{{profile_pic}}" alt="" width="100">
+                            {% if sosmed_pic %}
+                            <img src="{{sosmed_pic}}" width="70">
                             {% else %}
-                            <img src="{% static 'euphonime/img/dolphin.png' %}" alt="" width="100"><br>
-<!--                            <p style="padding:3px; border:1px solid #f5e79f; background:rgba(252, 239, 169, 0.5); color: #c9b755;">halo mastaa....!!</p>-->
-                            <div class="alert alert-warning alert-dismissible fade show" role="alert" style="font-size:12px;">
-                              Mastaa...! Lengkapi profilenya!
-                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
+                                {% if profile_pic %}
+                                    <img src="{{profile_pic}}" alt="" width="70">
+                                {% else %}
+                                    <img class="photo-display" src="{% static 'euphonime/img/anonymous.jpg' %}" alt="" width="70">
+                                    <form method="post" action="{% url 'edit_profile' profile.id %}" enctype="multipart/form-data" style="display:none;">
+                                        {% csrf_token %}
+                                        <input type="file" class="photo-profile" name="photo">
+                                        <input type="submit" class="submit-photo">
+                                    </form>
+                                {% endif %}
                             {% endif %}
 
                         </div>

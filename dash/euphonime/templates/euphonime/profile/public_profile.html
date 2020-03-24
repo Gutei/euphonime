@@ -5,6 +5,20 @@
     <title>EuphoNime</title>
     {% endblock title %}
 
+    {% block site_logo %}
+    {% if sosmed_pic %}
+    <meta property="og:image" content="{{sosmed_pic}}">
+    {% else %}
+        {% if profile_pic %}
+            <meta property="og:image" content="{{profile_pic}}">
+        {% else %}
+            <meta property="og:image" content="{% static 'euphonime/img/anonymous.jpg' %}">
+        {% endif %}
+    {% endif %}
+
+    <meta name="description" content="Bergabunglah bersama {{user.username}} di EuphoNime." />
+    {% endblock site_logo %}
+
     {% block extra_css %}
         <link rel="stylesheet" href="{% static 'euphonime/plugins/daterangepicker/daterangepicker.css' %}">
     {% endblock extra_css %}
@@ -29,7 +43,7 @@
                                 {% if profile_pic %}
                                 <img src="{{profile_pic}}" alt="" width="100">
                                     {% else %}
-                                <img src="{% static 'euphonime/img/dolphin.png' %}" alt="" width="100"><br>
+                                <img src="{% static 'euphonime/img/anonymous.jpg' %}" alt="" width="100"><br>
                                 {% endif %}
 
                             {% endif %}
@@ -81,9 +95,6 @@
                             <div class="ct-title">
                                 <hr>
                                 <div>
-                                    {% if sosmed_pic %}
-                                    <img src="{{sosmed_pic}}" width="70">
-                                    {% endif %}
                                     <div class="row">
 
                                         <div class="col-sm-6">
@@ -129,13 +140,8 @@
                                             {% endif %}
                                             {% for us in story_page %}
                                             <div class="text-justify" style="padding:20px; font-size:14px;">
-                                                <form method="post" action="{% url 'delete_story' us.id %}">{% csrf_token %}
-                                                    <span>{{us.created}}
-                                                        &emsp;<button type="submit" class="btn btn-sm btn-danger" ><i class="fa fa-trash"></i></button>
-                                                    </span>
-                                                </form>
                                                 <br>
-                                                {{us.content|safe|truncatechars:700}}<a href="{% url 'read_story' us.id.hex %}">Baca Lagi</a>
+                                                {{us.content|safe|truncatechars:700}}<a href="{% url 'read_story' us.id.hex %}">Selengkapnya</a>
                                             </div>
                                             {% endfor %}
                                             <center>

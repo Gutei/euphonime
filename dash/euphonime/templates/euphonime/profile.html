@@ -22,9 +22,6 @@
                 <div class="row">
                     <div class="col-lg-3" style="background:#FFFFFF; padding:10px;">
                         <div class="cc-pic" style="margin-top:20px;">
-                            {% if profile_pic %}
-                            <img src="{{profile_pic}}" alt="" width="100">
-                            {% else %}
                             <img src="{% static 'euphonime/servant/modred-chibi.png' %}" alt="" width="100"><br>
 <!--                            <p style="padding:3px; border:1px solid #f5e79f; background:rgba(252, 239, 169, 0.5); color: #c9b755;">halo mastaa....!!</p>-->
                             <div class="alert alert-warning alert-dismissible fade show" role="alert" style="font-size:12px;">
@@ -33,7 +30,6 @@
                                 <span aria-hidden="true">&times;</span>
                               </button>
                             </div>
-                            {% endif %}
 
                         </div>
                         <div class="container" style="margin-top:1em;">
@@ -92,6 +88,17 @@
                                 <div>
                                     {% if sosmed_pic %}
                                     <img src="{{sosmed_pic}}" width="70">
+                                    {% else %}
+                                        {% if profile_pic %}
+                                            <img src="{{profile_pic}}" alt="" width="70">
+                                        {% else %}
+                                            <img class="photo-display" src="{% static 'euphonime/img/anonymous.jpg' %}" alt="" width="70">
+                                            <form method="post" action="{% url 'edit_profile' profile.id %}" enctype="multipart/form-data" style="display:none;">
+                                                {% csrf_token %}
+                                                <input type="file" class="photo-profile" name="photo">
+                                                <input type="submit" class="submit-photo">
+                                            </form>
+                                        {% endif %}
                                     {% endif %}
                                     <a href="{% url 'logout' %}" style="background:#00619D; color:#FFF; padding:10px;">Logout</a>
                                     <hr>
@@ -149,7 +156,7 @@
                                     <div class="row">
                                         <div class="col-sm-12 stry" style="display:none;">
                                             <form method="post" action="{% url 'create_story' profile.id %}">{% csrf_token %}
-                                            <textarea name="content"></textarea>
+                                            <textarea name="content" placeholder="Disini kamu bisa membuat thread..."></textarea>
                                                 <br>
                                                 <input type="submit" class="btn btn-sm btn-primary">
                                             </form>
@@ -169,7 +176,7 @@
                                                     </span>
                                                 </form>
                                                 <br>
-                                                {{us.content|safe|truncatechars:700}}<a href="{% url 'read_story' us.id.hex %}">Baca Lagi</a>
+                                                {{us.content|safe|truncatechars:700}}<a href="{% url 'read_story' us.id.hex %}">Preview</a>
                                             </div>
                                             {% endfor %}
                                             <center>
@@ -389,6 +396,14 @@
     <script>
         $(document).ready(() => {
             $('.header__top').hide();
+
+            $('.photo-display').click(() => {
+                $('.photo-profile').click();
+            });
+
+            $('.photo-profile').change(() => {
+                $('.submit-photo').click();
+            });
         })
     </script>
 
