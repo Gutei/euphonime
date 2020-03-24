@@ -1,4 +1,5 @@
 import logging
+import re
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from euphonime.models import ProfileUser, UserWatching, UserAnimeScore, Season, Anime, AnimeSeason, UserMessage
@@ -46,6 +47,11 @@ def profile(request):
 
     if profile.photo_profile:
         context['profile_pic'] = profile.photo_profile.url
+
+    biod = profile.biodata
+    escape_biod = re.sub(r'<script.+?</script>', '', biod, flags=re.DOTALL)
+
+    context['biodata'] = escape_biod
 
     watch_anime = UserWatching.objects.filter(user=profile)
 
