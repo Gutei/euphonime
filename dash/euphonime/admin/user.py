@@ -1,5 +1,5 @@
 from django.contrib import admin
-from euphonime.models import ProfileUser, UserWatching, UserAnimeScore, UserPolls, UserMessage
+from euphonime.models import ProfileUser, UserWatching, UserAnimeScore, UserPolls, UserMessage, UserPost
 
 class ScoreInline(admin.TabularInline):
     model = UserAnimeScore
@@ -55,3 +55,16 @@ class UserMessageAdmin(admin.ModelAdmin):
         return obj.user.user.email
     get_email.admin_order_field = 'email'
     get_email.short_description = 'Email'
+
+
+@admin.register(UserPost, site=admin.site)
+class UserPostAdmin(admin.ModelAdmin):
+    list_display = ('get_email', 'created')
+    search_fields = ('get_email',)
+    list_filter = ('created',)
+    list_per_page = 10
+
+    def get_email(self, obj):
+        return obj.user.user.email
+    get_email.admin_order_field = 'user'
+    get_email.short_description = 'User'
