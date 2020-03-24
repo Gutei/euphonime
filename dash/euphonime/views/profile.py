@@ -1,6 +1,6 @@
 import logging
 import re
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from euphonime.models import ProfileUser, UserWatching, UserAnimeScore, Season, Anime, AnimeSeason, UserMessage
 from django.shortcuts import redirect
@@ -10,6 +10,7 @@ from django.db.models import Count
 from dateutil import parser as ps
 from django.db.models import Q
 from allauth.socialaccount.models import SocialAccount
+from django.contrib.auth.models import User
 
 from euphonime.tasks import send_email_to_user
 
@@ -135,3 +136,34 @@ def contact_modred(request, id):
         return redirect('profile')
 
     return redirect('profile')
+
+
+
+@login_required
+def public_profile(request, username):
+    user = get_object_or_404(User, username=username)
+    profile = ProfileUser.objects.filter(user=user).first()
+    allauth = SocialAccount.objects.filter(user=user).first()
+
+    biod = profile.biodata
+    if biod:
+        escape_biod = re.sub(r'<script.+?</script>', '', biod, flags=re.DOTALL)
+    else:
+        escape_biod = ""
+
+    context = {
+        'profile': profile,
+        'user': user,
+        'biodata': escape_biod,
+    }
+
+    if allauth:
+        if "picture" in allauth.extra_data:
+            image_url = allauth.extra_data['picture']
+            logger.debug('GET PROFILE PIC {}'.format(image_url))
+
+            context['sosmed_pic'] = image_url
+
+    context['user_watching'] = UserWatching.objects.filter(status__in=[UserWatching.WATCHING, UserWatching.HOLDING, UserWatching.FINISHED_WATCHING]).order_by('-updated')[:10]
+
+    return render(request, 'euphonime/public_profile.html', context)

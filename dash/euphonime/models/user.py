@@ -123,3 +123,14 @@ class UserMessage(models.Model):
     class Meta:
         db_table = 'user_messages'
         verbose_name = 'Pesan Untuk Developer'
+
+
+class UserPost(models.Model):
+    id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey('ProfileUser', null=True, blank=True, on_delete=models.CASCADE)
+    content = RichTextUploadingField(blank=True, null=True,)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'user_posts'
