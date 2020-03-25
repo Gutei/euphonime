@@ -197,7 +197,7 @@ def public_profile(request, username):
         context['profile_pic'] = profile.photo_profile.url
 
     context['user_watching'] = UserWatching.objects.filter(
-        status__in=[UserWatching.WATCHING, UserWatching.HOLDING, UserWatching.FINISHED_WATCHING], user=user).order_by('-updated')[
+        status__in=[UserWatching.WATCHING, UserWatching.HOLDING, UserWatching.FINISHED_WATCHING], user=profile).order_by('-updated')[
                                :10]
 
     return render(request, 'euphonime/profile/public_profile.html', context)
