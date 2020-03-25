@@ -32,7 +32,7 @@ def profile(request):
     allauth = SocialAccount.objects.filter(user=user).first()
     logger.debug('AUTHENTICATION FROM SOCIAL MEDIA {}'.format(allauth))
 
-    usr_story = UserPost.objects.filter(user=profile).order_by('-created')[:100]
+    usr_story = UserPost.objects.filter(user=profile).order_by('-updated')[:100]
     us_st = []
     for s in usr_story:
         release_content = s.content
@@ -42,6 +42,7 @@ def profile(request):
             'id': s.id,
             'story': release_content,
             'created': s.created,
+            'updated': s.updated,
         })
 
     paginator = Paginator(us_st, 1)  # Show 25 contacts per page
@@ -271,3 +272,18 @@ def read_story(request, id):
         context['profile_pic'] = usr_story.user.photo_profile.url
 
     return render(request, 'euphonime/profile/read_story.html', context)
+
+@login_required
+@transaction.atomic
+def update_story(request, id):
+    old_story = get_object_or_404(UserPost, id=id)
+
+    if request.method == 'POST':
+        content = request.POST.get('content')
+        old_story.content = content
+        if content:
+            try:
+                old_story.save()
+            except Exception as e:
+                return redirect('profile')
+    return redirect('profile')

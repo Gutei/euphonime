@@ -43,6 +43,7 @@ urlpatterns = [
                   # url(r'^(?P<username>[^/]+)/(?P<id>[^/]+)/$', views.read_story, name='read_story'),
                   url(r'^create-story/(?P<id>[^/]+)/$', views.create_story, name='create_story'),
                   url(r'^delete-story/(?P<id>[^/]+)/$', views.delete_story, name='delete_story'),
+                  url(r'^update-story/(?P<id>[^/]+)/$', views.update_story, name='update_story'),
 
                   # Anime
                   url(r'^anime/(?P<pk>[^/]+)/$', views.get_anime, name='anime'),

@@ -170,7 +170,7 @@
                                         </div>
                                     </div>
                                     <hr>
-                                    <p style="background:#00619D; color:#FFF; padding:10px;">Tulisan &emsp;<button onclick="$('.stry').css('display', 'block');"><i class="fa fa-pencil"></i></button></p>
+                                    <p style="background:#00619D; color:#FFF; padding:10px;">Tulisan &emsp;<button class="bt-new-thread">New <i class="fa fa-pencil"></i></button></p>
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-12 stry" style="display:none;">
@@ -188,19 +188,30 @@
                                             </center>
                                             {% endif %}
                                             {% for us in story_page %}
-                                            <div class="text-justify" style="padding:20px; font-size:14px;">
+                                            <div class="col-sm-12 stryiedit" style="display:none;">
+                                                <form method="post" action="{% url 'update_story' us.id %}">{% csrf_token %}
+                                                    <textarea name="content" class="mce">{{us.story}}</textarea>
+                                                    <br>
+                                                        <button class="btn btn-sm bt-cancel-thread btn-success" type="submit" style="float:right; background: green;">Update</button>
+                                                        <a class="btn btn-sm bt-cancel-thread btn-danger" style="float:right; margin-right:10px; color:white;">Batal</a>
+                                                </form>
+                                            </div>
+                                            <div class="text-justify show-threads" style="padding:20px; font-size:14px;">
                                                 <div class="row">
                                                     <div class="col-6">
                                                         <form method="post" action="{% url 'delete_story' us.id %}">{% csrf_token %}
-                                                            <span>{{us.created}}
+                                                            <span>{{us.updated|date:'d M Y H:m'}}
                                                                 &emsp;<button type="submit" class="btn btn-sm btn-danger" ><i class="fa fa-trash"></i></button>
                                                             </span>
                                                         </form>
                                                     </div>
                                                     <div class="col-6">
                                                       <a href="{% url 'read_story' us.id.hex %}" class="btn btn-sm btn-success" style="float:right;">Preview</a>
+
+                                                      <a class="btn btn-sm btn-warning bt-edit-thread" data-toggle="modal" data-target="#edit-thread" style="float:right; margin-right:10px;">Edit <i class="fa fa-pencil"></i></a>
                                                     </div>
                                                 </div>
+
                                                 <p class="non-mce">
 
                                                     {% autoescape off %}
@@ -209,6 +220,8 @@
                                                 </p>
                                             </div>
                                             {% endfor %}
+                                            <br><br>
+                                            <hr>
                                             <center>
                                                 <div>
                                                     <span>
@@ -420,9 +433,11 @@
 
     <script src="https://cdn.tiny.cloud/1/1zn4egdiw66btnzwz9jkgk930l7vp0aw270sppxtdms538w9/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script>tinymce.init({selector:'.mce',
-                          plugins: "print preview powerpaste casechange importcss searchreplace autolink autosave save directionality visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap linkchecker emoticons advtable"
+                          plugins: "print preview powerpaste casechange importcss searchreplace autolink autosave save directionality visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap linkchecker emoticons advtable",
+                          height: 500,
                           });
     </script>
+
     <script>
         $(document).ready(() => {
             $('.header__top').hide();
@@ -434,6 +449,30 @@
             $('.photo-profile').change(() => {
                 $('.submit-photo').click();
             });
+
+            $('.bt-edit-thread').click(() => {
+                $('.stryiedit').show();
+                $('.stry').hide();
+                $('.show-threads').hide();
+            });
+
+            $('.bt-new-thread').click(() => {
+                $('.stry').css('display', 'block');
+                $('.stry').show();
+                $('.stryiedit').hide();
+                $('.stry').show();
+                $('.show-threads').show();
+            });
+
+            $('.bt-cancel-thread').click(() => {
+                $('.stry').css('display', 'none');
+                $('.stry').hide();
+                $('.stryiedit').hide();
+                $('.show-threads').show();
+            });
+
+
+
         })
     </script>
 
