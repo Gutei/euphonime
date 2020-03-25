@@ -175,7 +175,7 @@
                                     <div class="row">
                                         <div class="col-sm-12 stry" style="display:none;">
                                             <form method="post" action="{% url 'create_story' profile.id %}">{% csrf_token %}
-                                            <textarea required class="mce" name="content" placeholder="Disini kamu bisa membuat thread..."></textarea>
+                                            <textarea class="mce" name="content" placeholder="Disini kamu bisa membuat thread..."></textarea>
                                                 <br>
                                                 <input type="submit" class="btn btn-sm btn-primary">
                                             </form>
