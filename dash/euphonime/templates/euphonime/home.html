@@ -14,11 +14,23 @@
 
 
     {% block content %}
+    <center>
+
+    </center>
     <section class="soccer-section">
         <div class="container" style="background:#FFFFFF;">
             <center>
-            <img src="{% static 'euphonime/img/anime-banner.jpg' %}" height="120">
-            <img src="{% static 'euphonime/img/anime-banner2.gif' %}" height="120">
+            <div class="row" style="margin-top:10px;">
+                <div class="col-sm-6" style="height:120px; width:100%; background:url({% static 'euphonime/img/who.jpg' %}); background-position:center; background-size: contain; background-repeat:no-repeat;">
+                    <img src="">
+                </div>
+                <div class="col-sm-6" style="height:120px; width:100%; padding:20px;">
+                    <h4 style="color:#5cb4f2"><b>#StayAtHome</b> with us</h4>
+                    <img src="{% static 'euphonime/img/logo.png' %}" height="50">
+                </div>
+            </div>
+<!--            <img src="{% static 'euphonime/img/anime-banner.jpg' %}" height="120">-->
+<!--            <img src="{% static 'euphonime/img/anime-banner2.gif' %}" height="120">-->
             </center><br>
             <div class="row this-season-row">
                 <div class="col-lg-12 p-0">
