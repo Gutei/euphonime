@@ -275,12 +275,26 @@ def read_story(request, id):
     allauth = SocialAccount.objects.filter(user=user).first()
     profile = ProfileUser.objects.filter(user=user).first()
 
+    img = re.search('<img src="([^"]+)"'[4:], usr_story.content)
+    display_img = None
+    img_thread_url = None
+    no_prefix = None
+    if img:
+        display_img = img.group().strip('"')
+        if display_img.split('"')[0] == " src=":
+            no_prefix = display_img.split('"')[1]
+            if no_prefix.split(':')[0] == 'https' or no_prefix.split(':')[0] == 'http':
+                img_thread_url = no_prefix
+            else:
+                img_thread_url = None
+
     logger.debug('AUTHENTICATION FROM SOCIAL MEDIA {}'.format(allauth))
 
     context = {
         # 'author': username,
         'profile': profile,
         'story': usr_story,
+        'img_thread_url': img_thread_url,
     }
 
     if social:

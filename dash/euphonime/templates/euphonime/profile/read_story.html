@@ -7,14 +7,18 @@
 
     {% block site_logo %}
 
-    {% if sosmed_pic %}
-    <meta property="og:image" content="{{sosmed_pic}}">
-    {% else %}
-        {% if profile_pic %}
-            <meta property="og:image" content="{{profile_pic}}">
+    {% if not img_thread_url %}
+        {% if sosmed_pic %}
+        <meta property="og:image" content="{{sosmed_pic}}">
         {% else %}
-            <meta property="og:image" content="{% static 'euphonime/img/anonymous.jpg' %}">
+            {% if profile_pic %}
+                <meta property="og:image" content="{{profile_pic}}">
+            {% else %}
+                <meta property="og:image" content="{% static 'euphonime/img/anonymous.jpg' %}">
+            {% endif %}
         {% endif %}
+    {% else %}
+    <meta property="og:image" content="{{img_thread_url}}">
     {% endif %}
     <meta name="description" content="{{story.content|striptags|safe|truncatechars:130}}" />
 
