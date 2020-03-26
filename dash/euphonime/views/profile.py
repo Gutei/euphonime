@@ -168,8 +168,32 @@ def public_profile(request, username):
     user = get_object_or_404(User, username=username)
     profile = ProfileUser.objects.filter(user=user).first()
     allauth = SocialAccount.objects.filter(user=user).first()
-    usr_story = UserPost.objects.filter(user=profile).order_by('-created')[:100]
-    paginator = Paginator(usr_story, 1)  # Show 25 contacts per page
+    usr_story = UserPost.objects.filter(user=profile).order_by('-updated')[:100]
+
+    ust_parse = []
+
+    for u_p in usr_story:
+        img = re.search('src="([^"]+)"'[4:], u_p.content)
+        display_img = None
+        img_thread_url = None
+        if img:
+            display_img = img.group().strip('"')
+            if display_img.split(':')[0] == 'https' or display_img.split(':')[0] == 'http':
+                img_thread_url = display_img
+            else:
+                img_thread_url = None
+
+        print(img_thread_url)
+
+        ust_parse.append({
+            'id': u_p.id,
+            'created': u_p.created,
+            'content': u_p.content,
+            'updated': u_p.updated,
+            'img': None if not img_thread_url else img_thread_url,
+        })
+
+    paginator = Paginator(ust_parse, 3)  # Show 25 contacts per page
     page = request.GET.get('page')
     story_page = paginator.get_page(page)
 
