@@ -10,6 +10,12 @@
         a:hover {
           color: red;
         }
+
+        .box-anime {
+        -webkit-box-shadow: 0px 4px 5px -4px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px 4px 5px -4px rgba(0,0,0,0.75);
+        box-shadow: 0px 4px 5px -4px rgba(0,0,0,0.75);
+        }
        </style>
     {% endblock extra_css %}
 
@@ -37,16 +43,16 @@
                             <div class="row">
                                 {% for a in animes %}
                                     <div class="col-lg-4 col-md-6" >
-                                        <div class="news-item border" style="padding:5px;">
-                                            <div class="ct-title" style="border-bottom: 1.5px solid #f2f2f2; padding:4px">
+                                        <div class="news-item border box-anime" style="padding:15px; border-radius:10px;">
+                                            <div class="ct-title" style="border-bottom: 1px solid #f2f2f2; padding:4px">
                                                 <a style="color: black; text-decoration:none;" href="{% url 'anime' a.id.hex %}">{{a.title|truncatechars:35}}</a>
                                             </div>
 
-                                           <div class="ni-pic" style="width:100px; height:130px; background:url('{% if a.image %}{{a.image.url}}{% else %}{{a.image_url}}{% endif %}'); background-size:cover;"
+                                           <a href="{% url 'anime' a.id.hex %}"><div class="ni-pic" style="width:100px; height:130px; margin-top:5px; background:url('{% if a.image %}{{a.image.url}}{% else %}{{a.image_url}}{% endif %}'); background-size:cover; background-position:center;"
                                                 onclick="location.href='{% url 'anime' a.id.hex %}';">
-                                           </div>
-                                        <div class="ni-text text-justify">
-                                                {{a.description|striptags|truncatechars:120}}
+                                           </div></a>
+                                        <div class="ni-text text-justify" style="font-size:13px;">
+                                                {{a.description|striptags|safe|truncatechars:120}}
                                             <ul>
                                                 <li><i class="fa fa-film"></i>&emsp;{{a.get_type_display}}</li>
                                             </ul>

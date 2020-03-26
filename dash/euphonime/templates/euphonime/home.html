@@ -112,13 +112,13 @@
                         {% for sn in new_anime %}
                         <div class="col-lg-12" >
                             <div class="news-item"style="border-bottom: 1.5px solid #f2f2f2;">
-                                <div class="ni-pic" style="width:100px; height:130px; background:url('{% if sn.image %}{{sn.image.url}}{% else %}{{ sn.image_url }}{% endif %}'); background-size:cover;"
+                                <div class="ni-pic" style="width:100px; height:130px; background:url('{% if sn.image %}{{sn.image.url}}{% else %}{{ sn.image_url }}{% endif %}'); background-size:cover; background-position:center; background-repeat:no-repeat; cursor:pointer;"
                                 onclick="location.href='{% url 'anime' sn.id.hex %}';">
                                 </div>
                                 <div class="ni-text">
                                     <h5><a href="{% url 'anime' sn.id.hex %}">{{sn.title}}</a></h5>
 
-                                    <p class="text-justify">
+                                    <p class="text-justify" style="font-size:13px;">
                                         {{sn.description|striptags|safe|truncatechars:350}}
                                     </p>
 
@@ -137,7 +137,7 @@
                     </div>
                     <div class="row">
                         {% for a in article %}
-                        <div class="col-md-6">
+                        <div class="col-md-6" style="cursor:pointer;">
                             <div class="news-item popular-item set-bg" data-setbg="{{a.image.url}}" onclick="location.href='{% url 'article' a.id.hex %}';">
                                 <div class="ni-tag tenis">{{a.title}}</div>
                                 <div class="ni-text">
