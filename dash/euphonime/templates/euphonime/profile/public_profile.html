@@ -109,7 +109,11 @@
                                         </div>
 
                                         <div class="col-sm-6">
+
                                             <div style="font-size:12px; padding:10px;">
+                                                {% if claimed_watch %}
+                                                <p style="font-size:14px; color:gray;"><i>"{{user.username}} mengklaim telah menonton sebanyak {{claimed_watch}} anime"</i></p>
+                                                {% endif %}
                                                 <h6>Anime terakhir yang ditonton:</h6><br>
                                                 {% if user_watching %}
                                                 <ul>

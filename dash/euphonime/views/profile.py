@@ -169,6 +169,7 @@ def public_profile(request, username):
     profile = ProfileUser.objects.filter(user=user).first()
     allauth = SocialAccount.objects.filter(user=user).first()
     usr_story = UserPost.objects.filter(user=profile).order_by('-updated')[:100]
+    claimed_watch = UserWatching.objects.filter(user=profile).count()
 
     ust_parse = []
 
@@ -225,6 +226,8 @@ def public_profile(request, username):
     context['user_watching'] = UserWatching.objects.filter(
         status__in=[UserWatching.WATCHING, UserWatching.HOLDING, UserWatching.FINISHED_WATCHING], user=profile).order_by('-updated')[
                                :10]
+
+    context['claimed_watch'] = claimed_watch if claimed_watch > 0 else None
 
     return render(request, 'euphonime/profile/public_profile.html', context)
 
