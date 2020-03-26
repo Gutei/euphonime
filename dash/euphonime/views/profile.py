@@ -183,8 +183,6 @@ def public_profile(request, username):
             else:
                 img_thread_url = None
 
-        print(img_thread_url)
-
         ust_parse.append({
             'id': u_p.id,
             'created': u_p.created,
