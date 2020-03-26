@@ -119,7 +119,7 @@
                                     <h5><a href="{% url 'anime' sn.id.hex %}">{{sn.title}}</a></h5>
 
                                     <p class="text-justify">
-                                        {{sn.description|striptags|truncatechars:350}}
+                                        {{sn.description|striptags|safe|truncatechars:350}}
                                     </p>
 
                                 </div>
