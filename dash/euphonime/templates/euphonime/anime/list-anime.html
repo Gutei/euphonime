@@ -38,17 +38,15 @@
                                 {% for a in animes %}
                                     <div class="col-lg-4 col-md-6" >
                                         <div class="news-item border" style="padding:5px;">
-                                            <div class="ct-title" style="border-bottom: 1.5px solid #f2f2f2;">
-                                                <a style="color: black; text-decoration:none;" href="{% url 'anime' a.id.hex %}">{{a.title|truncatechars:40}}</a>
+                                            <div class="ct-title" style="border-bottom: 1.5px solid #f2f2f2; padding:4px">
+                                                <a style="color: black; text-decoration:none;" href="{% url 'anime' a.id.hex %}">{{a.title|truncatechars:35}}</a>
                                             </div>
 
-                                        <div class="ni-pic">
-                                            <a href="{% url 'anime' a.id.hex %}"><img style="padding-top:10px" src="{% if a.image %}{{a.image.url}}{% else %}{{a.image_url}}{% endif %}" alt=""></a>
-                                        </div>
-                                        <div class="ni-text">
-                                                {% autoescape off %}
-                                                {{a.description|truncatechars:60}}
-                                                {% endautoescape %}
+                                           <div class="ni-pic" style="width:100px; height:130px; background:url('{% if a.image %}{{a.image.url}}{% else %}{{a.image_url}}{% endif %}'); background-size:cover;"
+                                                onclick="location.href='{% url 'anime' a.id.hex %}';">
+                                           </div>
+                                        <div class="ni-text text-justify">
+                                                {{a.description|striptags|truncatechars:120}}
                                             <ul>
                                                 <li><i class="fa fa-film"></i>&emsp;{{a.get_type_display}}</li>
                                             </ul>
