@@ -16,7 +16,7 @@
             <meta property="og:image" content="{% static 'euphonime/img/anonymous.jpg' %}">
         {% endif %}
     {% endif %}
-    <meta name="description" content="{{story.content|striptags|truncatechars:70}}" />
+    <meta name="description" content="{{story.content|striptags|safe|truncatechars:130}}" />
 
     {% endblock site_logo %}
 
