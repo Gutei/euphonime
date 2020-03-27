@@ -70,6 +70,7 @@ urlpatterns = [
                   url(r'^contact-&-media-partner/$', views.get_contact, name='contact'),
 
                   url(r'^sitemap.xml', views.get_sitemaps, name='sitemaps'),
+                  url(r'^robots.txt', views.robots_txt, name='robots'),
 
                   url(r'^auth-login/', views.auth_login, name='auth_login'),
 

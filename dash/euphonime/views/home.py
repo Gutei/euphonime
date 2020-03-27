@@ -49,3 +49,7 @@ def home(request):
         'polls': result_polls,
     }
     return render(request, template_name, context)
+
+
+def robots_txt(request):
+    return render(request, 'euphonime/robots.txt', content_type="text/plain")
