@@ -25,20 +25,26 @@ def register(request):
         if User.objects.filter(email=email).exists():
             context['message'] = 'You have tried to Register and Failed. Email already exist .'
             return render(request, template_name, context)
-        try:
-            user = User.objects.create(
-                username=username,
-                email=email,
-                password=make_password(password),
-                is_active=True,
-                is_staff=False,
-            )
 
-            ProfileUser.objects.create(
-                user=user
-            )
+        user = User(
+            username=username,
+            email=email,
+            password=make_password(password),
+            is_active=True,
+            is_staff=False,
+        )
+
+        try:
+            user.save()
         except Exception as e:
-            print(e)
             return render(request, template_name)
+
+        profile_user = ProfileUser(user=user,)
+
+        try:
+            profile_user.save()
+        except Exception as e:
+            return render(request, template_name)
+
         return redirect('profile')
     return render(request, template_name)
