@@ -74,7 +74,10 @@ def profile(request):
         context['profile_pic'] = profile.photo_profile.url
 
     biod = profile.biodata
-    escape_biod = re.sub(r'<script.+?</script>', '', biod, flags=re.DOTALL)
+    if biod:
+        escape_biod = re.sub(r'<script.+?</script>', '', biod, flags=re.DOTALL)
+    else:
+        escape_biod = ""
 
     context['biodata'] = escape_biod
 
@@ -199,7 +202,6 @@ def public_profile(request, username):
     page = request.GET.get('page')
     story_page = paginator.get_page(page)
 
-
     biod = profile.biodata
     if biod:
         escape_biod = re.sub(r'<script.+?</script>', '', biod, flags=re.DOTALL)
@@ -224,7 +226,8 @@ def public_profile(request, username):
         context['profile_pic'] = profile.photo_profile.url
 
     context['user_watching'] = UserWatching.objects.filter(
-        status__in=[UserWatching.WATCHING, UserWatching.HOLDING, UserWatching.FINISHED_WATCHING], user=profile).order_by('-updated')[
+        status__in=[UserWatching.WATCHING, UserWatching.HOLDING, UserWatching.FINISHED_WATCHING],
+        user=profile).order_by('-updated')[
                                :10]
 
     context['claimed_watch'] = claimed_watch if claimed_watch > 0 else None
@@ -314,6 +317,7 @@ def read_story(request, id):
         context['profile_pic'] = usr_story.user.photo_profile.url
 
     return render(request, 'euphonime/profile/read_story.html', context)
+
 
 @login_required
 @transaction.atomic
