@@ -102,6 +102,14 @@ def save_rate(request, anime_id, rate):
     profile = ProfileUser.objects.filter(user=request.user).first()
     anime = Anime.objects.filter(id=anime_id).first()
 
+    if request.method == "GET":
+        return redirect(reverse('anime', args=[anime.id, ]))
+
+    id = request.POST.get('id')
+    val = request.POST.get('rate')
+
+    anime = Anime.objects.filter(id=id).first()
+
     if not profile:
         return redirect(reverse('login'))
 
@@ -110,7 +118,7 @@ def save_rate(request, anime_id, rate):
     if user_rate:
         return redirect(reverse('anime', args=[anime.id, ]))
 
-    user_rate = UserAnimeScore(user=profile, anime=anime, score=rate)
+    user_rate = UserAnimeScore(user=profile, anime=anime, score=val)
     user_rate.save()
 
     user_poll = UserPolls(user=profile, anime=anime, poll=True)
