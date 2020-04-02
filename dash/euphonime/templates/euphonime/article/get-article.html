@@ -9,9 +9,9 @@
 
     <meta property="og:title" content="{{article.title}} - EuphoNime">
 
-    <meta property="og:description" content="{{article.content|striptags|safe|truncatechars:200}}">
+    <meta property="og:description" content="{{article.content|striptags|safe|truncatewords:140}}">
 
-    <meta name="description" content="{{article.content|striptags|safe}}" />
+    <meta name="description" content="{{article.content|striptags|safe|truncatewords:140}}" />
     {% endblock site_logo %}
 
     {% block content %}

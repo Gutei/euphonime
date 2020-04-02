@@ -13,9 +13,9 @@
     {% endif %}
     <meta property="og:title" content="{{anime.title}} - EuphoNime">
 
-    <meta property="og:description" content="Mencari informasi tentang anime {{anime.title}}? Temukan banyak hal tentang anime di EuphoNime!!...">
+    <meta property="og:description" content="{{ anime.description|striptags|safe|truncatewords:140 }}">
 
-    <meta name="description" content="Mencari informasi tentang anime {{anime.title}}? Temukan banyak hal tentang anime di EuphoNime!!..." />
+    <meta name="description" content="{{ anime.description|striptags|safe|truncatewords:140 }}" />
     {% endblock site_logo %}
 
     {% block meta %}
