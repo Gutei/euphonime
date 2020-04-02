@@ -5,6 +5,12 @@
     <title>Anime - EuphoNime</title>
     {% endblock title %}
 
+    {% block site_logo %}
+        <meta property="og:image" content="{{request.scheme}}://{{request.META.HTTP_HOST}}{% static 'euphonime/img/euphonime-og.jpg' %}">
+
+        <meta name="description" content="EuphoNime adalah media, database anime, dan situs komunitas untuk penggemar anime yang dapat saling berinteraksi di Indonesia." />
+    {% endblock site_logo %}
+
     {% block extra_css %}
         <style>
         a:hover {
