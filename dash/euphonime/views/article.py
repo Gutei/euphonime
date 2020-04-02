@@ -1,16 +1,18 @@
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render
-from euphonime.models import Article
+from euphonime.models import Article, MetaPage
 
 
 def get_article(request, pk):
     template_name = 'euphonime/article/get-article.html'
     article = Article.objects.filter(id=pk).first()
     news_article = Article.objects.filter(is_publish=True).order_by('-updated')[:4]
+    meta = MetaPage.objects.filter(page=MetaPage.ARTICLE).exclude(meta_name__in=['title', 'description', 'og:image', 'og:title', 'og:description'])
     context = {
         'article': article,
-        'news_article': news_article
+        'news_article': news_article,
+        'meta': meta,
     }
     return render(request, template_name, context)
 
@@ -18,6 +20,7 @@ def get_article(request, pk):
 def list_article(request):
     template_name = 'euphonime/article/list-article.html'
     articles = Article.objects.filter(is_publish=True).order_by('-updated')
+    meta = MetaPage.objects.filter(page=MetaPage.ARTICLE)
 
     search = request.GET.get('search')
     if request.method == 'GET' and search:
@@ -29,6 +32,7 @@ def list_article(request):
     page = request.GET.get('page')
     articles_page = paginator.get_page(page)
     context = {
-        'articles': articles_page
+        'articles': articles_page,
+        'meta': meta
     }
     return render(request, template_name, context)

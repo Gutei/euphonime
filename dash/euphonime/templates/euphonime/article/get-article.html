@@ -6,10 +6,21 @@
 
     {% block site_logo %}
     <meta property="og:image" content="{{article.image.url}}">
+
+    <meta property="og:title" content="{{article.title}} - EuphoNime">
+
+    <meta property="og:description" content="{{article.content|striptags|safe|truncatechars:200}}">
+
+    <meta name="description" content="{{article.content|striptags|safe}}" />
     {% endblock site_logo %}
 
-
     {% block content %}
+
+    {% block meta %}
+    {% for m in meta %}
+    {{m.value|safe}}
+    {% endfor %}
+    {% endblock meta %}
 
     <section class="blog-hero-section set-bg" data-setbg="{{ article.image.url }}">
         <div class="container" style="position: relative;bottom:0;">

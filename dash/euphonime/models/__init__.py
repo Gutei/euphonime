@@ -8,3 +8,4 @@ from .ost import *
 from .user import *
 from .article import *
 from .ost import *
+from .site_settings import *

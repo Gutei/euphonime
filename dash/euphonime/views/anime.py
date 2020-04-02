@@ -2,7 +2,7 @@ from django.db.models import Q
 from django.core.paginator import Paginator
 from django.shortcuts import render
 from euphonime.models import (Anime, Character, AnimeGenre, Quote, UserAnimeScore, ProfileUser, UserWatching,
-                              AnimeCharacter, Ost, UserPolls, AnimeStudio, Studio)
+                              AnimeCharacter, Ost, UserPolls, AnimeStudio, Studio, MetaGeneral, MetaPage)
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 def get_anime(request, pk):
     anime = Anime.objects.filter(id=pk).first()
     anime_character = AnimeCharacter.objects.filter(anime=anime)
+    meta = MetaPage.objects.filter(page=MetaPage.ANIME,).exclude(meta_name__in=['title', 'description', 'og:image', 'og:title', 'og:description'])
     characters = []
     for ac in anime_character:
         characters.append(ac.character)
@@ -76,6 +77,7 @@ def get_anime(request, pk):
         'rating_counter_10': rating_counter_10,
         'status': status,
         'studios': studios,
+        'meta': meta,
     }
     return render(request, template_name, context)
 
@@ -83,6 +85,7 @@ def get_anime(request, pk):
 def list_anime(request):
     template_name = 'euphonime/anime/list-anime.html'
     animes = Anime.objects.filter(is_publish=True).order_by('title')
+    meta = MetaPage.objects.filter(page=MetaPage.ANIME)
 
     search = request.GET.get('search')
     if request.method == 'GET' and search:
@@ -93,6 +96,7 @@ def list_anime(request):
     animes_page = paginator.get_page(page)
     context = {
         'animes': animes_page,
+        'meta': meta,
     }
     return render(request, template_name, context)
 

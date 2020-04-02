@@ -12,8 +12,18 @@
     <meta property="og:image" content="{{character.image.url}}">
     {% endif %}
 
+    <meta property="og:title" content="{{character.name}} - EuphoNime">
+
+    <meta property="og:description" content="Mencari informasi tentang karakter {{character.name}}? Temukan banyak hal tentang {{anime.0.anime.title}} di Euphonime!!...">
+
     <meta name="description" content="Mencari informasi tentang karakter {{character.name}}? Temukan banyak hal tentang {{anime.0.anime.title}} di Euphonime!!..." />
     {% endblock site_logo %}
+
+    {% block meta %}
+    {% for m in meta %}
+    {{m.value|safe}}
+    {% endfor %}
+    {% endblock meta %}
 
     {% block content %}
 

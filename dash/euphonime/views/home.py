@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from euphonime.models import Anime, Article, Season, AnimeSeason, UserPolls, UserWatching, UserAnimeScore
+from euphonime.models import Anime, Article, Season, AnimeSeason, UserPolls, UserWatching, UserAnimeScore, MetaGeneral
 from django.db.models import Avg, Sum
 
 
@@ -8,6 +8,7 @@ def home(request):
     new_anime = Anime.objects.filter(is_publish=True).order_by('-updated')[:4]
     article = Article.objects.filter(is_publish=True).order_by('-updated')[:4]
     template_name = 'euphonime/home.html'
+    meta = MetaGeneral.objects.all()
     this_sesason = Season.objects.filter(is_season=True).first()
     polls = []
     result_polls = []
@@ -47,6 +48,7 @@ def home(request):
         'new_anime': new_anime,
         'article': article,
         'polls': result_polls,
+        'meta': meta,
     }
     return render(request, template_name, context)
 

@@ -11,11 +11,18 @@
     {% else %}
     <meta property="og:image" content="{{anime.image.url}}">
     {% endif %}
+    <meta property="og:title" content="{{anime.title}} - EuphoNime">
 
-
+    <meta property="og:description" content="Mencari informasi tentang anime {{anime.title}}? Temukan banyak hal tentang anime di EuphoNime!!...">
 
     <meta name="description" content="Mencari informasi tentang anime {{anime.title}}? Temukan banyak hal tentang anime di EuphoNime!!..." />
     {% endblock site_logo %}
+
+    {% block meta %}
+    {% for m in meta %}
+    {{m.value|safe}}
+    {% endfor %}
+    {% endblock meta %}
 
         {% block extra_css %}
         <style>

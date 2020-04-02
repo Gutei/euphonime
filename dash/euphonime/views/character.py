@@ -2,12 +2,13 @@ from django.db.models import Q
 from django.core.paginator import Paginator
 from django.db.models import Count
 from django.shortcuts import render
-from euphonime.models import Anime, Character, Quote, AnimeCharacter
+from euphonime.models import Anime, Character, Quote, AnimeCharacter, MetaPage
 
 
 def get_character(request, pk):
     character = Character.objects.filter(id=pk).first()
     quote = Quote.objects.filter(character=character)
+    meta = MetaPage.objects.filter(page=MetaPage.CHARACTER,).exclude(meta_name__in=['title', 'description', 'og:image', 'og:title', 'og:description'])
 
     template_name = 'euphonime/character/get-character.html'
 
@@ -16,7 +17,8 @@ def get_character(request, pk):
     context = {
         'character': character,
         'quotes': quote,
-        'anime': anime
+        'anime': anime,
+        'meta': meta,
     }
     return render(request, template_name, context)
 
@@ -24,6 +26,7 @@ def get_character(request, pk):
 def list_character(request):
     template_name = 'euphonime/character/list-character.html'
     character = Character.objects.order_by('-updated')
+    meta = MetaPage.objects.filter(page=MetaPage.CHARACTER, )
 
     chr = []
     for c in character:
@@ -50,5 +53,6 @@ def list_character(request):
 
     context = {
         'characters': characters_page,
+        'meta': meta,
     }
     return render(request, template_name, context)
