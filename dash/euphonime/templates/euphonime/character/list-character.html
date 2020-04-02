@@ -27,7 +27,7 @@
                                 </div>
                             </div>
                             <div class="section-title sidebar-title">
-                                <h5>Karakter</h5>
+                                <h1 style="font-size:24px;">Karakter</h1>
                             </div>
                         <div class="st-table table table-hover">
                             <table style="padding: 4px 0;border-bottom: #EBEBEB 1px solid;">
@@ -50,7 +50,7 @@
                                         </td>
                                         <td class="left-team">
                                             <a href="{% url 'character' ch.character.id.hex %}">
-                                            <img style="width: 48px;height: 68px;" src="{% if ch.character.image %}{{ch.character.image.url}}{% else %}{{ ch.character.image_url }}{% endif %}" alt="">
+                                            <img style="width: 48px;height: 68px;" src="{% if ch.character.image %}{{ch.character.image.url}}{% else %}{{ ch.character.image_url }}{% endif %}" alt="{{ch.character.name}}">
                                             </a>
                                         </td>
                                         <td class="st-option" style="padding-left: 8px;text-align: left;">

@@ -34,7 +34,7 @@
 
                             </div>
                             <div class="section-title sidebar-title">
-                                <h5>Artikel <span><img src="{% static 'euphonime/img/yuno.jpg' %}" height="30px;"></span> </h5>
+                                <h1 style="font-size:24px;">Artikel <span><img src="{% static 'euphonime/img/yuno.jpg' %}" alt="Gasai, Yuno" height="30px;"></span> </h1>
                             </div>
                             <div class="row">
                                 {% for a in articles %}
@@ -42,13 +42,13 @@
                                     <div class="news-item">
                                     <div class="ni-pic">
                                         <a href="{% url 'article' a.id.hex %}"><div style="width:150px; height:150px; background:url('{{a.image.url}}'); background-position:center; background-size:cover;">
-                                        <img src="{% static 'euphonime/img/logo.png' %}" alt="" style="height:30px; visibility:hidden;">
+                                        <img src="{% static 'euphonime/img/logo.png' %}" alt="EuphoNime" style="height:30px; visibility:hidden;">
 
                                         </div></a>
 <!--                                        <a href="{% url 'article' a.id.hex %}"><img src="{{a.image.url}}" alt=""></a>-->
                                     </div>
                                     <div class="ni-text">
-                                        <h5 ><a href="{% url 'article' a.id.hex %}">{{a.title|truncatechars:80}}</a></h5>
+                                        <a style="color:#000000;" href="{% url 'article' a.id.hex %}"><h2 style="font-size:18px;">{{a.title|truncatechars:80}}</h2></a>
                                         <ul>
                                             <li><i class="fa fa-calendar"></i> {{a.updated|date:'d F Y'}}</li>
                                         </ul>

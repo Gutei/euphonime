@@ -37,7 +37,7 @@
                     <div class="timeline" style="margin:0 20px 45px">
 
                         <div class="time-label">
-                            <h2 style="background:white;padding-bottom:20px">Quotes <b style="color:red;">Terbaru</b></h2>
+                            <h1 style="background:white; padding-bottom:20px; font-size:36px;">Quotes <b style="color:red;">Terbaru</b></h1>
                         </div>
                         {% for q in quotes %}
                             <div>
@@ -48,7 +48,7 @@
 
                                     <div class="avatar">
                                         <a href="{% url 'character' q.character.id.hex %}">
-                                            <img src="{% if q.character.image %}{{q.character.image.url}}{% else %}{{ q.character.image_url }}{% endif %}">
+                                            <img src="{% if q.character.image %}{{q.character.image.url}}{% else %}{{ q.character.image_url }}{% endif %}" alt="{{ q.character.name }}">
                                         </a>
                                     </div>
                                     <div class="bubble-container">
