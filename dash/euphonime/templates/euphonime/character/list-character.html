@@ -50,7 +50,7 @@
                                         </td>
                                         <td class="left-team">
                                             <a href="{% url 'character' ch.character.prefix_id ch.character.slug %}">
-                                            <img style="width: 48px;height: 68px;" src="{% if ch.character.image %}{{ch.character.image.url}}{% else %}{{ ch.character.image_url }}{% endif %}" alt="{{ch.character.name}}">
+                                            <img style="width: 48px;height: 68px;" src="{% if ch.character.image %}{{ch.character.image.url}}{% else %}{% if ch.character.image_url == 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png' %}{% static 'euphonime/img/anonymous.jpg' %}{% else %}{{ ch.character.image_url }}{% endif %}{% endif %}" alt="{{ch.character.name}}">
                                             </a>
                                         </td>
                                         <td class="st-option" style="padding-left: 8px;text-align: left;">

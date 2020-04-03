@@ -166,6 +166,8 @@ class QuoteAdmin(admin.ModelAdmin):
         if obj:
             if obj.character:
                 anime_character = AnimeCharacter.objects.filter(character=obj.character).first()
+                if not anime_character:
+                    return ""
                 a = anime_character.anime.title
                 return "{}".format(a)
         return '-'

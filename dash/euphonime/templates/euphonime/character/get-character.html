@@ -7,7 +7,11 @@
 
     {% block site_logo %}
     {% if not character.image %}
+    {% if character.image_url == 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png' %}
+    <meta property="og:image" content="{% static 'euphonime/img/anonymous.jpg' %}">
+    {% else %}
     <meta property="og:image" content="{{character.image_url}}">
+    {% endif %}
     {% else %}
     <meta property="og:image" content="{{character.image.url}}">
     {% endif %}
@@ -53,8 +57,15 @@
                         <div class="cc-pic">
 
                             <center>
-                            <div style="width:200px; height:250px; background:url('{{character.image_url}}'); background-size:cover;">
-                            </div>
+                                {% if not character.image %}
+                                    {% if character.image_url == 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png' %}
+                                        <div style="width:200px; height:250px; background:url('https://euphonime.com/static/euphonime/img/anonymous.jpg'); background-size:cover; background-position:center;"></div>
+                                    {% else %}
+                                        <div style="width:200px; height:250px; background:url('{{character.image_url}}'); background-size:cover; background-position:center;"></div>
+                                    {% endif %}
+                                    {% else %}
+                                        <div style="width:200px; height:250px; background:url('{{character.image.url}}'); background-size:cover; background-position:center;"></div>
+                                {% endif %}
                             </center>
 
                         </div>

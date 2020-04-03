@@ -48,7 +48,7 @@
 
                                     <div class="avatar">
                                         <a href="{% url 'character' q.character.prefix_id q.character.slug %}">
-                                            <img src="{% if q.character.image %}{{q.character.image.url}}{% else %}{{ q.character.image_url }}{% endif %}" alt="{{ q.character.name }}">
+                                            <img src="{% if q.character.image %}{{q.character.image.url}}{% else %}{% if q.character.image_url == 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png' %}{% static 'euphonime/img/anonymous.jpg' %}{% else %}{{ q.character.image_url }}{% endif %}{% endif %}" alt="{{ q.character.name }}">
                                         </a>
                                     </div>
                                     <div class="bubble-container">

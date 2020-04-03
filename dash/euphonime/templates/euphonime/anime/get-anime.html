@@ -336,7 +336,7 @@
                                     <div class="ct-item">
                                         <div class="ci-text" style="width:200px;float:left;">
                                             <a href="{% url 'character' ch.prefix_id ch.slug %}">
-                                            <img style="width:50px;" src="{% if ch.image %}{{ch.image.url}}{% else %}{{ ch.image_url }}{% endif %}" alt="{{ch.name}}">
+                                            <img style="width:50px;" src="{% if ch.image %}{{ch.image.url}}{% else %}{% if ch.image_url == 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png' %}{% static 'euphonime/img/anonymous.jpg' %}{% else %}{{ ch.image_url }}{% endif %}{% endif %}" alt="{{ch.name}}">
                                             </a>
                                                 <a href="{% url 'character' ch.prefix_id ch.slug %}"><p style="font-size:14px"><b>{{ch.name}}</b></p></a>
                                                 <p style="font-size:0.7rem;">({{ch.get_role_display}})</p>
