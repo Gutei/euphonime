@@ -8,7 +8,7 @@
     {% block site_logo %}
     {% if not character.image %}
     {% if character.image_url == 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png' %}
-    <meta property="og:image" content="{% static 'euphonime/img/anonymous.jpg' %}">
+    <meta property="og:image" content="https://euphonime.com{% static 'euphonime/img/anonymous.jpg' %}">
     {% else %}
     <meta property="og:image" content="{{character.image_url}}">
     {% endif %}
