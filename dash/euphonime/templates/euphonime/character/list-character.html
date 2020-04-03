@@ -49,17 +49,17 @@
                                             </div>
                                         </td>
                                         <td class="left-team">
-                                            <a href="{% url 'character' ch.character.id.hex %}">
+                                            <a href="{% url 'character' ch.character.prefix_id ch.character.slug %}">
                                             <img style="width: 48px;height: 68px;" src="{% if ch.character.image %}{{ch.character.image.url}}{% else %}{{ ch.character.image_url }}{% endif %}" alt="{{ch.character.name}}">
                                             </a>
                                         </td>
                                         <td class="st-option" style="padding-left: 8px;text-align: left;">
-                                            <div class="so-text"><a href="{% url 'character' ch.character.id.hex %}">{{ch.character.name}}</a></div>
+                                            <div class="so-text"><a href="{% url 'character' ch.character.prefix_id ch.character.slug %}">{{ch.character.name}}</a></div>
                                         </td>
                                         <td class="st-option">
                                             <div class="so-text">
                                                 {% for a in ch.anime_character %}
-                                                <b><a href="{% url 'anime' a.anime.id %}">{{a.anime.title}}</a></b>,
+                                                <b><a href="{% url 'anime' pk=a.anime.prefix_id slug=a.anime.slug %}">{{a.anime.title}}</a></b>,
                                                 {% endfor %}
                                             </div>
                                         </td>

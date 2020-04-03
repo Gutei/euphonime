@@ -29,7 +29,7 @@ def home(request):
             polls.append({
                 'number': i,
                 'obj': s.anime,
-                'polls': polling,
+                # 'polls': polling,
                 'watch': watch,
                 'score': 0 if not score['score__avg'] else score['score__avg'],
                 'polls': user_poll,

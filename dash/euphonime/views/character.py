@@ -5,8 +5,8 @@ from django.shortcuts import render
 from euphonime.models import Anime, Character, Quote, AnimeCharacter, MetaPage
 
 
-def get_character(request, pk):
-    character = Character.objects.filter(id=pk).first()
+def get_character(request, pk, slug):
+    character = Character.objects.filter(prefix_id=pk, slug=slug).first()
     quote = Quote.objects.filter(character=character)
     meta = MetaPage.objects.filter(page=MetaPage.CHARACTER,).exclude(meta_name__in=['title', 'description', 'og:image', 'og:title', 'og:description', 'keywords'])
 

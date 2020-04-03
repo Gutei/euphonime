@@ -12,6 +12,9 @@ import logging
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
 
+from django.template.defaultfilters import slugify
+
+
 
 logger = logging.getLogger(__name__)
 
@@ -46,6 +49,8 @@ class Anime(models.Model):
     total_episode = models.PositiveIntegerField(default=0)
     duration = models.PositiveIntegerField(default=0)
     is_publish = models.BooleanField(default=False)
+    slug = models.SlugField(max_length=512, null=True, blank=True)
+    prefix_id = models.SlugField(max_length=512, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -54,6 +59,14 @@ class Anime(models.Model):
 
     def __str__(self):
         return '{}'.format(self.title)
+
+    def save(self, *args, **kwargs):
+        uid = self.id.hex[:8]
+
+        self.slug = slugify(self.title)
+        self.prefix_id = '{}'.format(uid)
+
+        super(Anime, self).save(*args, **kwargs)
 
 
 class AnimeGenre(models.Model):

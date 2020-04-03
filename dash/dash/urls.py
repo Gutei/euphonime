@@ -46,21 +46,21 @@ urlpatterns = [
                   url(r'^update-story/(?P<id>[^/]+)/$', views.update_story, name='update_story'),
 
                   # Anime
-                  url(r'^anime/(?P<pk>[^/]+)/$', views.get_anime, name='anime'),
+                  url(r'^anime/(?P<pk>[^/]+)/(?P<slug>[^/]+)/$', views.get_anime, name='anime'),
                   url(r'^rate-anime/(?P<anime_id>[^/]+)/(?P<rate>[^/]+)/$', views.save_rate, name='rate_anime'),
                   url(r'^watch-anime/(?P<anime_id>[^/]+)/$', views.save_watching, name='watch_anime'),
-                  url(r'^animes/$', views.list_anime, name='list_anime'),
+                  url(r'^anime/$', views.list_anime, name='list_anime'),
 
                   # Article
-                  url(r'^article/(?P<pk>[^/]+)/$', views.get_article, name='article'),
-                  url(r'^articles/$', views.list_article, name='list_article'),
+                  url(r'^artikel/(?P<pk>[^/]+)/(?P<slug>[^/]+)/$', views.get_article, name='article'),
+                  url(r'^artikel/$', views.list_article, name='list_article'),
 
                   # Quote
                   url(r'^quotes/$', views.list_quote, name='list_quote'),
 
                   # Character
-                  url(r'^character/(?P<pk>[^/]+)/$', views.get_character, name='character'),
-                  url(r'^characters/$', views.list_character, name='list_character'),
+                  url(r'^karakter/(?P<pk>[^/]+)/(?P<slug>[^/]+)/$', views.get_character, name='character'),
+                  url(r'^karakter/$', views.list_character, name='list_character'),
 
                   # Footer Conrtent
                   url(r'^disclaimer/$', views.get_disclaimer, name='disclaimer'),

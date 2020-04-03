@@ -307,7 +307,7 @@
 
                             <!-- Your share button code -->
                             <div class="fb-share-button"
-                            data-href="{% url 'anime' anime.id %}"
+                            data-href="{% url 'anime' pk=anime.prefix_id slug=anime.slug %}"
                             data-layout="button_count">
                             </div>
 
@@ -332,10 +332,10 @@
                                     {% for ch in character %}
                                     <div class="ct-item">
                                         <div class="ci-text" style="width:200px;float:left;">
-                                            <a href="{% url 'character' ch.id.hex  %}">
+                                            <a href="{% url 'character' ch.prefix_id ch.slug %}">
                                             <img style="width:50px;" src="{% if ch.image %}{{ch.image.url}}{% else %}{{ ch.image_url }}{% endif %}" alt="{{ch.name}}">
                                             </a>
-                                                <a href="{% url 'character' ch.id.hex  %}"><p style="font-size:14px"><b>{{ch.name}}</b></p></a>
+                                                <a href="{% url 'character' ch.prefix_id ch.slug %}"><p style="font-size:14px"><b>{{ch.name}}</b></p></a>
                                                 <p style="font-size:0.7rem;">({{ch.get_role_display}})</p>
 
                                         </div>

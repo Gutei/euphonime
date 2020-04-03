@@ -47,13 +47,13 @@
                                     </div>
 
                                     <div class="avatar">
-                                        <a href="{% url 'character' q.character.id.hex %}">
+                                        <a href="{% url 'character' q.character.prefix_id q.character.slug %}">
                                             <img src="{% if q.character.image %}{{q.character.image.url}}{% else %}{{ q.character.image_url }}{% endif %}" alt="{{ q.character.name }}">
                                         </a>
                                     </div>
                                     <div class="bubble-container">
                                         <div class="bubble">
-                                            <a href="{% url 'character' q.character.id.hex %}">
+                                            <a href="{% url 'character' q.character.prefix_id q.character.slug %}">
                                                 <h3>{{ q.character.name }}</h3>
                                             </a>
                                             <p style="font-size:14px;">{{q.quote}}</p>

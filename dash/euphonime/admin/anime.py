@@ -34,7 +34,7 @@ class AnimeGenreInline(admin.TabularInline):
 
 @admin.register(Anime, site=admin.site)
 class AnimeAdmin(admin.ModelAdmin):
-    list_display = ('title', 'get_image', 'is_publish', 'created', 'updated')
+    list_display = ('title', 'get_image', 'is_publish', 'slug', 'created', 'updated')
     search_fields = ('title',)
     list_filter = ('is_publish', 'created', 'updated')
     inlines = [
@@ -99,7 +99,7 @@ class MalAnimeAdmin(admin.ModelAdmin):
 
 @admin.register(Character, site=admin.site)
 class CharacterAdmin(admin.ModelAdmin):
-    list_display = ('get_image', 'role', 'get_anime', 'get_actor')
+    list_display = ('get_image', 'role', 'get_anime', 'get_actor',  'slug',)
     search_fields = ('name', 'voice_act__name')
     raw_id_fields = ('voice_act',)
     list_per_page = 10

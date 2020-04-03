@@ -70,7 +70,7 @@
                                                             <p style="font-size:14px;">
                                                                 <ul>
                                                                     {% for a in anime %}
-                                                                    <li><p style="font-size:14px;"><a href="{% url 'anime' a.anime.id %}">{{a.anime.title}}</a></p></li>
+                                                                    <li><p style="font-size:14px;"><a href="{% url 'anime' a.anime.prefix_id a.anime.slug %}">{{a.anime.title}}</a></p></li>
                                                                     {% endfor %}
                                                                 </ul>
                                                             </p>
@@ -137,7 +137,7 @@
 
                               <!-- Your share button code -->
                               <div class="fb-share-button"
-                                data-href="{% url 'character' character.id %}"
+                                data-href="{% url 'character' character.prefix_id character.slug %}"
                                 data-layout="button_count">
                               </div>
 

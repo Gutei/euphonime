@@ -4,9 +4,9 @@ from django.shortcuts import render
 from euphonime.models import Article, MetaPage
 
 
-def get_article(request, pk):
+def get_article(request, pk, slug):
     template_name = 'euphonime/article/get-article.html'
-    article = Article.objects.filter(id=pk).first()
+    article = Article.objects.filter(prefix_id=pk, slug=slug).first()
     news_article = Article.objects.filter(is_publish=True).order_by('-updated')[:4]
     meta = MetaPage.objects.filter(page=MetaPage.ARTICLE).exclude(meta_name__in=['title', 'description', 'og:image', 'og:title', 'og:description', 'keywords'])
     context = {

@@ -8,8 +8,8 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 
-def get_anime(request, pk):
-    anime = Anime.objects.filter(id=pk).first()
+def get_anime(request, pk, slug):
+    anime = Anime.objects.filter(prefix_id=pk, slug=slug).first()
     anime_character = AnimeCharacter.objects.filter(anime=anime)
     meta = MetaPage.objects.filter(page=MetaPage.ANIME,).exclude(meta_name__in=['title', 'description', 'og:image', 'og:title', 'og:description', 'keywords'])
     characters = []
@@ -107,7 +107,7 @@ def save_rate(request, anime_id, rate):
     anime = Anime.objects.filter(id=anime_id).first()
 
     if request.method == "GET":
-        return redirect(reverse('anime', args=[anime.id, ]))
+        return redirect(reverse('anime', args=[anime.prefix_id, anime.slug]))
 
     id = request.POST.get('id')
     val = request.POST.get('rate')
@@ -120,7 +120,7 @@ def save_rate(request, anime_id, rate):
     user_rate = UserAnimeScore.objects.filter(user=profile, anime=anime).first()
 
     if user_rate:
-        return redirect(reverse('anime', args=[anime.id, ]))
+        return redirect(reverse('anime', args=[anime.prefix_id, anime.slug]))
 
     user_rate = UserAnimeScore(user=profile, anime=anime, score=val)
     user_rate.save()
@@ -128,7 +128,7 @@ def save_rate(request, anime_id, rate):
     user_poll = UserPolls(user=profile, anime=anime, poll=True)
     user_poll.save()
 
-    return redirect(reverse('anime', args=[anime.id, ]))
+    return redirect(reverse('anime', args=[anime.prefix_id, anime.slug]))
 
 
 @login_required
@@ -137,7 +137,7 @@ def save_watching(request, anime_id):
     anime = Anime.objects.filter(id=anime_id).first()
 
     if request.method == 'GET':
-        return redirect(reverse('anime', args=[anime.id, ]))
+        return redirect(reverse('anime', args=[anime.prefix_id, anime.slug]))
     elif request.method == 'POST':
         if not profile:
             return redirect(reverse('login'))
@@ -151,4 +151,4 @@ def save_watching(request, anime_id):
                 user_watching = UserWatching(user=profile, anime=anime, status=int(request.POST.get('status')))
                 user_watching.save()
 
-    return redirect(reverse('anime', args=[anime.id, ]))
+    return redirect(reverse('anime', args=[anime.prefix_id, anime.slug]))

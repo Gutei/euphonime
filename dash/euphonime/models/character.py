@@ -1,6 +1,7 @@
 import uuid
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.template.defaultfilters import slugify
 
 
 class Character(models.Model):
@@ -22,6 +23,8 @@ class Character(models.Model):
     role = models.PositiveIntegerField(choices=ROLE, null=True, blank=True)
     voice_act = models.ForeignKey('VoiceAct', null=True, blank=True, on_delete=models.PROTECT)
     mal_id = models.CharField(max_length=128, null=True, blank=True)
+    slug = models.SlugField(max_length=512, null=True, blank=True)
+    prefix_id = models.SlugField(max_length=512, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -30,6 +33,15 @@ class Character(models.Model):
 
     def __str__(self):
         return '{}'.format(self.name)
+
+    def save(self, *args, **kwargs):
+
+        uid = self.id.hex[:8]
+
+        self.slug = slugify(self.name)
+        self.prefix_id = '{}'.format(uid)
+
+        super(Character, self).save(*args, **kwargs)
 
 
 class AnimeCharacter(models.Model):
