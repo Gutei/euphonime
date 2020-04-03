@@ -1,8 +1,11 @@
+import random
 from django.shortcuts import render
 from euphonime.models import Anime, Article, Season, AnimeSeason, UserPolls, UserWatching, UserAnimeScore, MetaGeneral
 from django.db.models import Avg, Sum
+from django.views.decorators.cache import cache_page
 
 
+@cache_page(60 * 15)
 def home(request):
     ses_anime = Anime.objects.filter(is_publish=True)
     new_anime = Anime.objects.filter(is_publish=True).order_by('-updated')[:4]
@@ -43,8 +46,14 @@ def home(request):
             result_polls.append(s_polls)
             ranking += 1
 
+    if len(ses_anime) > 10:
+        ses_anime_random_sample = 10
+        shuffle_ses_anime = random.sample(set(ses_anime), ses_anime_random_sample)
+    else:
+        shuffle_ses_anime = ses_anime
+
     context = {
-        'season_nime': ses_anime,
+        'season_nime': shuffle_ses_anime,
         'new_anime': new_anime,
         'article': article,
         'polls': result_polls,
