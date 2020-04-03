@@ -64,3 +64,6 @@ def home(request):
 
 def robots_txt(request):
     return render(request, 'euphonime/robots.txt', content_type="text/plain")
+
+def bing_site(request):
+    return render(request, 'euphonime/BingSiteAuth.xml', content_type="text/xml")

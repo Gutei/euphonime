@@ -71,6 +71,7 @@ urlpatterns = [
 
                   url(r'^sitemap.xml', views.get_sitemaps, name='sitemaps'),
                   url(r'^robots.txt', views.robots_txt, name='robots'),
+                  url(r'^BingSiteAuth.xml', views.bing_site, name='bing_site'),
 
                   url(r'^auth-login/', views.auth_login, name='auth_login'),
 
