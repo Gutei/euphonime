@@ -5,7 +5,9 @@
     {% endblock title %}
 
     {% block site_logo %}
-    <meta property="og:image" content="{{article.image.url}}">
+    <meta property="og:url" content="https://www.euphonime.com{% url 'article' article.prefix_id article.slug %}" />
+
+    <meta property="og:image" content="https://www.euphonime.com{{article.image.url}}">
 
     <meta property="og:title" content="{{article.title}} - EuphoNime">
 

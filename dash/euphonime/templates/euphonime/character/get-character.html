@@ -12,6 +12,8 @@
     <meta property="og:image" content="{{character.image.url}}">
     {% endif %}
 
+    <meta property="og:url" content="https://www.euphonime.com{% url 'character' character.prefix_id character.slug %}" />
+
     <meta property="og:title" content="{{character.name}} - EuphoNime">
 
     <meta property="og:description" content="{{ character.description|striptags|safe|truncatewords:20 }}">
