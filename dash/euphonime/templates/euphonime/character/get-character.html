@@ -14,9 +14,9 @@
 
     <meta property="og:title" content="{{character.name}} - EuphoNime">
 
-    <meta property="og:description" content="{{ character.description|striptags|safe|truncatewords:140 }}">
+    <meta property="og:description" content="{{ character.description|striptags|safe|truncatewords:20 }}">
 
-    <meta name="description" content="{{ character.description|striptags|safe|truncatewords:140 }}" />
+    <meta name="description" content="{{ character.description|striptags|safe|truncatewords:20 }}" />
 
     <meta name="keywords" content="{{character.name}}, {{anime.0.anime.title}}, euphonime, berita anime, info anime, info karakter anime, berita otaku, forum otaku"/>
     {% endblock site_logo %}
