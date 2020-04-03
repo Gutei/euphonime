@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 def get_anime(request, pk):
     anime = Anime.objects.filter(id=pk).first()
     anime_character = AnimeCharacter.objects.filter(anime=anime)
-    meta = MetaPage.objects.filter(page=MetaPage.ANIME,).exclude(meta_name__in=['title', 'description', 'og:image', 'og:title', 'og:description'])
+    meta = MetaPage.objects.filter(page=MetaPage.ANIME,).exclude(meta_name__in=['title', 'description', 'og:image', 'og:title', 'og:description', 'keywords'])
     characters = []
     for ac in anime_character:
         characters.append(ac.character)

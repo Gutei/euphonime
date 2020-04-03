@@ -8,7 +8,7 @@ def get_article(request, pk):
     template_name = 'euphonime/article/get-article.html'
     article = Article.objects.filter(id=pk).first()
     news_article = Article.objects.filter(is_publish=True).order_by('-updated')[:4]
-    meta = MetaPage.objects.filter(page=MetaPage.ARTICLE).exclude(meta_name__in=['title', 'description', 'og:image', 'og:title', 'og:description'])
+    meta = MetaPage.objects.filter(page=MetaPage.ARTICLE).exclude(meta_name__in=['title', 'description', 'og:image', 'og:title', 'og:description', 'keywords'])
     context = {
         'article': article,
         'news_article': news_article,

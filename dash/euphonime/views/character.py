@@ -8,7 +8,7 @@ from euphonime.models import Anime, Character, Quote, AnimeCharacter, MetaPage
 def get_character(request, pk):
     character = Character.objects.filter(id=pk).first()
     quote = Quote.objects.filter(character=character)
-    meta = MetaPage.objects.filter(page=MetaPage.CHARACTER,).exclude(meta_name__in=['title', 'description', 'og:image', 'og:title', 'og:description'])
+    meta = MetaPage.objects.filter(page=MetaPage.CHARACTER,).exclude(meta_name__in=['title', 'description', 'og:image', 'og:title', 'og:description', 'keywords'])
 
     template_name = 'euphonime/character/get-character.html'
 
