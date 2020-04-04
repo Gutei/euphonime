@@ -14,6 +14,10 @@ def get_character(request, pk, slug):
 
     anime = AnimeCharacter.objects.filter(character=character)
 
+    character.description = character.description.replace("\\n", "<br>")
+    character.description = character.description.replace("\r", "")
+    character.description = character.description.replace("\t", "")
+
     context = {
         'character': character,
         'quotes': quote,
