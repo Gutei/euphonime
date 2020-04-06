@@ -8,11 +8,14 @@
     {% block site_logo %}
     {% if sosmed_pic %}
     <meta property="og:image" content="{{sosmed_pic}}">
+    <meta property="og:image:secure_url" content="https://www.euphonime.com{{sosmed_pic}}">
     {% else %}
         {% if profile_pic %}
             <meta property="og:image" content="{{profile_pic}}">
+            <meta property="og:image:secure_url" content="https://www.euphonime.com{{profile_pic}}">
         {% else %}
             <meta property="og:image" content="{% static 'euphonime/img/anonymous.jpg' %}">
+            <meta property="og:image:secure_url" content="https://www.euphonime.com{% static 'euphonime/img/anonymous.jpg' %}">
         {% endif %}
     {% endif %}
 
