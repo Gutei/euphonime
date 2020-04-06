@@ -22,6 +22,8 @@
 
     <meta property="og:description" content="{{ character.description|striptags|safe|truncatewords:20 }}">
 
+    <meta property="fb:app_id" content="3039061062805819" />
+
     <meta name="description" content="{{ character.description|striptags|safe|truncatewords:20 }}" />
 
     <meta name="keywords" content="{{character.name}}, {{anime.0.anime.title}}, euphonime, berita anime, info anime, info karakter anime, berita otaku, forum otaku"/>
@@ -140,13 +142,6 @@
                                 {% endif %}                            </div>
 
                             <div id="fb-root"></div>
-                              <script>(function(d, s, id) {
-                                var js, fjs = d.getElementsByTagName(s)[0];
-                                if (d.getElementById(id)) return;
-                                js = d.createElement(s); js.id = id;
-                                js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
-                                fjs.parentNode.insertBefore(js, fjs);
-                              }(document, 'script', 'facebook-jssdk'));</script>
 
                               <!-- Your share button code -->
                               <div class="fb-share-button"

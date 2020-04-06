@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <meta name="msvalidate.01" content="BFD74C06EF092A7B94E24A33921294A8" />
     <link rel="icon" type="image/png" href="{% static 'euphonime/img/euphonime-icon.jpg' %}"/>
+    <meta property="fb:app_id" content="3039061062805819" />
 
     {% block title %}
     {% endblock title %}
@@ -36,6 +37,24 @@
 </head>
 
 <body>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '3039061062805819',
+          xfbml      : true,
+          version    : 'v6.0'
+        });
+        FB.AppEvents.logPageView();
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "https://connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>
     {% block navbar %}
             {% include 'euphonime/__includes/__navbar/__navbar.html' %}
     {% endblock navbar %}
