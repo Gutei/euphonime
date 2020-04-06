@@ -9,7 +9,7 @@ from django.views.decorators.cache import cache_page
 def home(request):
     ses_anime = Anime.objects.filter(is_publish=True)
     new_anime = Anime.objects.filter(is_publish=True).order_by('-updated')[:4]
-    article = Article.objects.filter(is_publish=True).order_by('-updated')[:8]
+    article = Article.objects.filter(is_publish=True).order_by('-updated')[:4]
     template_name = 'euphonime/home.html'
     meta = MetaGeneral.objects.all()
     this_sesason = Season.objects.filter(is_season=True).first()
