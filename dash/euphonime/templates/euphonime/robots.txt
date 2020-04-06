@@ -1,7 +1,26 @@
-User-agent: Googlebot
-Disallow:
+User-agent: Googlebot{% for an in anime_id %}
+Disallow:/rate-anime/{{an}}/1/
+Disallow:/rate-anime/{{an}}/2/
+Disallow:/rate-anime/{{an}}/3/
+Disallow:/rate-anime/{{an}}/4/
+Disallow:/rate-anime/{{an}}/5/
+Disallow:/rate-anime/{{an}}/6/
+Disallow:/rate-anime/{{an}}/7/
+Disallow:/rate-anime/{{an}}/8/
+Disallow:/rate-anime/{{an}}/9/
+Disallow:/rate-anime/{{an}}/10/{% endfor %}
 
-User-agent: *
-Disallow:
+
+User-agent: *{% for an in anime_id %}
+Disallow:/rate-anime/{{an}}/1/
+Disallow:/rate-anime/{{an}}/2/
+Disallow:/rate-anime/{{an}}/3/
+Disallow:/rate-anime/{{an}}/4/
+Disallow:/rate-anime/{{an}}/5/
+Disallow:/rate-anime/{{an}}/6/
+Disallow:/rate-anime/{{an}}/7/
+Disallow:/rate-anime/{{an}}/8/
+Disallow:/rate-anime/{{an}}/9/
+Disallow:/rate-anime/{{an}}/10/{% endfor %}
 
 Sitemap: https://euphonime.com/sitemap.xml
