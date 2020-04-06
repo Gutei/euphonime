@@ -14,7 +14,7 @@
 
     <meta property="og:url" content="https://www.euphonime.com{% url 'anime' anime.prefix_id anime.slug %}" />
 
-    <meta property="og:title" content="{{anime.title}} - EuphoNime">
+    <meta property="og:title" content="{{anime.title|safe}} - EuphoNime">
 
     <meta property="og:description" content="{{ anime.description|striptags|safe|truncatewords:20 }}">
 
