@@ -17,6 +17,12 @@
     {% endif %}
 
     <meta name="description" content="Bergabunglah bersama {{user.username}} di EuphoNime." />
+
+    <meta property="og:url" content="https://www.euphonime.com{% url 'public_profile' user.username %}" />
+
+    <meta property="og:title" content="{{user.username}} @ EuphoNime">
+
+    <meta property="fb:app_id" content="3039061062805819" />
     {% endblock site_logo %}
 
     {% block extra_css %}
