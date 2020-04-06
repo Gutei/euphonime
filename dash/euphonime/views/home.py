@@ -5,7 +5,7 @@ from django.db.models import Avg, Sum
 from django.views.decorators.cache import cache_page
 
 
-@cache_page(60 * 15)
+# @cache_page(60 * 15)
 def home(request):
     ses_anime = Anime.objects.filter(is_publish=True)
     new_anime = Anime.objects.filter(is_publish=True).order_by('-updated')[:4]
