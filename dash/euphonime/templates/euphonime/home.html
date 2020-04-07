@@ -48,47 +48,12 @@
 
             </div>
 
-            <div class="row load-this-season">
-                <div class="col-lg-3" style="width:150px;">
-                        <div class="soccer-item set-bg" style="background:#efefef;">
-                            <div class="si-tag">Loading</div>
-                            <div class="si-text">
-                                <h6 style="font-size:0.9rem;"><a style="color:#fff;">Memuat data anime...</a></h6>
-                            </div>
-                        </div>
-                    </div>
-                <div class="col-lg-3" style="width:150px;">
-                        <div class="soccer-item set-bg" style="background:#efefef;">
-                            <div class="si-tag">Loading</div>
-                            <div class="si-text">
-                                <h6 style="font-size:0.9rem;"><a style="color:#fff;">Memuat data anime...</a></h6>
-                            </div>
-                        </div>
-                    </div>
-                <div class="col-lg-3" style="width:150px;">
-                        <div class="soccer-item set-bg" style="background:#efefef;">
-                            <div class="si-tag">Loading</div>
-                            <div class="si-text">
-                                <h6 style="font-size:0.9rem;"><a style="color:#fff;">Memuat data anime...</a></h6>
-                            </div>
-                        </div>
-                    </div>
-                <div class="col-lg-3" style="width:150px;">
-                        <div class="soccer-item set-bg" style="background:#efefef;">
-                            <div class="si-tag">Loading...</div>
-                            <div class="si-text">
-                                <h6 style="font-size:0.9rem;"><a style="color:#fff;">Memuat data anime...</a></h6>
-                            </div>
-                        </div>
-                    </div>
-            </div>
+            <div class="row this-season-wrapper">
 
-            <div class="row this-season-wrapper" style="visibility:hidden;">
-
-                <div class="video-slider owl-carousel this-season-wrapper content-sitag" style="visibility:hidden;">
+                <div class="video-slider owl-carousel this-season-wrapper content-sitag">
                     {% for sn in season_nime %}
 
-                    <div class="col-lg-3 col-sm-6 p-0 this-season" style="width:150px; visibility:hidden;">
+                    <div class="col-lg-3 col-sm-6 p-0 this-season" style="width:150px;">
                         <div class="soccer-item set-bg content-sitag" data-setbg="{{ sn.image_url }}" onclick="location.href='{% url 'anime' pk=sn.prefix_id slug=sn.slug %}';">
                             <div class="si-tag content-sitag">{{sn.get_type_display}}</div>
                             <div class="si-text content-sitag">
@@ -246,24 +211,6 @@
 
     {% block extra_js %}
     <script>
-        $('.si-tag').ready(() => {
-            $('.this-season').hide();
-        });
-        $('.content-sitag').ready(() => {
-            setTimeout( function() { $('.load-this-season').hide(); }, 1000 );
-            setTimeout( function() {
-                $('.this-season').show('slow');
-
-            }, 1000 );
-            setTimeout( function() {
-                $('.this-season').css('visibility', 'visible');
-
-            }, 1000 );
-            setTimeout( function() {
-                $('.this-season-wrapper').css('visibility', 'visible');
-
-            }, 1000 );
-        })
 
     </script>
 
