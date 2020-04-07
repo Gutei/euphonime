@@ -257,13 +257,13 @@ td{
 }
 
 .loader-text {
-	width: 40px;
+	width: 200px;
 	height: 40px;
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	margin-top: 40px;
-	margin-left: -23px;
+	margin-left: -93px;
 	color:white;
 }
 
