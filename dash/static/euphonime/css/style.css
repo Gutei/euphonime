@@ -262,8 +262,9 @@ td{
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	margin-top: -13px;
-	margin-left: -13px;
+	margin-top: 40px;
+	margin-left: -23px;
+	color:white;
 }
 
 @keyframes loader {
