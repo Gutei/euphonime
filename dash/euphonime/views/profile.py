@@ -16,6 +16,7 @@ from django.core.paginator import Paginator
 from euphonime.tasks import send_email_to_user
 from django.utils.text import Truncator
 from django.utils.safestring import mark_safe
+from django.urls import reverse
 
 logger = logging.getLogger(__name__)
 
@@ -110,6 +111,9 @@ def profile(request):
         status__in=[UserWatching.WATCHING, UserWatching.HOLDING, UserWatching.FINISHED_WATCHING]).order_by('-updated')[
                                :10]
 
+    if request.GET.get('fail') and request.GET.get('fail') == '4':
+        context['message_fail'] = "Gagal mengubah username. Username sudah digunakan."
+
     return render(request, 'euphonime/profile.html', context)
 
 
@@ -124,6 +128,7 @@ def edit_profile(request, id):
         biodata = request.POST.get('biodata')
         birth_date = request.POST.get('birth_date')
         gender = request.POST.get('gender')
+        username = request.POST.get('username')
         photo = request.FILES.get('photo', False)
         if biodata:
             photo = None
@@ -132,6 +137,13 @@ def edit_profile(request, id):
             usr_prof.birth_date = ps.parse(birth_date)
         if gender:
             usr_prof.gender = gender
+        if username:
+            usrnm = User.objects.filter(username=username).first()
+            if usrnm:
+                return redirect("{}?{}".format(reverse('profile'), 'fail=4'))
+            usrnm = request.user
+            usrnm.username = username
+            usrnm.save()
         if photo:
             usr_prof.photo_profile = request.FILES['photo']
         try:
