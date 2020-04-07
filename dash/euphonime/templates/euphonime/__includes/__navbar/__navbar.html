@@ -23,9 +23,9 @@
                     </li>
                     <li>
                         {% if request.user.is_anonymous %}
-                                    <i style="color:blue" class="fa fa-sign-in"></i> <a style="color:#00619D;" href="{% url 'login' %}">Sign in</a>
+                                    <i style="color:#00619D" class="fa fa-sign-in"></i> <a style="color:#00619D;" href="{% url 'login' %}">Sign in</a>
                                     {% else %}
-                                    <i style="color:blue" class="fa fa-user"></i> <a style="color:#00619D;" href="{% url 'profile' %}">{{request.user.email}}</a>
+                                    <i style="color:#00619D" class="fa fa-user"></i> <a style="color:#00619D;" href="{% url 'profile' %}">{{request.user.email}}</a>
                                     {% endif %}
                                 </li>
                 </ul>
@@ -58,9 +58,9 @@
                             <ul>
                                 <li>
                                     {% if request.user.is_anonymous %}
-                                    <i style="color:blue" class="fa fa-sign-in"></i> <a style="color:#00619D;" href="{% url 'login' %}">Sign in</a>
+                                    <i style="color:#00619D" class="fa fa-sign-in"></i> <a style="color:#00619D;" href="{% url 'login' %}">Sign in</a>
                                     {% else %}
-                                    <i style="color:blue" class="fa fa-user"></i> <a style="color:#00619D;" href="{% url 'profile' %}">{{request.user.email}}</a>
+                                    <i style="color:#00619D" class="fa fa-user"></i> <a style="color:#00619D;" href="{% url 'profile' %}">{{request.user.email}}</a>
                                     {% endif %}
                                 </li>
                                 <li><a style="color:#00619D;" href="{% url 'register' %}">Daftar</a></li>
@@ -81,10 +81,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-3">
-                        <div class="logo">
+                        <div>
                             <a href="{% url 'home' %}">
-                                <span><img src="{% static 'euphonime/img/dolphin.png' %}" alt="dolphin-icon" width="50"></span>
-                                <img src="{% static 'euphonime/img/logo.png' %}" alt="logo" width="150">
+                                <img src="{% static 'euphonime/img/logo-eupho1.png' %}" alt="logo" width="300">
                             </a>
                         </div>
                     </div>
