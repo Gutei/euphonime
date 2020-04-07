@@ -26,7 +26,6 @@ def list_article(request):
     if request.method == 'GET' and search:
         # Q(name__icontains=query) | Q(state__icontains=query)
         articles = Article.objects.filter(Q(title__icontains=search)).order_by('-updated')
-        print(articles)
 
     paginator = Paginator(articles, 9)  # Show 25 contacts per page
     page = request.GET.get('page')
