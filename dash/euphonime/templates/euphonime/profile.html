@@ -110,21 +110,21 @@
                                 <div>
                                     <a href="{% url 'logout' %}" style="background:#00619D; color:#FFF; padding:10px;">Logout</a>
                                     <hr>
-                                    <table>
-                                        <tr>
-                                            <td><img src="{% static 'euphonime/img/mordred_symbol.png' %}" width="30"></td>
-                                            <td style="padding:10px;">{{profile.symbol}}</td>
-                                            <td><a href="" data-toggle="modal" data-target="#release-note">[?]</a></td>
-                                            <td>
-                                                {% if profile.symbol %}
-                                                <img class="photo-display" style="margin-left:50px;" src="{% static 'euphonime/img/modred-chibi.png' %}" width="70">
-                                                <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#pesan-mordred">Gunakan Simbol</button>
-                                                {% endif %}
-                                            </td>
-                                        </tr>
-                                    </table>
+<!--                                    <table>-->
+<!--                                        <tr>-->
+<!--                                            <td><img src="{% static 'euphonime/img/mordred_symbol.png' %}" width="30"></td>-->
+<!--                                            <td style="padding:10px;">{{profile.symbol}}</td>-->
+<!--                                            <td><a href="" data-toggle="modal" data-target="#release-note">[?]</a></td>-->
+<!--                                            <td>-->
+<!--                                                {% if profile.symbol %}-->
+<!--                                                <img class="photo-display" style="margin-left:50px;" src="{% static 'euphonime/img/modred-chibi.png' %}" width="70">-->
+<!--                                                <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#pesan-mordred">Gunakan Simbol</button>-->
+<!--                                                {% endif %}-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                    </table>-->
 
-                                    <hr>
+<!--                                    <hr>-->
                                     <div class="row">
 
                                         <div class="col-sm-6">
@@ -359,35 +359,35 @@
       </div>
     </div>
 
-    <!-- Modal gender-->
-    <div class="modal fade" id="release-note" tabindex="-1" role="dialog"  aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" >Release Note v0.6.0</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="contact-form">
-                <p style="font-size:14px;">Demi lingkungan komunitas yang baik, damai, dan sejahtera baik lahir dan batin,
-                    di versi ini kami membuka fitur baru!
-                    <br>
-                    <img src="{% static 'euphonime/servant/modred-chibi.png' %}" alt="" width="50">
-                    Anak ini bernama Mordred.
-                    <br>
-                    Dia servant sekaligus teman untuk semua user.<br>
-                    <img src="{% static 'euphonime/img/mordred_symbol.png' %}" width="30"> Ini adalah simbol perintah untuknya.<br>
-                    Dengan menggunakan simbol ini, setiap user dapat memberi perintah mutlak kepada Mordred untuk mengirim pesan secara langsung kepada developer tanpa melalui perantara admin.<br><br>
-                    Kami, para developer akan mendengarkan curhatan kalian. Katakan pada kami keinginan kalian, atau saran, agar platform ini terus berjalan dengan baik dan dapat terus menjadi wadah komunitas yang sejahtera, adil, dan makmur untuk para user/anggota komunitas.<br><br>
-                    <b>Simbol Mordred hanya bisa digunakan maksimal 3x</b> sampai di reset pada rilis berikutnya. Gunakan dengan bijak.
-                </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+
+<!--    <div class="modal fade" id="release-note" tabindex="-1" role="dialog"  aria-hidden="true">-->
+<!--      <div class="modal-dialog modal-dialog-centered" role="document">-->
+<!--        <div class="modal-content">-->
+<!--          <div class="modal-header">-->
+<!--            <h5 class="modal-title" >Release Note v0.6.0</h5>-->
+<!--            <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--              <span aria-hidden="true">&times;</span>-->
+<!--            </button>-->
+<!--          </div>-->
+<!--          <div class="modal-body">-->
+<!--            <div class="contact-form">-->
+<!--                <p style="font-size:14px;">Demi lingkungan komunitas yang baik, damai, dan sejahtera baik lahir dan batin,-->
+<!--                    di versi ini kami membuka fitur baru!-->
+<!--                    <br>-->
+<!--                    <img src="{% static 'euphonime/servant/modred-chibi.png' %}" alt="" width="50">-->
+<!--                    Anak ini bernama Mordred.-->
+<!--                    <br>-->
+<!--                    Dia servant sekaligus teman untuk semua user.<br>-->
+<!--                    <img src="{% static 'euphonime/img/mordred_symbol.png' %}" width="30"> Ini adalah simbol perintah untuknya.<br>-->
+<!--                    Dengan menggunakan simbol ini, setiap user dapat memberi perintah mutlak kepada Mordred untuk mengirim pesan secara langsung kepada developer tanpa melalui perantara admin.<br><br>-->
+<!--                    Kami, para developer akan mendengarkan curhatan kalian. Katakan pada kami keinginan kalian, atau saran, agar platform ini terus berjalan dengan baik dan dapat terus menjadi wadah komunitas yang sejahtera, adil, dan makmur untuk para user/anggota komunitas.<br><br>-->
+<!--                    <b>Simbol Mordred hanya bisa digunakan maksimal 3x</b> sampai di reset pada rilis berikutnya. Gunakan dengan bijak.-->
+<!--                </p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
 
     {% if profile.symbol %}
     <div class="modal fade" id="pesan-mordred" tabindex="-1" role="dialog"  aria-hidden="true">
