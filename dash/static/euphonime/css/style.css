@@ -256,6 +256,16 @@ td{
 	-webkit-animation: loader 0.8s linear infinite;
 }
 
+.loader-text {
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -13px;
+	margin-left: -13px;
+}
+
 @keyframes loader {
 	0% {
 		-webkit-transform: rotate(0deg);
