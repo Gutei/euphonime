@@ -57,16 +57,19 @@
                                         </a>
                                         </h4>
                                         {% if message_fail %}
-                                        <center>
-                                        <p style="color:red; font-size:10px;">{{message_fail}}</p>
-                                        </center>
+                                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                              <p style="color:red; font-size:10px;">{{message_fail}}</p>
+                                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button>
+                                            </div>
                                         {% endif %}
                                         <br>
                                         <div class="st-table" style="font-size:12px;">
                                             <table>
                                                 <tbody>
                                                     <tr>
-                                                        <td>
+                                                        <td style="white-space: -moz-pre-wrap !important; white-space: -webkit-pre-wrap; white-space: -pre-wrap; white-space: -o-pre-wrap; white-space: pre-wrap; word-wrap: break-word; word-break: break-all; white-space: normal;">
                                                             <center><p style="font-size:12px;">Link Profile Untuk Dibagikan<br><a href="{% url 'public_profile' user.username %}" target="_blank">https://euphonime.com{% url 'public_profile' user.username %}</a></p></center>
                                                         </td>
                                                     </tr>
@@ -120,21 +123,21 @@
                                 <div>
                                     <a href="{% url 'logout' %}" style="background:#00619D; color:#FFF; padding:10px;">Logout</a>
                                     <hr>
-<!--                                    <table>-->
-<!--                                        <tr>-->
-<!--                                            <td><img src="{% static 'euphonime/img/mordred_symbol.png' %}" width="30"></td>-->
-<!--                                            <td style="padding:10px;">{{profile.symbol}}</td>-->
-<!--                                            <td><a href="" data-toggle="modal" data-target="#release-note">[?]</a></td>-->
-<!--                                            <td>-->
-<!--                                                {% if profile.symbol %}-->
+                                    <table>
+                                        <tr>
+                                            <td><img src="{% static 'euphonime/img/mordred_symbol.png' %}" width="30"></td>
+                                            <td style="padding:10px;">{{profile.symbol}}</td>
+                                            <td><a href="" data-toggle="modal" data-target="#release-note">[?]</a></td>
+                                            <td>
+                                                {% if profile.symbol %}
 <!--                                                <img class="photo-display" style="margin-left:50px;" src="{% static 'euphonime/img/modred-chibi.png' %}" width="70">-->
 <!--                                                <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#pesan-mordred">Gunakan Simbol</button>-->
-<!--                                                {% endif %}-->
-<!--                                            </td>-->
-<!--                                        </tr>-->
-<!--                                    </table>-->
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    </table>
 
-<!--                                    <hr>-->
+                                    <hr>
                                     <div class="row">
 
                                         <div class="col-sm-6">
@@ -352,13 +355,14 @@
           <div class="modal-body">
               <p style="color:red; font-size:12px;">
                   Mengubah nama pengguna akan berpengaruh pada url publik anda. <br> Url publik akan diperbarui. Hal ini akan menyebabkan <br> <i>'Link Profile Untuk Dibagikan'</i> yang sebelumnya menjadi tidak valid.
-
+                  <br><br>
+                  Biaya: 1x<img src="{% static 'euphonime/img/mordred_symbol.png' %}" width="30"><br>
               </p>
             <div class="contact-form">
                 <form method="post" action="{% url 'edit_profile' profile.id %}">{% csrf_token %}
                     <div class="group-in">
-                        <input type="text" name="username" class="form-control" autocomplete="off"
-                                           value="{{ profile.user.username }}">
+                        <input type="text" name="username" pattern="[_a-zA-Z0-9-]+" required class="form-control" autocomplete="off"
+                                           value="{{ profile.user.username }}" placeholder="Gunakan: a-z A-Z 0-9 dan tanda - atau _">
                     </div>
                     <div class="group-in text-right">
                         <button type="button" class="btn btn-secondary" style="background:red;" data-dismiss="modal">Tutup</button>
@@ -402,34 +406,33 @@
     </div>
 
 
-<!--    <div class="modal fade" id="release-note" tabindex="-1" role="dialog"  aria-hidden="true">-->
-<!--      <div class="modal-dialog modal-dialog-centered" role="document">-->
-<!--        <div class="modal-content">-->
-<!--          <div class="modal-header">-->
-<!--            <h5 class="modal-title" >Release Note v0.6.0</h5>-->
-<!--            <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--              <span aria-hidden="true">&times;</span>-->
-<!--            </button>-->
-<!--          </div>-->
-<!--          <div class="modal-body">-->
-<!--            <div class="contact-form">-->
-<!--                <p style="font-size:14px;">Demi lingkungan komunitas yang baik, damai, dan sejahtera baik lahir dan batin,-->
-<!--                    di versi ini kami membuka fitur baru!-->
-<!--                    <br>-->
+    <div class="modal fade" id="release-note" tabindex="-1" role="dialog"  aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" >Release Note v0.6.0</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="contact-form">
+                <p style="font-size:14px;">
 <!--                    <img src="{% static 'euphonime/servant/modred-chibi.png' %}" alt="" width="50">-->
 <!--                    Anak ini bernama Mordred.-->
 <!--                    <br>-->
 <!--                    Dia servant sekaligus teman untuk semua user.<br>-->
-<!--                    <img src="{% static 'euphonime/img/mordred_symbol.png' %}" width="30"> Ini adalah simbol perintah untuknya.<br>-->
-<!--                    Dengan menggunakan simbol ini, setiap user dapat memberi perintah mutlak kepada Mordred untuk mengirim pesan secara langsung kepada developer tanpa melalui perantara admin.<br><br>-->
-<!--                    Kami, para developer akan mendengarkan curhatan kalian. Katakan pada kami keinginan kalian, atau saran, agar platform ini terus berjalan dengan baik dan dapat terus menjadi wadah komunitas yang sejahtera, adil, dan makmur untuk para user/anggota komunitas.<br><br>-->
-<!--                    <b>Simbol Mordred hanya bisa digunakan maksimal 3x</b> sampai di reset pada rilis berikutnya. Gunakan dengan bijak.-->
-<!--                </p>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
+                    <img src="{% static 'euphonime/img/mordred_symbol.png' %}" width="30"> Perubahan fungsi simbol perintah mordred.<br>
+                    Dengan menggunakan simbol ini, setiap user dapat memberi perintah mutlak kepada Mordred untuk merubah username kalian.<br>
+                    Dengan catatan, username belum digunakan oleh siapa pun.<br><br>
+                    Jika ketahuan menggunakan username cabul, hal-hal yang menyinggung SARA, user akan langsung di block.<br><br>
+                    <b>Simbol Mordred hanya bisa digunakan maksimal 3x. Gunakan dengan bijak.</b><br>
+                </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     {% if profile.symbol %}
     <div class="modal fade" id="pesan-mordred" tabindex="-1" role="dialog"  aria-hidden="true">

@@ -114,6 +114,9 @@ def profile(request):
     if request.GET.get('fail') and request.GET.get('fail') == '4':
         context['message_fail'] = "Gagal mengubah username. Username sudah digunakan."
 
+    if request.GET.get('fail') and request.GET.get('fail') == '5':
+        context['message_fail'] = "Gagal mengubah username. Simbol mordred telah habis. Username haya dapat diubah maksimal 3x."
+
     return render(request, 'euphonime/profile.html', context)
 
 
@@ -138,12 +141,18 @@ def edit_profile(request, id):
         if gender:
             usr_prof.gender = gender
         if username:
+            if usr_prof.symbol < 1:
+                return redirect("{}?{}".format(reverse('profile'), 'fail=5'))
             usrnm = User.objects.filter(username=username).first()
             if usrnm:
                 return redirect("{}?{}".format(reverse('profile'), 'fail=4'))
+            usr_prof.symbol -= 1
+            usr_prof.save()
+
             usrnm = request.user
             usrnm.username = username
             usrnm.save()
+
         if photo:
             usr_prof.photo_profile = request.FILES['photo']
         try:
