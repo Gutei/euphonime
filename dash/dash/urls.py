@@ -58,6 +58,9 @@ urlpatterns = [
                   # Quote
                   url(r'^quotes/$', views.list_quote, name='list_quote'),
 
+                  # Seiyuu
+                  url(r'^cast/(?P<slug>[^/]+)/$', views.seiyuu, name='seiyuu'),
+
                   # Character
                   url(r'^karakter/(?P<pk>[^/]+)/(?P<slug>[^/]+)/$', views.get_character, name='character'),
                   url(r'^karakter/$', views.list_character, name='list_character'),

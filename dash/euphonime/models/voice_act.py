@@ -1,6 +1,7 @@
 import uuid
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.template.defaultfilters import slugify
 
 class VoiceAct(models.Model):
     id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False)
@@ -12,6 +13,7 @@ class VoiceAct(models.Model):
     birth_date = models.DateTimeField(null=True, blank=True,)
     description = RichTextUploadingField(null=True, blank=True, extra_plugins=['uploadimage'])
     mal_id = models.CharField(max_length=128, null=True, blank=True)
+    slug = models.SlugField(max_length=512, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -21,6 +23,13 @@ class VoiceAct(models.Model):
 
     def __str__(self):
         return '{}'.format(self.name)
+
+    def save(self, *args, **kwargs):
+        uid = self.id.hex[:4]
+
+        self.slug = "{}-{}".format(uid, slugify(self.name))
+
+        super(VoiceAct, self).save(*args, **kwargs)
 
 
 class SampleVoiceAct(models.Model):

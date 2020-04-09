@@ -1,0 +1,204 @@
+    {% extends "euphonime/index.html" %}
+    {% load static %}
+
+    {% block title %}
+    <title>{{seiyuu.name}} - EuphoNime</title>
+    {% endblock title %}
+
+    {% block site_logo %}
+    {% if not seiyuu.image %}
+    {% if seiyuu.image_url == 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png' %}
+    <meta property="og:image" content="https://euphonime.com{% static 'euphonime/img/anonymous.jpg' %}">
+    {% else %}
+    <meta property="og:image" content="{{seiyuu.image_url}}">
+    {% endif %}
+    {% else %}
+    <meta property="og:image" content="{{seiyuu.image.url}}">
+    {% endif %}
+
+    <meta property="og:url" content="https://www.euphonime.com{% url 'seiyuu' seiyuu.slug %}" />
+
+    <meta property="og:title" content="{{seiyuu.name|safe}} - EuphoNime">
+
+    <meta property="og:description" content="{{ seiyuu.description|striptags|safe|truncatewords:20 }}">
+
+    <meta property="fb:app_id" content="3039061062805819" />
+
+    <meta name="description" content="{{ seiyuu.description|striptags|safe|truncatewords:20 }}" />
+
+    <meta name="keywords" content="{{seiyuu.name|safe}}, euphonime, berita anime, info anime, info karakter anime, berita otaku, forum otaku"/>
+    {% endblock site_logo %}
+
+    {% block meta %}
+    {% for m in meta %}
+    {{m.value|safe}}
+    {% endfor %}
+    {% endblock meta %}
+
+    {% block content %}
+
+    {% block extra_css %}
+    <link rel="stylesheet" href="{% static 'euphonime/css/quote-list.css' %}" type="text/css">
+        <style>
+            body {
+                background: #eaeaea;
+            }
+            .header__top {
+                background: #FFFFFF;
+            }
+        </style>
+    {% endblock extra_css %}
+
+
+    <!-- Club Section Begin -->
+    <section class="club-section spad" style="padding-top:30px; padding-bottom:0;">
+        <div class="container">
+            <div class="club-content">
+                <div class="row">
+                    <div class="col-lg-4" style="background:#FFF; padding:30px;">
+                        <div class="cc-pic">
+
+                            <center>
+                                {% if not seiyuu.image %}
+                                    {% if seiyuu.image_url == 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png' %}
+                                        <div style="width:200px; height:250px; background:url('https://euphonime.com/static/euphonime/img/anonymous.jpg'); background-size:cover; background-position:center;"></div>
+                                    {% else %}
+                                        <div style="width:200px; height:250px; background:url('{{seiyuu.image_url}}'); background-size:cover; background-position:center;"></div>
+                                    {% endif %}
+                                    {% else %}
+                                        <div style="width:200px; height:250px; background:url('{{seiyuu.image.url}}'); background-size:cover; background-position:center;"></div>
+                                {% endif %}
+                            </center>
+
+                        </div>
+                        <div class="container" style="margin-top:1em;">
+                                    <div class="schedule-text">
+                                        <h2 class="st-title" style="background:#00619D; color:#ffffff; font-size:16px;">Info seiyuu</h2>
+                                        <div class="st-table">
+                                            <table>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="left-team">
+                                                            <p>Nama Jepang</p>
+                                                        </td>
+                                                        <td class="left-team">
+                                                            <p style="font-size:14px;">{% if seiyuu.given_name and seiyuu.family_name == 'None' %}-{% else %}{{seiyuu.given_name}} {{seiyuu.family_name}}{% endif %}</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="left-team">
+                                                            <p>Tanggal Lahir</p>
+                                                        </td>
+                                                        <td class="left-team">
+                                                            <p style="font-size:14px;">{% if seiyuu.birth_date %}{{seiyuu.birth_date|date:'d F Y'}}{% else %}-{% endif %}</p>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-8" style="background:#FFF; padding:30px;">
+                        <div class="cc-text">
+                            <div class="ct-title">
+                                <div class="row">
+                                <h1 style="background:#00619D; font-size:14px; color:white; padding:10px;">{{seiyuu.name}}</h1>
+                                </div>
+                                <br>
+                                {% if seiyuu.given_name and seiyuu.family_name == 'None' %}{% else %}<h4>{{seiyuu.given_name}} {{seiyuu.family_name}}</h4>{% endif %}
+                                <hr>
+                                {% if seiyuu.description %}
+                                <p style="font-size:14px">{{ seiyuu.description|safe }}</p>
+                                {% else %}
+                                    <center>
+                                        <img src="{% static 'euphonime/img/nodes.png' %}">
+                                        <h4>No Description...</h4>
+                                    </center>
+                                {% endif %}                            </div>
+
+                            <div id="fb-root"></div>
+
+                              <!-- Your share button code -->
+                              <div class="fb-share-button"
+                                data-href="{% url 'seiyuu' seiyuu.slug %}"
+                                data-layout="button_count">
+                              </div>
+
+                        </div>
+                        <div class="club-tab-list">
+                <div class="row">
+                    <div class="col-lg-12 m-auto">
+                        <div class="container-fluid">
+                                <!-- Timelime example  -->
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <!-- The time line -->
+                                    <div class="timeline">
+                                      <!-- timeline time label -->
+                                      <div class="time-label">
+                                        <span class="bg-red"><h2 style="color:#00619D;"><b>Karakter yang Diperankan</b></h2></span>
+                                      </div><br>
+                                        {% if characters %}
+                                          {% for c in characters %}
+                                          <div>
+                                            <div class="timeline-item">
+                                                <a href="{% url 'character' c.character.prefix_id c.character.slug %}"><h3 style="background:#00619D; color:#fff; padding:10px;" class="timeline-header">{{ c.character.name }}</h3></a>
+                                              <div class="timeline-body" style="padding:20px; margin-top:0;">
+                                                  <div class="row">
+                                                  {% if not c.character.image %}
+                                                    {% if c.character.image_url == 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png' %}
+                                                        <div class="col-sm-2" style="height:150px; background:url('https://euphonime.com/static/euphonime/img/anonymous.jpg') no-repeat; background-size:contain; background-position:center;"></div>
+                                                    {% else %}
+                                                        <div class="col-sm-2" style="height:150px; background:url('{{c.character.image_url}}') no-repeat; background-size:contain; background-position:center;"></div>
+                                                    {% endif %}
+                                                    {% else %}
+                                                        <div class="col-sm-2" style="height:150px; background:url('{{c.character.image.url}}') no-repeat; background-size:contain; background-position:center;"></div>
+                                                {% endif %}
+                                                      <div class="col-sm-10">
+                                                          <b>{{seiyuu.name}}</b> memerankan <a href="{% url 'character' c.character.prefix_id c.character.slug %}"><b>{{c.character.name}}</b></a><br>
+                                                          di anime <a href="{% url 'anime' c.anime.prefix_id c.anime.slug %}"><b>{{c.anime.title}}</b></a>
+                                                      </div>
+                                                      </div>
+                                              </div>
+
+                                            </div>
+                                          </div>
+                                          {% endfor %}
+                                        {% else %}
+                                        <br>
+                                        <div>
+                                        <div class="timeline-item">
+                                          <h3 style="background:#00619D; color:#fff; padding:10px;" class="timeline-header"><i class="fa fa-quote-left"></i>&ensp;{{ character.name }}</h3>
+                                          <span class="time text-right" style="color:#fff;"><i class="fas fa-clock"></i> Unkown</span>
+
+                                          <div class="timeline-body" style="height:150px;background:url({% static 'euphonime/img/noquote.png' %}); background-position:center;background-size:cover;">
+                                                <h2 style="color:gray;padding-left:10px">(-_-) !!</h2>
+                                          </div>
+                                        </div>
+                                      </div>
+                                        {% endif %}
+
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                    </div>
+                </div>
+            </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </section>
+    <!-- Club Section End -->
+
+    {% endblock content %}

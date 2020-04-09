@@ -8,7 +8,7 @@ class SampleVoiceActInline(admin.TabularInline):
 
 @admin.register(VoiceAct, site=admin.site)
 class VoiceActAdmin(admin.ModelAdmin):
-    list_display = ('name', 'birth_date', 'given_name', 'family_name', 'get_image')
+    list_display = ('name', 'birth_date', 'given_name', 'family_name', 'get_image', 'slug',)
     search_fields = ('name',)
 
     inlines = [
