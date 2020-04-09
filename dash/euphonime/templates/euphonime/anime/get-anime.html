@@ -343,8 +343,15 @@
 
                                         </div>
                                         <div class="ci-text" style="width:200px;float:right;">
+                                            {% if ch.voice_act.slug %}
+                                            <a href="{% url 'seiyuu' ch.voice_act.slug %}">
                                             <img style="width:50px;" src="{% if ch.voice_act.image %}{{ch.voice_act.image.url}}{% else %}{{ ch.voice_act.image_url }}{% endif %}" alt="{{ch.voice_act.name}}">
                                             <p style="font-size:14px">{{ch.voice_act.name}}</p>
+                                            </a>
+                                            {% else %}
+                                            <img style="width:50px;" src="{% if ch.voice_act.image %}{{ch.voice_act.image.url}}{% else %}{{ ch.voice_act.image_url }}{% endif %}" alt="{{ch.voice_act.name}}">
+                                            <p style="font-size:14px">{{ch.voice_act.name}}</p>
+                                            {% endif %}
                                         </div>
                                     </div>
                                     {% endfor %}
