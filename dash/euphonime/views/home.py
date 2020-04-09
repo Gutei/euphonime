@@ -7,6 +7,8 @@ from django.views.decorators.cache import cache_page
 
 # @cache_page(60 * 15)
 def home(request):
+    uagent = request.META['HTTP_USER_AGENT']
+
     ses_anime = Anime.objects.filter(is_publish=True)
     new_anime = Anime.objects.filter(is_publish=True).order_by('-updated')[:4]
     article = Article.objects.filter(is_publish=True).order_by('-updated')[:4]
@@ -58,6 +60,7 @@ def home(request):
         'article': article,
         'polls': result_polls,
         'meta': meta,
+        'uagent': uagent,
     }
     return render(request, template_name, context)
 
