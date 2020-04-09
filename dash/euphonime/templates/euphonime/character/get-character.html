@@ -104,7 +104,7 @@
                                                             <p>Pengisi Suara</p>
                                                         </td>
                                                         <td class="left-team">
-                                                            <p style="font-size:14px;">{% if character.voice_act%}{{character.voice_act.name}}{% else %}-{% endif %}</p>
+                                                            <p style="font-size:14px;">{% if character.voice_act %}<a href="{% url 'seiyuu' character.voice_act.slug %}">{{character.voice_act.name}}</a>{% else %}-{% endif %}</p>
                                                         </td>
                                                     </tr>
                                                     <tr>
