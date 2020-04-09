@@ -40,3 +40,7 @@ django-celery-results
 celery[redis]
 django-allauth
 django-cookies-samesite
+pyyaml
+ua-parser
+user-agents
+django-user-agents

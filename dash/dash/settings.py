@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 
     'django.contrib.sitemaps',
+    'django_user_agents',
 ]
 
 MIDDLEWARE = [
@@ -64,6 +65,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_user_agents.middleware.UserAgentMiddleware',
 ]
 
 ROOT_URLCONF = 'dash.urls'
@@ -208,7 +210,7 @@ CACHES = {
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
-    }
+    },
 }
 
 CKEDITOR_CONFIGS = {
@@ -252,3 +254,5 @@ EMAIL_HOST_PASSWORD = 'eupho2020'
 # SESSION_COOKIE_SAMESITE_KEYS = {'euphonime-cookies'}
 
 # SESSION_COOKIE_SAMESITE_FORCE_ALL = True
+
+USER_AGENTS_CACHE = 'default'
