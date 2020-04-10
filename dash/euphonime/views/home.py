@@ -1,6 +1,7 @@
 import random
+import re
 from django.shortcuts import render
-from euphonime.models import Anime, Article, Season, AnimeSeason, UserPolls, UserWatching, UserAnimeScore, MetaGeneral
+from euphonime.models import Anime, Article, Season, AnimeSeason, UserPolls, UserWatching, UserAnimeScore, MetaGeneral, UserPost
 from django.db.models import Avg, Sum
 from django.views.decorators.cache import cache_page
 
@@ -12,7 +13,7 @@ def home(request):
 
     ses_anime = Anime.objects.filter(is_publish=True)
     new_anime = Anime.objects.filter(is_publish=True).order_by('-updated')[:4]
-    article = Article.objects.filter(is_publish=True).order_by('-updated')[:4]
+    article = Article.objects.filter(is_publish=True).order_by('-updated')[:8]
     template_name = 'euphonime/home.html'
     meta = MetaGeneral.objects.all()
     this_sesason = Season.objects.filter(is_season=True).first()
@@ -55,6 +56,33 @@ def home(request):
     else:
         shuffle_ses_anime = ses_anime
 
+    last_thread = UserPost.objects.all().order_by('-updated')[:4]
+
+    ust_parse = []
+
+    for u_p in last_thread:
+        img = re.search('<img src="([^"]+)"'[4:], u_p.content)
+        display_img = None
+        img_thread_url = None
+        no_prefix = None
+        if img:
+            display_img = img.group().strip('"')
+            if display_img.split('"')[0] == " src=":
+                no_prefix = display_img.split('"')[1]
+                if no_prefix.split(':')[0] == 'https' or no_prefix.split(':')[0] == 'http':
+                    img_thread_url = no_prefix
+                else:
+                    img_thread_url = None
+
+        ust_parse.append({
+            'id': u_p.id,
+            'created': u_p.created,
+            'content': u_p.content,
+            'updated': u_p.updated,
+            'img': None if not img_thread_url else img_thread_url,
+            'obj': u_p,
+        })
+
     context = {
         'season_nime': shuffle_ses_anime,
         'new_anime': new_anime,
@@ -63,6 +91,7 @@ def home(request):
         'meta': meta,
         'uagent': uagent,
         'uos': uos,
+        'last_thread': ust_parse,
     }
     return render(request, template_name, context)
 
